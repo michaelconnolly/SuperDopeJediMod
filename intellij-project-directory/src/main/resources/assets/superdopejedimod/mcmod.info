@@ -1,0 +1,16 @@
+[
+{
+  "modid": "superdopejedimod",
+  "name": "SuperDopeJediModMod",
+  "description": "Republic versus Empire!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["SuperDopeSquad"],
+  "credits": "SuperDopeSquad",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
