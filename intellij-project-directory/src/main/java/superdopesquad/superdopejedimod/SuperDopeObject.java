@@ -10,8 +10,8 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 public interface SuperDopeObject {
 
 	// Must be implemented.
-	public String getName();
-	public String getFullName();
+	//public String getName();
+	//public String getFullName();
 	
 	// The following methods by default do nothing; override if you have something to register.
 	default public void registerBlocks(RegistryEvent.Register<Block> event) {

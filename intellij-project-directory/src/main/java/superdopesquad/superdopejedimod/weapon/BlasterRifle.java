@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.Utilities;
-import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
+//import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 public class BlasterRifle extends BaseBlaster {
 
@@ -14,22 +14,22 @@ public class BlasterRifle extends BaseBlaster {
 		super(unlocalizedName);
 		
 		// Unique style of this type of blaster:
-		this.isInstantWeapon = true;
-		this.powerLevel = PowerLevel.RIFLE;
-		this.range = 20.0F;
+//		this.isInstantWeapon = true;
+//		this.powerLevel = PowerLevel.RIFLE;
+//		this.range = 20.0F;
 	}
 
 	
-	public void registerRecipe() {
-		
-		ItemStack itemStackBlasterPartsOne = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts);
-		ItemStack itemStackMe = new ItemStack(this);
-		ItemStack itemStackBlasterPartsMany = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts, 4);
-		
-		// Many Blaster Parts create this weapon.
-    	GameRegistry.addShapedRecipe(getRegistryName(), null, itemStackMe,  "xxx", "x  ", "   ", 'x', itemStackBlasterPartsOne);	
-    	
-    	// This weapon can be broken down into many Blaster Parts.
-    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameRecycler(this), null, itemStackBlasterPartsMany, "x", 'x', itemStackMe);
-	}
+//	public void registerRecipe() {
+//
+//		ItemStack itemStackBlasterPartsOne = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts);
+//		ItemStack itemStackMe = new ItemStack(this);
+//		ItemStack itemStackBlasterPartsMany = new ItemStack(SuperDopeJediMod.weaponManager.blasterParts, 4);
+//
+//		// Many Blaster Parts create this weapon.
+//    	GameRegistry.addShapedRecipe(getRegistryName(), null, itemStackMe,  "xxx", "x  ", "   ", 'x', itemStackBlasterPartsOne);
+//
+//    	// This weapon can be broken down into many Blaster Parts.
+//    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameRecycler(this), null, itemStackBlasterPartsMany, "x", 'x', itemStackMe);
+//	}
 }

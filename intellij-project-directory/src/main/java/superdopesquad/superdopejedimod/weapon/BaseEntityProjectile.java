@@ -1,18 +1,21 @@
 package superdopesquad.superdopejedimod.weapon;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityThrowable;
+//import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+//import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+//import net.minecraftforge.fml.common.registry.EntityRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.SuperDopeEntity;
 
-public abstract class BaseEntityProjectile extends EntityThrowable implements SuperDopeEntity {
+public abstract class BaseEntityProjectile extends ThrowableEntity implements SuperDopeEntity {
 
 	// Instance Members
 	private String _name = "foo";
@@ -20,7 +23,10 @@ public abstract class BaseEntityProjectile extends EntityThrowable implements Su
 	
 	
 	public BaseEntityProjectile(World worldIn, float damageAmount) {
-		super(worldIn);
+
+		super(EntityType.SNOWBALL, worldIn);
+
+		//super(worldIn);
 		this._damageAmount = damageAmount;
 		
 		// Insert this object into our collection of custom objects, so we 
@@ -29,8 +35,10 @@ public abstract class BaseEntityProjectile extends EntityThrowable implements Su
 	}
 	
 	
-	public BaseEntityProjectile(World worldIn, EntityLivingBase throwerIn, float damageAmount) {
-		super(worldIn, throwerIn);
+	public BaseEntityProjectile(World worldIn, LivingEntity throwerIn, float damageAmount) {
+
+		super(EntityType.SNOWBALL, worldIn);
+		//super(worldIn, throwerIn);
 		this._damageAmount = damageAmount;
 		
 		// Insert this object into our collection of custom objects, so we 
@@ -38,27 +46,27 @@ public abstract class BaseEntityProjectile extends EntityThrowable implements Su
 		SuperDopeJediMod.customObjects.add(this);
 	}
 	
-	@Override
-	public String getName() {
-		return this._name;
-	}
-	
-	@Override
-	public String getFullName() {
-		return SuperDopeJediMod.MODID + ":" + this.getName();
-	}
-	
-	@Override
-    public void registerItems(RegistryEvent.Register<Item> event) {
-		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
-		EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(), 
-				SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
-	}
+//	@Override
+//	public String getName() {
+//		return this._name;
+//	}
+//
+//	@Override
+//	public String getFullName() {
+//		return SuperDopeJediMod.MODID + ":" + this.getName();
+//	}
+//
+//	@Override
+//    public void registerItems(RegistryEvent.Register<Item> event) {
+//		ResourceLocation resourceLocation = new ResourceLocation(this.getFullName());
+//		EntityRegistry.registerModEntity(resourceLocation, this.getClass(), this.getName(),
+//				SuperDopeJediMod.entityManager.getUniqueEntityId(), SuperDopeJediMod.instance, 80, 3, true, 0xfffffff, 0x000000);
+//	}
    
-	@Override
-	protected void onImpact(RayTraceResult result) {
-		// TODO Auto-generated method stub
-	}
+//	@Override
+//	protected void onImpact(RayTraceResult result) {
+//		// TODO Auto-generated method stub
+//	}
 	
 	public void setDamage(double damageIn) {   	
 		this._damageAmount = (float) damageIn;

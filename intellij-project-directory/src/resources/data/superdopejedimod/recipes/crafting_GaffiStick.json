@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx ",
+    " y ",
+    " x "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "tag": "forge:items/ironIngot"
+    },
+    "y":
+    {
+      "item": "forge:items/stick"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:gaffiStick",
+    "count": 1
+  }
+}

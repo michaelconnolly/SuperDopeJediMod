@@ -1,0 +1,2 @@
+https://mcforge.readthedocs.io/en/stable/utilities/recipes/
+
