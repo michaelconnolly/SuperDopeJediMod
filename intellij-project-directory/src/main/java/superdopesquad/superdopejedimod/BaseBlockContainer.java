@@ -62,7 +62,7 @@ public abstract class BaseBlockContainer extends ContainerBlock implements Super
 		
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
-		SuperDopeJediMod.customObjects.add(this);
+		//SuperDopeJediMod.customObjects.add(this);
 	}
 	
 	

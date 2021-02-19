@@ -3,12 +3,9 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 //import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 public class PowerCrystalOre extends BaseBlock {
@@ -37,21 +34,21 @@ public class PowerCrystalOre extends BaseBlock {
 		
 		Item obj = null;
 		
-		if (this.color == "Red") {
-			obj = SuperDopeJediMod.redPowerCrystal;
-		}
-		else if (this.color == "Green") {
-			obj = SuperDopeJediMod.greenPowerCrystal;
-		}
-		else if (this.color == "Blue") {
-			obj = SuperDopeJediMod.bluePowerCrystal;
-		}
-		else if (this.color == "Purple") {
-			obj = SuperDopeJediMod.purplePowerCrystal;
-		} 
-		else {
-			obj = SuperDopeJediMod.greenPowerCrystal;
-		}
+//		if (this.color == "Red") {
+//			obj = SuperDopeJediMod.redPowerCrystal;
+//		}
+//		else if (this.color == "Green") {
+//			obj = SuperDopeJediMod.greenPowerCrystal;
+//		}
+//		else if (this.color == "Blue") {
+//			obj = SuperDopeJediMod.bluePowerCrystal;
+//		}
+//		else if (this.color == "Purple") {
+//			obj = SuperDopeJediMod.purplePowerCrystal;
+//		}
+//		else {
+//			obj = SuperDopeJediMod.greenPowerCrystal;
+//		}
 		
     	return obj;	
 	}

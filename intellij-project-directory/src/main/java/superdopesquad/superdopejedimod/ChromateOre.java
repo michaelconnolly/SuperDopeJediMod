@@ -3,16 +3,12 @@ package superdopesquad.superdopejedimod;
 import java.util.Random;
 
 //import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 //import net.minecraft.init.Blocks;
 //import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ChromateOre extends BaseBlock{
+public class ChromateOre extends BaseBlock {
 	
 	public ChromateOre(String unlocalizedName) {
 		
@@ -26,11 +22,11 @@ public class ChromateOre extends BaseBlock{
 	}
 
 	
-	public Item getItemDropped(int metadata, Random random, int fortune) {
-	        
-		return Item.getItemFromBlock(SuperDopeJediMod.chromateOre);
-	}
+//	public Item getItemDropped(int metadata, Random random, int fortune) {
 //
+//		return Item.getItemFromBlock(SuperDopeJediMod.chromateOre);
+//	}
+////
 //	public void registerRecipe() {
 //
 //		// Smelting a ChromateOre will create 1 Chromate Ingot

@@ -10,30 +10,51 @@ import java.util.Random;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 //import net.minecraft.item.ItemBlock;
 //import net.minecraft.world.World;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.fml.RegistryObject;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.SuperDopeObjectGeneratable;
 //import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 //import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
 
 
 public abstract class BaseBlock extends Block implements SuperDopeObjectGeneratable {
 	
 	// Instance Members
-	private String _name = "";
-	private boolean _showUpInCreativeTab = true;
-	
-	
+//	private String _name = "";
+//	private boolean _showUpInCreativeTab = true;
+
+
+	public BaseBlock(String name, Block.Properties properties) {
+
+		super(properties);
+
+		SuperDopeJediMod.BLOCKS.register(name, () -> this);
+		SuperDopeJediMod.ITEMS.register(name, () -> new BlockItem(this,
+				new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
+	}
+
+
 	public BaseBlock(Material material, String name) {
+
 		this(material, name, true);
 	}
 	
 	
 	public BaseBlock(Material material, String name, boolean showUpInCreativeTab) {
 
+		//super (new Properties().gr
+		//super(Properties.create(material).);
 		super(Properties.create(material));
+
 		//super(new Properties(material, material.getColor()));
 		// Call our super class constructor, "Block".
 		//super(material);
@@ -53,7 +74,7 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 //
 		// Insert this object into our collection of custom blocks, so we 
 		// can send separate events to it for lifecycle management.
-		SuperDopeJediMod.customObjects.add(this);
+		//SuperDopeJediMod.customObjects.add(this);
 	}
 	
 //
@@ -69,8 +90,19 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 //	}
 //
 //
-//	@Override // from SuperDopeObject
-//	public void registerBlocks(RegistryEvent.Register<Block> event) {
+	@Override // from SuperDopeObject
+	public void registerBlocks(RegistryEvent.Register<Block> event) {
+
+		event.getRegistry().register(this);
+
+//		public void registerBlocks(RegistryEvent.Register<Block> event) {
+//			event.getRegistry().registerAll(new Block(...), new Block(...), ...);
+//
+//		public static final RegistryObject<Block> ROCK_BLOCK = BLOCKS.register("rock", () -> new Block(Block.Properties.create(Material.ROCK)));
+//
+//public ExampleMod() {
+//			BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+//		}
 //
 //		// System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
 //		// System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
@@ -78,9 +110,9 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 //
 //		this.setRegistryName(this.getName());
 //		event.getRegistry().register(this);
-//
-//		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-//	}
+
+		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+	}
 //
 //
 //	@Override // from SuperDopeObject

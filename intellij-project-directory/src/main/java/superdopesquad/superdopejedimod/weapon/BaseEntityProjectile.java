@@ -31,7 +31,7 @@ public abstract class BaseEntityProjectile extends ThrowableEntity implements Su
 		
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
-		SuperDopeJediMod.customObjects.add(this);
+		//SuperDopeJediMod.customObjects.add(this);
 	}
 	
 	
@@ -43,7 +43,7 @@ public abstract class BaseEntityProjectile extends ThrowableEntity implements Su
 		
 		// Insert this object into our collection of custom objects, so we 
 		// can send separate events to it for lifecycle management.
-		SuperDopeJediMod.customObjects.add(this);
+		//SuperDopeJediMod.customObjects.add(this);
 	}
 	
 //	@Override

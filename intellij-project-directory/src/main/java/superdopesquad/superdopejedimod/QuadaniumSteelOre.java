@@ -3,9 +3,7 @@ package superdopesquad.superdopejedimod;
 
 import java.util.Random;
 //import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 
@@ -21,11 +19,11 @@ public class QuadaniumSteelOre extends BaseBlock {
 //		this.setHarvestLevel("pickaxe", 2);
 	}
 	
-	
-    public Item getItemDropped(int metadata, Random random, int fortune) {
-        
-    	return Item.getItemFromBlock(SuperDopeJediMod.quadaniumSteelOre);
-    }
+//
+//    public Item getItemDropped(int metadata, Random random, int fortune) {
+//
+//    	return Item.getItemFromBlock(SuperDopeJediMod.quadaniumSteelOre);
+//    }
   
     
     public void generateSurface(World world, Random random, int i, int j) {

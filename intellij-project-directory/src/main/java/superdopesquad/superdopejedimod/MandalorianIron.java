@@ -1,29 +1,25 @@
 package superdopesquad.superdopejedimod;
 
 
-import java.util.Random;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 //import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 public class MandalorianIron extends BaseBlock {
 
 	
-	public MandalorianIron(String unlocalizedName) {
+	public MandalorianIron(String name) {
 
-		super(Material.IRON, unlocalizedName);
+		//super(Material.IRON, unlocalizedName);
+		super(name, (Block.Properties.create(Material.IRON)));
 	}
 	
 	
-	public Item getItemDropped(int metadata, Random random, int fortune) {
-        
-		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIron);
-	}
+//	public Item getItemDropped(int metadata, Random random, int fortune) {
+//
+//		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIron);
+//	}
 	
 //
 //	@Override

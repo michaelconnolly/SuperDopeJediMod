@@ -1,18 +1,12 @@
 package superdopesquad.superdopejedimod;
 
-import java.util.Random;
-
 //import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 //import net.minecraft.init.Blocks;
 //import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
-public class ElectricTransmitter extends BaseBlock{
+public class ElectricTransmitter extends BaseBlock {
 
 	public ElectricTransmitter(String unlocalizedName) {
 		
@@ -22,10 +16,10 @@ public class ElectricTransmitter extends BaseBlock{
 	}
 	
 	
-	public Item getItemDropped(int metadata, Random random, int fortune) {
-        
-		return Item.getItemFromBlock(SuperDopeJediMod.electricTransmitter);
-	}
+//	public Item getItemDropped(int metadata, Random random, int fortune) {
+//
+//		return Item.getItemFromBlock(SuperDopeJediMod.electricTransmitter);
+//	}
 	
 	
 //	public void registerRecipe() {

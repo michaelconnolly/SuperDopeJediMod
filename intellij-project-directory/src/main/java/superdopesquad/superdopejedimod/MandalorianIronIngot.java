@@ -5,14 +5,16 @@ package superdopesquad.superdopejedimod;
 //import net.minecraft.init.Items;
 
 
+import net.minecraft.item.ItemGroup;
+
 public class MandalorianIronIngot extends BaseItem {
 
-	public MandalorianIronIngot(String unlocalizedName) {
+	public MandalorianIronIngot(Properties properties) {
 		
-        super(unlocalizedName);
+        super(properties, ItemGroup.MISC);
        // this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 	
-	public void registerRecipe() {
-	}
+//	public void registerRecipe() {
+//	}
 }

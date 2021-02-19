@@ -4,12 +4,9 @@ import java.util.Random;
 
 import net.minecraft.block.material.Material;
 //import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class SaphireOre extends BaseBlock{
+public class SaphireOre extends BaseBlock {
 
 	public SaphireOre(String unlocalizedName) {
 		
@@ -22,10 +19,10 @@ public class SaphireOre extends BaseBlock{
 //		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 	}
 
-	public Item getItemDropped(int metadata, Random random, int fortune) {
-    
-		return Item.getItemFromBlock(SuperDopeJediMod.saphireOre);
-}
+//	public Item getItemDropped(int metadata, Random random, int fortune) {
+//
+//		return Item.getItemFromBlock(SuperDopeJediMod.saphireOre);
+//}
 
 //	public void registerRecipe() {
 //
