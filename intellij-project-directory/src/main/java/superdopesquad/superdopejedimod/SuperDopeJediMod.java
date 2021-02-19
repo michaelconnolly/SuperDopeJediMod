@@ -1,46 +1,19 @@
 package superdopesquad.superdopejedimod;
 
 
-import java.util.ArrayList;
-
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemGroup;
-import net.minecraftforge.common.MinecraftForge;
 //import net.minecraftforge.common.capabilities.CapabilityManager;
 //import net.minecraftforge.common.util.EnumHelper;
 //import net.minecraftforge.common.Enum;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.RegistryObject;
+        import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+        import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+        import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import net.minecraftforge.common.IExtensibleEnum;
-
-import net.minecraftforge.event.RegistryEvent;
 //import net.minecraftforge.fml.client.registry.RenderingRegistry;
 //import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 //import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -48,32 +21,20 @@ import net.minecraftforge.event.RegistryEvent;
 //import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 //import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 //import net.minecraftforge.fml.common.IWorldGenerator;
-import net.minecraftforge.fml.common.Mod;
 //import net.minecraftforge.fml.common.Mod.EventHandler;
 //import net.minecraftforge.fml.common.Mod.Instance;
 //import net.minecraftforge.fml.common.SidedProxy;
 //import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 //import net.minecraftforge.fml.relauncher.Side;
 //import superdopesquad.superdopejedimod.entity.BaseMovingVehicle;
 //import superdopesquad.superdopejedimod.entity.EntityManager;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import superdopesquad.superdopejedimod.faction.ClassItem;
 //import superdopesquad.superdopejedimod.faction.ClassManager;
 //import superdopesquad.superdopejedimod.hangar.HangarManager;
 //import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
 //import superdopesquad.superdopejedimod.tinkertable.TinkerTable;
 //import superdopesquad.superdopejedimod.tools.Drill;
-import superdopesquad.superdopejedimod.weapon.BountyHunterLeaderKnife;
-import superdopesquad.superdopejedimod.weapon.BrynsAwesomeSword;
-import superdopesquad.superdopejedimod.weapon.DoubleLightSaber;
-import superdopesquad.superdopejedimod.weapon.GaffiStick;
-import superdopesquad.superdopejedimod.weapon.LightSaber;
-import superdopesquad.superdopejedimod.weapon.MandalorianIronSword;
-import superdopesquad.superdopejedimod.weapon.QuadaniumSteelSword;
+import superdopesquad.superdopejedimod.material.*;
 //import superdopesquad.superdopejedimod.weapon.WeaponManager;
-import net.minecraft.block.Block;
 //import net.minecraft.block.material.Material;
 //import net.minecraft.creativetab.CreativeTabs;
 //import net.minecraft.init.Blocks;
@@ -83,12 +44,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 //import net.minecraft.item.ItemStack;
 //import net.minecraft.item.Item.ToolMaterial;
-import  net.minecraft.item.ToolItem;
 //import net.minecraft.item.ItemArmor;
 //import net.minecraft.item.ItemArmor.ArmorMaterial;
 //import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+
 //
 //import org.apache.logging.log4j.LogManager;
 //import org.apache.logging.log4j.Logger;
@@ -148,20 +107,26 @@ public class SuperDopeJediMod {
     //   @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     //  public static SuperDopeJediMod instance;
 
-   // public static final RegistryObject<Item> MANDALORIAN_IRON_INGOT = ITEMS.register("mandarlorian_iron_ingot", () -> new Item(new Item.Properties()));
-
-    //public static final RegistryObject<Item> MANDALORIAN_IRON_INGOT = ITEMS.register("mandalorian_iron_ingot", () -> new MandalorianIronIngot(new Item.Properties()));
-    //public static final RegistryObject<Block> MANDALORIAN_IRON_ORE = BLOCKS.register("mandalorianIronOre", () -> new MandalorianIronOre("mandalorianIronOre"));
+    // ********************************
+    // * THE NEW WAY!                 *
+    // ********************************
 
     // Mandalorian Iron, used to create weapons and armor.
     public static final MandalorianIron MANDALORIAN_IRON = new MandalorianIron("mandalorian_iron");
     public static final MandalorianIronOre MANDALORIAN_IRON_ORE = new MandalorianIronOre("mandalorian_iron_ore");
+    public static final MandalorianIronIngot MANDALORIAN_IRON_INGOT = new MandalorianIronIngot("mandalorian_iron_ingot");
+
+    // Quadanium Steel, used to create vehicles.
+    public static final QuadaniumSteel QUADANIUM_STEEL = new QuadaniumSteel("quadanium_steel");
+    public static final QuadaniumSteelOre QUADANIUM_STEEL_ORE = new QuadaniumSteelOre("quadanium_steel_ore");
+    public static final QuadaniumSteelIngot QUADANIUM_STEEL_INGOT = new QuadaniumSteelIngot("quadanium_steel_ingot");
+
 
     //public static final RegistryObject<Block> MANDALORIAN_IRON = BLOCKS.register("mandalorian_iron", () -> new MandalorianIron());
     //public static final RegistryObject<Item> MANDALORIAN_IRON_ITEM = ITEMS.register("mandalorian_iron", () -> new BlockItem(MANDALORIAN_IRON.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
     //public static final RegistryObject<Block> MANDALORIAN_IRON_ORE = BLOCKS.register("mandalorian_iron_ore", () -> new MandalorianIronOre());
     //public static final RegistryObject<Item> MANDALORIAN_IRON_ORE_ITEM = ITEMS.register("mandalorian_iron_ore", () -> new BlockItem(MANDALORIAN_IRON_ORE.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> MANDALORIAN_IRON_INGOT = ITEMS.register("mandalorian_iron_ingot", () -> new MandalorianIronIngot(new Item.Properties()));
+    //public static final RegistryObject<Item> MANDALORIAN_IRON_INGOT = ITEMS.register("mandalorian_iron_ingot", () -> new MandalorianIronIngot(new Item.Properties()));
 
 //    public static final RegistryObject<Block> TUTORIAL_BLOCK = BLOCKS.register("tutorial_block", () -> new Block(Block.Properties.create(Material.ROCK)));
 //    public static final RegistryObject<Item> TUTORIAL_BLOCK = ITEMS.register("tutorial_block", () -> new BlockItem(ModBlocks.TUTORIAL_BLOCK.get(), new Item.Properties()));

@@ -1,19 +1,18 @@
-package superdopesquad.superdopejedimod;
+package superdopesquad.superdopejedimod.material;
 
-
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.init.Items;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-
+import net.minecraft.item.ItemGroup;
+import superdopesquad.superdopejedimod.BaseBlock;
 
 public class QuadaniumSteel extends BaseBlock {
-	
-	
+
 	public QuadaniumSteel(String name) {
-		
-		super(Material.IRON, name);
+
+		super(name, (Block.Properties.create(Material.IRON)));
 	}
-	
+}
+
 //
 //	 public Item getItemDropped(int metadata, Random random, int fortune) {
 //
@@ -40,4 +39,4 @@ public class QuadaniumSteel extends BaseBlock {
 //    	ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
 //    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameBackdoor(this), null, quadaniumSteelIngotStackNine, "xxx", "xyx", "xxx", 'x', ironIngotStack, 'y', inkSacStack);
 //	}
-}
+

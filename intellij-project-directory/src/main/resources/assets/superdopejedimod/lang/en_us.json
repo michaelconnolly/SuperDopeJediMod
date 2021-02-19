@@ -1,5 +1,8 @@
 {
     "block.superdopejedimod.mandalorian_iron": "Mandalorian Iron",
     "block.superdopejedimod.mandalorian_iron_ore": "Mandalorian Iron Ore",
-    "item.superdopejedimod.mandalorian_iron_ingot": "Mandalorian Iron Ingot"
+    "item.superdopejedimod.mandalorian_iron_ingot": "Mandalorian Iron Ingot",
+    "block.superdopejedimod.quadanium_steel": "Quadanium Steel",
+    "block.superdopejedimod.quadanium_steel_ore": "Quadanium Steel Ore",
+    "item.superdopejedimod.quadanium_steel_ingot": "Quadanium Steel Ingot"
 }

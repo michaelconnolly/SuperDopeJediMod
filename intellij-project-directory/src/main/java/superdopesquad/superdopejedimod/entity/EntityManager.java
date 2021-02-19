@@ -10,8 +10,8 @@
 ////import net.minecraft.init.Items;
 //import net.minecraft.util.math.BlockPos;
 //import net.minecraft.world.World;
-//import superdopesquad.superdopejedimod.MandalorianIron;
-//import superdopesquad.superdopejedimod.MandalorianIronIngot;
+//import superdopesquad.superdopejedimod.material.MandalorianIron;
+//import superdopesquad.superdopejedimod.material.MandalorianIronIngot;
 //import superdopesquad.superdopejedimod.SuperDopeObject;
 //import superdopesquad.superdopejedimod.entity.droid.DroidKit;
 //import superdopesquad.superdopejedimod.entity.droid.DroidParts;

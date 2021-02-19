@@ -1,20 +1,16 @@
-package superdopesquad.superdopejedimod;
-
+package superdopesquad.superdopejedimod.material;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-//import net.minecraft.init.Items;
-
+import superdopesquad.superdopejedimod.BaseBlock;
 
 public class MandalorianIron extends BaseBlock {
 
-	
 	public MandalorianIron(String name) {
 
-		//super(Material.IRON, unlocalizedName);
 		super(name, (Block.Properties.create(Material.IRON)));
 	}
-	
+}
 	
 //	public Item getItemDropped(int metadata, Random random, int fortune) {
 //
@@ -42,4 +38,4 @@ public class MandalorianIron extends BaseBlock {
 //    	ItemStack ironIngotStack = new ItemStack(Items.IRON_INGOT);
 //    	GameRegistry.addShapedRecipe(Utilities.GetRegistryNameBackdoor(this), null, mandalorianIronIngotStackNine, "xxx", "xyx", "xxx", 'x', ironIngotStack, 'y', lapisLazuliStack);
 //	}
-}
+

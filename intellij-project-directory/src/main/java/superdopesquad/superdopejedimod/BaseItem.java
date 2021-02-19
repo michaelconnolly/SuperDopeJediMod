@@ -23,6 +23,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.material.MandalorianIronIngot;
 
 
 public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwareInterface {
@@ -32,24 +33,27 @@ public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwa
 	private boolean _showUpInCreativeTab = true;
 
 	
-	//public BaseItem(String unlocalizedName) {
-	public BaseItem(Properties properties) {
+//	//public BaseItem(String unlocalizedName) {
+//	public BaseItem(Item.Properties properties) {
+//
+//		//properties.group(ItemGroup.MISC);
+//		this(properties, null);
+//	}
 
-		//properties.group(ItemGroup.MISC);
-		this(properties, null);
-	}
 
-
-	public BaseItem(String unlocalizedName) {
+	public BaseItem(String name) {
 	//public BaseItem(Properties properties) {
 
 		//properties.group(ItemGroup.MISC);
-		this(new Item.Properties(), null);
+		this(name, new Item.Properties());
 	}
 	
-	public BaseItem(Properties properties, ItemGroup itemGroup) {
-		
-		super(properties.group(itemGroup));
+	public BaseItem(String name, Item.Properties properties) {
+
+		super(properties);
+
+		SuperDopeJediMod.ITEMS.register(name, () -> this);
+	}
 
 //		// Establish what tab, if any, the item should show up in.
 //		if (itemGroup != null) {
@@ -67,7 +71,7 @@ public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwa
 		// Insert this item into our collection of custom items, so we 
 		// can send separate events to it for lifecycle management.
 		//SuperDopeJediMod.customObjects.add(this);
-	}
+	//}
 	
 //
 //	public String getName() {
