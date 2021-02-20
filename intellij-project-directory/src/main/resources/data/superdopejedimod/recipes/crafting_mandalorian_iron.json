@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:mandalorian_iron_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:mandalorian_iron",
+    "count": 1
+  }
+}

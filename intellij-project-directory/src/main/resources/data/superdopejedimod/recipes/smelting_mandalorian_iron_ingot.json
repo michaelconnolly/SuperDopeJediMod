@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+      "item": "superdopejedimod:mandalorian_iron_ore"
+  },
+  "result": "superdopejedimod:mandalorian_iron_ingot"
+}

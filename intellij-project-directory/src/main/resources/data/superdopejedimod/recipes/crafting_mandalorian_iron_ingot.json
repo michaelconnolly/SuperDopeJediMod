@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "superdopejedimod:mandalorian_iron"
+    }
+  ],
+  "result":
+  {
+    "item": "superdopejedimod:mandalorian_iron_ingot",
+    "count": 9
+  }
+}
