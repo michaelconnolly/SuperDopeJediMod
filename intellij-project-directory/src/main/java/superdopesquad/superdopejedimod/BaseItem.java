@@ -1,36 +1,14 @@
 package superdopesquad.superdopejedimod;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-//import net.minecraft.item.ItemBlock;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.util.text.TextComponentString;
-//import net.minecraft.world.World;
-import net.minecraft.item.ItemGroup;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
-import superdopesquad.superdopejedimod.faction.ClassInfo;
-import superdopesquad.superdopejedimod.material.MandalorianIronIngot;
 
 
 public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwareInterface {
 
 	
-	private String _name = "";
-	private boolean _showUpInCreativeTab = true;
+//	private String _name = "";
+//	private boolean _showUpInCreativeTab = true;
 
 	
 //	//public BaseItem(String unlocalizedName) {

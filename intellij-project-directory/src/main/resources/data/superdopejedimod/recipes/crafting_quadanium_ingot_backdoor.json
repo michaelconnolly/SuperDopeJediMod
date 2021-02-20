@@ -14,12 +14,12 @@
     },
     "y":
     {
-      "item": "minecraft:lapis_lazuli"
+      "item": "minecraft:ink_sac"
     }
   },
   "result":
   {
-    "item": "superdopejedimod:mandalorian_iron_ingot",
+    "item": "superdopejedimod:quadanium_ingot",
     "count": 9
   }
 }

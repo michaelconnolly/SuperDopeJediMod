@@ -10,12 +10,12 @@
   {
     "x":
     {
-      "item": "superdopejedimod:mandalorian_iron_ingot"
+      "item": "superdopejedimod:quadanium_ingot"
     }
   },
   "result":
   {
-    "item": "superdopejedimod:mandalorian_iron",
+    "item": "superdopejedimod:quadanium",
     "count": 1
   }
 }

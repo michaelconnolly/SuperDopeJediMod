@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "superdopejedimod:block/quadanium_steel_ore"
-    }
-}

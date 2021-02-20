@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+      "item": "superdopejedimod:quadanium_ore"
+  },
+  "result": "superdopejedimod:quadanium_ingot"
+}

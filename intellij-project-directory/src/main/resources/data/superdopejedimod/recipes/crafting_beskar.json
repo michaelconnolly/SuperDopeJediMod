@@ -3,19 +3,19 @@
   "pattern":
   [
     "xxx",
-    "x x",
+    "xxx",
     "xxx"
   ],
   "key":
   {
     "x":
     {
-      "tag": "forge:gems/diamond"
+      "item": "superdopejedimod:beskar_ingot"
     }
   },
   "result":
   {
-    "item": "superdopejedimod:mandalorian_iron",
+    "item": "superdopejedimod:beskar",
     "count": 1
   }
 }

@@ -6,7 +6,6 @@ package superdopesquad.superdopejedimod;
 //import net.minecraftforge.common.Enum;
 
 import net.minecraft.block.Block;
-        import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
         import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
         import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -56,7 +55,6 @@ import net.minecraft.item.Item;
 
 
 @Mod("superdopejedimod")
-//@Mod(modid=SuperDopeJediMod.MODID, name=SuperDopeJediMod.MODNAME, version=SuperDopeJediMod.MODVER) //Tell forge "Oh hey, there's a new mod here to load."
 public class SuperDopeJediMod {
 
     // Set the metadata of the mod.
@@ -64,7 +62,6 @@ public class SuperDopeJediMod {
     public static final String MODNAME = "SuperDopeJediMod";
     public static final String MODVER = "0.0.1";
 
-    //public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<Block>(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
@@ -107,19 +104,15 @@ public class SuperDopeJediMod {
     //   @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     //  public static SuperDopeJediMod instance;
 
-    // ********************************
-    // * THE NEW WAY!                 *
-    // ********************************
-
     // Mandalorian Iron, used to create weapons and armor.
-    public static final MandalorianIron MANDALORIAN_IRON = new MandalorianIron("mandalorian_iron");
-    public static final MandalorianIronOre MANDALORIAN_IRON_ORE = new MandalorianIronOre("mandalorian_iron_ore");
-    public static final MandalorianIronIngot MANDALORIAN_IRON_INGOT = new MandalorianIronIngot("mandalorian_iron_ingot");
+    public static final Beskar BESKAR = new Beskar("beskar");
+    public static final BeskarOre BESKAR_ORE = new BeskarOre("beskar_ore");
+    public static final BeskarIngot BESKAR_INGOT = new BeskarIngot("beskar_ingot");
 
     // Quadanium Steel, used to create vehicles.
-    public static final QuadaniumSteel QUADANIUM_STEEL = new QuadaniumSteel("quadanium_steel");
-    public static final QuadaniumSteelOre QUADANIUM_STEEL_ORE = new QuadaniumSteelOre("quadanium_steel_ore");
-    public static final QuadaniumSteelIngot QUADANIUM_STEEL_INGOT = new QuadaniumSteelIngot("quadanium_steel_ingot");
+    public static final Quadanium QUADANIUM = new Quadanium("quadanium");
+    public static final QuadaniumOre QUADANIUM_ORE = new QuadaniumOre("quadanium_ore");
+    public static final QuadaniumIngot QUADANIUM_INGOT = new QuadaniumIngot("quadanium_ingot");
 
 
     //public static final RegistryObject<Block> MANDALORIAN_IRON = BLOCKS.register("mandalorian_iron", () -> new MandalorianIron());

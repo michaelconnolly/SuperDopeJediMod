@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import superdopesquad.superdopejedimod.BaseBlock;
 
-public class MandalorianIron extends BaseBlock {
+public class Beskar extends BaseBlock {
 
-	public MandalorianIron(String name) {
+	public Beskar(String name) {
 
 		super(name, (Block.Properties.create(Material.IRON)));
 	}

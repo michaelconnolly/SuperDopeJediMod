@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "superdopejedimod:beskar"
+    }
+  ],
+  "result":
+  {
+    "item": "superdopejedimod:beskar_ingot",
+    "count": 9
+  }
+}

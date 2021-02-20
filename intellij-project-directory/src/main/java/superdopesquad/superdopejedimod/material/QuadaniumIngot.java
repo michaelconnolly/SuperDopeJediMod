@@ -4,10 +4,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import superdopesquad.superdopejedimod.BaseItem;
 
-public class MandalorianIronIngot extends BaseItem {
+public class QuadaniumIngot extends BaseItem {
 
-	public MandalorianIronIngot(String name) {
+	public QuadaniumIngot(String name) {
 		
-        super(name, new Item.Properties().group((ItemGroup.MISC)));
+		super(name, new Item.Properties().group((ItemGroup.MISC)));
 	}
 }
