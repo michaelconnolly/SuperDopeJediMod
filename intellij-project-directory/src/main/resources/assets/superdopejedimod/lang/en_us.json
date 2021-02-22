@@ -34,5 +34,10 @@
     "item.superdopejedimod.stormtrooper_helmet": "Stormtrooper Helmet",
     "item.superdopejedimod.stormtrooper_chestplate": "Stormtrooper Chestplate",
     "item.superdopejedimod.stormtrooper_leggings": "Stormtrooper Leggings",
-    "item.superdopejedimod.stormtrooper_boots": "Stormtrooper Boots"
+    "item.superdopejedimod.stormtrooper_boots": "Stormtrooper Boots",
+
+    "item.superdopejedimod.rebel_helmet": "Rebel Helmet",
+    "item.superdopejedimod.rebel_chestplate": "Rebel Chestplate",
+    "item.superdopejedimod.rebel_leggings": "Rebel Leggings",
+    "item.superdopejedimod.rebel_boots": "Rebel Boots"
 }

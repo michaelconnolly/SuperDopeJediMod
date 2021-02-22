@@ -11,91 +11,119 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 //import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-//import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-//import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.event.world.NoteBlockEvent;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
 public class ClassManager {
 
-
-	public static final Integer UNAFFILIATED = 0;
-	public static final Integer JEDI = 1;
-	public static final Integer SITH = 2;
-	public static final Integer SMUGGLER = 3;
-	public static final Integer BOUNTYHUNTER = 4;
-	public static final Integer TEAMJUDE = 5;
-	public static final Integer TUNNELER = 6;
-	public static final Integer STORMTROOPERCOMMANDER = 7;
-	public static final Integer SITHPILOT = 8;
-	public static final Integer REPUBLICPILOT = 9;
-
-	public static final String UNAFFILIATED_NAME = "Unaffiliated";
-	public static final String JEDI_NAME = "Jedi";
-	public static final String SITH_NAME = "Sith";
-	public static final String SMUGGLER_NAME = "Smuggler";
-	public static final String BOUNTYHUNTER_NAME = "Bounty Hunter";
-	public static final String TEAMJUDE_NAME = "Team Jude";
-	public static final String TUNNELER_NAME = "Tunneler";
-	public static final String STORMTROOPERCOMMANDER_NAME = "Storm Trooper Commander";
-	public static final String SITHPILOT_NAME = "Sith Pilot";
-	public static final String REPUBLICPILOT_NAME = "Republic Pilot";
-
-	public static final Integer FACTION_REPUBLIC = 0;
-	public static final Integer FACTION_EMPIRE = 1;
-	public static final String FACTION_REPUBLIC_NAME = "The Republic";
-	public static final String FACTION_EMPIRE_NAME = "The Empire";
-
-	private HashMap _factionMap = new HashMap();
-	private HashMap _classMap = new HashMap();
+	public static final HashMap factionMap = new HashMap();
+	public static final HashMap classMap = new HashMap();
 	ArrayList<ClassInfo> _forceWieldingClasses = new ArrayList<ClassInfo>();
+
+	public static final FactionInfo REBEL_ALLIANCE = new FactionInfo(0,"Rebel Alliance");
+	public static final FactionInfo THE_EMPIRE = new FactionInfo(1,"The Empire");
+	public static final FactionInfo INDEPENDENT_CONTRACTOR = new FactionInfo(2,"Independent Contractor");
+
+	public static final ClassInfo UNAFFILIATED = new ClassInfo(0, "Unaffiliated", Color.white);
+	public static final ClassInfo JEDI_KNIGHT = new ClassInfo(1, "Jedi Knight", Color.blue, true, REBEL_ALLIANCE);
+	public static final ClassInfo REBEL_CELL_COMMANDER = new ClassInfo(2, "Rebel Cell Commander", Color.cyan, true, REBEL_ALLIANCE);
+	public static final ClassInfo SITH_LORD = new ClassInfo(3, "Sith Lord", Color.red, true, THE_EMPIRE);
+	public static final ClassInfo STORMTROOPER = new ClassInfo(4, "Stormtrooper", Color.orange, true, THE_EMPIRE);
+	public static final ClassInfo BOUNTYHUNTER = new ClassInfo(5, "Bounty Hunter", Color.black, true, INDEPENDENT_CONTRACTOR);
+	public static final ClassInfo SMUGGLER = new ClassInfo(6, "Smuggler", Color.green, true, INDEPENDENT_CONTRACTOR);
+	public static final ClassInfo TUNNELER = new ClassInfo(7, "Tunneler", Color.lightGray, true, INDEPENDENT_CONTRACTOR);
+	public static final ClassInfo TEAMJUDE =  new ClassInfo(8, "Team Jude", Color.pink, true, INDEPENDENT_CONTRACTOR);
+
+
+//
+//	public static final Integer UNAFFILIATED = 0;
+//	public static final Integer JEDI = 1;
+//	public static final Integer SITH = 2;
+//	public static final Integer SMUGGLER = 3;
+//	public static final Integer BOUNTYHUNTER = 4;
+//	public static final Integer TEAMJUDE = 5;
+//	public static final Integer TUNNELER = 6;
+//	public static final Integer STORMTROOPERCOMMANDER = 7;
+//	public static final Integer SITHPILOT = 8;
+//	public static final Integer REPUBLICPILOT = 9;
+
+//	public static final String UNAFFILIATED_NAME = "Unaffiliated";
+//	public static final String JEDI_NAME = "Jedi";
+//	public static final String SITH_NAME = "Sith";
+//	public static final String SMUGGLER_NAME = "Smuggler";
+//	public static final String BOUNTYHUNTER_NAME = "Bounty Hunter";
+//	public static final String TEAMJUDE_NAME = "Team Jude";
+//	public static final String TUNNELER_NAME = "Tunneler";
+//	public static final String STORMTROOPERCOMMANDER_NAME = "Storm Trooper Commander";
+//	public static final String SITHPILOT_NAME = "Sith Pilot";
+//	public static final String REPUBLICPILOT_NAME = "Republic Pilot";
+
+//	public static final Integer FACTION_REPUBLIC = 0;
+//	public static final Integer FACTION_EMPIRE = 1;
+//	public static final String FACTION_REPUBLIC_NAME = "The Republic";
+//	public static final String FACTION_EMPIRE_NAME = "The Empire";
+
 
 
 	public ClassManager() {
 
 		// Define our factions.
-		FactionInfo factionInfoRepublic = new FactionInfo(FACTION_REPUBLIC, FACTION_REPUBLIC_NAME);
-		FactionInfo factionInfoEmpire = new FactionInfo(FACTION_EMPIRE, FACTION_EMPIRE_NAME);
-		this._factionMap.put(FACTION_REPUBLIC, factionInfoRepublic);
-		this._factionMap.put(FACTION_EMPIRE, factionInfoEmpire);
-		this._factionMap.put(2, "Independent Contractor");
+//		FactionInfo factionInfoRepublic = new FactionInfo(FACTION_REPUBLIC, FACTION_REPUBLIC_NAME);
+//		FactionInfo factionInfoEmpire = new FactionInfo(FACTION_EMPIRE, FACTION_EMPIRE_NAME);
+//		this._factionMap.put(FACTION_REPUBLIC, factionInfoRepublic);
+//		this._factionMap.put(FACTION_EMPIRE, factionInfoEmpire);
+//		this._factionMap.put(0, "Independent Contractor");
+//		this._factionMap.put(1, "Independent Contractor");
 
-		// Define our classes.
-		ClassInfo classInfoUnaffiliated = new ClassInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.white);
-		ClassInfo classInfoJedi = new ClassInfo(JEDI, JEDI_NAME, Color.blue, true, factionInfoRepublic);
-		ClassInfo classInfoSith = new ClassInfo(SITH, SITH_NAME, Color.red, true, factionInfoEmpire);
-		ClassInfo classInfoSmuggler = new ClassInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true, factionInfoRepublic);
-		ClassInfo classInfoBountyHunter = new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire);
-		ClassInfo classInfoTeamJude = new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null);
-		ClassInfo classInfoTunneler = new ClassInfo(TUNNELER, TUNNELER_NAME, Color.lightGray, true, null);
-		ClassInfo classInfoStormTrooperCommander = new ClassInfo(STORMTROOPERCOMMANDER, STORMTROOPERCOMMANDER_NAME, Color.orange, true, factionInfoEmpire);
-		ClassInfo classInfoSithPilot = new ClassInfo(SITHPILOT, SITHPILOT_NAME, Color.gray, true, factionInfoEmpire);
-		ClassInfo classInfoRepublicPilot = new ClassInfo(REPUBLICPILOT, REPUBLICPILOT_NAME, Color.cyan, true, factionInfoRepublic);
+//		this._factionMap.put(0, new FactionInfo(0,"Rebel Alliance"));
+//		this._factionMap.put(1, new FactionInfo(1,"The Empire"));
+//		this._factionMap.put(2, new FactionInfo(2,"Independent Contractor"));
 
-		this._classMap.put(UNAFFILIATED, classInfoUnaffiliated);
-		this._classMap.put(JEDI, classInfoJedi);
-		this._classMap.put(SITH, classInfoSith);
-		this._classMap.put(SMUGGLER, classInfoSmuggler);
-		this._classMap.put(BOUNTYHUNTER, classInfoBountyHunter);
-		this._classMap.put(TEAMJUDE, classInfoTeamJude);
-		this._classMap.put(TUNNELER, classInfoTunneler);
-		this._classMap.put(STORMTROOPERCOMMANDER, classInfoStormTrooperCommander);
-		this._classMap.put(SITHPILOT, classInfoSithPilot);
-		this._classMap.put(REPUBLICPILOT, classInfoRepublicPilot);
+//		this._factionMap.put(1, new FactionInfo(1,"The Empire"));
+//		this._factionMap.put(2, new FactionInfo(2,"Independent Contractor"));
+
+//		this._classMap.put(0, new ClassInfo(0, "Unaffiliated", Color.white));
+//		this._classMap.put(1, new ClassInfo(1, "Jedi Knight", Color.blue, true, REBEL_ALLIANCE));
+//		this._classMap.put(2, new ClassInfo(2, "Rebel Cell Commander", Color.cyan, true, REBEL_ALLIANCE));
+//		this._classMap.put(3, new ClassInfo(3, "Sith Lord", Color.red, true, THE_EMPIRE));
+//		this._classMap.put(4, new ClassInfo(4, "Stormtrooper", Color.orange, true, THE_EMPIRE));
+//		this._classMap.put(5, new ClassInfo(5, "Bounty Hunter", Color.black, true, INDEPENDENT_CONTRACTOR));
+//		this._classMap.put(6, new ClassInfo(6, "Smuggler", Color.green, true, INDEPENDENT_CONTRACTOR));
+//		this._classMap.put(7, new ClassInfo(7, "Tunneler", Color.lightGray, true, INDEPENDENT_CONTRACTOR));
+//		this._classMap.put(8, new ClassInfo(8, "Team Jude", Color.pink, true, INDEPENDENT_CONTRACTOR));
+//
+
+//		// Define our classes.
+//		ClassInfo classInfoUnaffiliated = new ClassInfo(UNAFFILIATED, UNAFFILIATED_NAME, Color.white);
+//		ClassInfo classInfoJedi = new ClassInfo(JEDI, JEDI_NAME, Color.blue, true, factionInfoRepublic);
+//		ClassInfo classInfoSith = new ClassInfo(SITH, SITH_NAME, Color.red, true, factionInfoEmpire);
+//		ClassInfo classInfoSmuggler = new ClassInfo(SMUGGLER, SMUGGLER_NAME, Color.green, true, factionInfoRepublic);
+//		ClassInfo classInfoBountyHunter = new ClassInfo(BOUNTYHUNTER, BOUNTYHUNTER_NAME, Color.black, true, factionInfoEmpire);
+//		ClassInfo classInfoTeamJude = new ClassInfo(TEAMJUDE, TEAMJUDE_NAME, Color.pink, true, null);
+//		ClassInfo classInfoTunneler = new ClassInfo(TUNNELER, TUNNELER_NAME, Color.lightGray, true, null);
+//		ClassInfo classInfoStormTrooperCommander = new ClassInfo(STORMTROOPERCOMMANDER, STORMTROOPERCOMMANDER_NAME, Color.orange, true, factionInfoEmpire);
+//		ClassInfo classInfoSithPilot = new ClassInfo(SITHPILOT, SITHPILOT_NAME, Color.gray, true, factionInfoEmpire);
+//		ClassInfo classInfoRepublicPilot = new ClassInfo(REPUBLICPILOT, REPUBLICPILOT_NAME, Color.cyan, true, factionInfoRepublic);
+
+//		this._classMap.put(UNAFFILIATED, classInfoUnaffiliated);
+//		this._classMap.put(JEDI, classInfoJedi);
+//		this._classMap.put(SITH, classInfoSith);
+//		this._classMap.put(SMUGGLER, classInfoSmuggler);
+//		this._classMap.put(BOUNTYHUNTER, classInfoBountyHunter);
+//		this._classMap.put(TEAMJUDE, classInfoTeamJude);
+//		this._classMap.put(TUNNELER, classInfoTunneler);
+//		this._classMap.put(STORMTROOPERCOMMANDER, classInfoStormTrooperCommander);
+//		this._classMap.put(SITHPILOT, classInfoSithPilot);
+//		this._classMap.put(REPUBLICPILOT, classInfoRepublicPilot);
 
 		// Stash the list of force wielding classes for easy access later.
-		this._forceWieldingClasses.add(classInfoJedi);
-		this._forceWieldingClasses.add(classInfoSith);
+		this._forceWieldingClasses.add(JEDI_KNIGHT);
+		this._forceWieldingClasses.add(SITH_LORD);
 
 		// Let's do a shout-out.
-		System.out.println("SuperDopeJediMod: initialized " + this._factionMap.size() + " player factions.");
-		System.out.println("SuperDopeJediMod: initialized " + this._classMap.size() + " player classes.");
+		System.out.println("SuperDopeJediMod: initialized " + this.factionMap.size() + " player factions.");
+		System.out.println("SuperDopeJediMod: initialized " + this.classMap.size() + " player classes.");
 	}
 
 
@@ -156,20 +184,20 @@ public class ClassManager {
 	}
 
 
-	public ArrayList<FactionInfo> getRepublicFactions() {
+//	public ArrayList<FactionInfo> getRepublicFactions() {
+//
+//		ArrayList<FactionInfo> list = new ArrayList<FactionInfo>();
+//		list.add(this.getFactionInfo(REBEL_ALLIANCE));
+//		return list;
+//	}
 
-		ArrayList<FactionInfo> list = new ArrayList<FactionInfo>();
-		list.add(this.getFactionInfo(FACTION_REPUBLIC));
-		return list;
-	}
 
-
-	public ArrayList<FactionInfo> getImperialFactions() {
-
-		ArrayList<FactionInfo> list = new ArrayList<FactionInfo>();
-		list.add(this.getFactionInfo(FACTION_EMPIRE));
-		return list;
-	}
+//	public ArrayList<FactionInfo> getImperialFactions() {
+//
+//		ArrayList<FactionInfo> list = new ArrayList<FactionInfo>();
+//		list.add(this.getFactionInfo(THE_EMPIRE));
+//		return list;
+//	}
 
 
 
@@ -234,7 +262,7 @@ public class ClassManager {
 		ArrayList<ClassInfo> classes = new ArrayList<ClassInfo>();
 		int index = 0;
 
-		for (Object o : this._classMap.values()) {
+		for (Object o : this.classMap.values()) {
 			classes.add((ClassInfo) o);
 		}
 
@@ -246,7 +274,7 @@ public class ClassManager {
 
 		ArrayList<FactionInfo> factions = new ArrayList<FactionInfo>();
 
-		for (Object o : this._factionMap.values()) {
+		for (Object o : this.factionMap.values()) {
 			factions.add((FactionInfo) o);
 		}
 
@@ -254,28 +282,28 @@ public class ClassManager {
 	}
 
 
-	public FactionInfo getFactionInfo(Integer id) {
+//	public FactionInfo getFactionInfo(Integer id) {
+//
+//		Object factionInfo = this._factionMap.get(id);
+//
+//		if (factionInfo == null) {
+//			return null;
+//		}
+//
+//		return (FactionInfo) factionInfo;
+//	}
 
-		Object factionInfo = this._factionMap.get(id);
 
-		if (factionInfo == null) {
-			return null;
-		}
-
-		return (FactionInfo) factionInfo;
-	}
-
-
-	public ClassInfo getClassInfo(Integer id) {
-
-		Object classInfo = this._classMap.get(id);
-
-		if (classInfo == null) {
-			return null;
-		}
-
-		return (ClassInfo) classInfo;
-	}
+//	public ClassInfo getClassInfo(Integer id) {
+//
+//		Object classInfo = this._classMap.get(id);
+//
+//		if (classInfo == null) {
+//			return null;
+//		}
+//
+//		return (ClassInfo) classInfo;
+//	}
 
 
 	public boolean isPlayerInFaction(PlayerEntity player, FactionInfo factionInfoInput) {
@@ -307,12 +335,13 @@ public class ClassManager {
 		assert(classCapability != null);
 		if (classCapability == null) {
 			System.out.println("Uh oh! Failed to find class capability.");
-			return (ClassInfo) this._classMap.get(UNAFFILIATED);
+			//return (ClassInfo) this.classMap.get(UNAFFILIATED);
+			return (ClassInfo) SuperDopeJediMod.CLASS_MANAGER.UNAFFILIATED;
 		}
 
 		// Extract the name out of factionInfo, now that we have the proper id.
 		Integer classId = classCapability.get();
-		ClassInfo classInfo = (ClassInfo) this._classMap.get(classId);
+		ClassInfo classInfo = (ClassInfo) this.classMap.get(classId);
 
 		//System.out.println("getPlayerFaction: " + player.toString() + ", factionid:" + factionId.toString());
 
@@ -346,7 +375,8 @@ public class ClassManager {
 		// Let's refresh it.
     	ClassInfo classInfo = this.getPlayerClass(player);
 
-    	if (classInfo.getId() == this.UNAFFILIATED) {
+    	//if (classInfo.getId() == this.UNAFFILIATED) {
+		if (classInfo.getId() == SuperDopeJediMod.CLASS_MANAGER.UNAFFILIATED.getId()) {
     		return ("You are not affiliated with any class.");
     	}
 
@@ -415,9 +445,9 @@ public class ClassManager {
 		int classId = -1;
 
 		// Now, let's enumerate our dictionary map and find the faction that the user wants to join.
-		for (Object key : this._classMap.keySet()) {
+		for (Object key : this.classMap.keySet()) {
 
-			ClassInfo classInfo = (ClassInfo) this._classMap.get(key);
+			ClassInfo classInfo = (ClassInfo) this.classMap.get(key);
 			String className = classInfo.getShortName();
 
 			//System.out.println(key.toString() + ":" + value);

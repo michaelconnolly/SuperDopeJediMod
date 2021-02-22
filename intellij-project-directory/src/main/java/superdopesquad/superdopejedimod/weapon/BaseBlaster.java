@@ -95,7 +95,7 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	public List<ClassInfo> GetUnfriendlyClasses() {
 
 		// By default, we do not let force-wielding classes use blasters.
-		return SuperDopeJediMod.classManager.getForceWieldingClasses();
+		return SuperDopeJediMod.CLASS_MANAGER.getForceWieldingClasses();
 	}
 
 

@@ -1,5 +1,7 @@
 package superdopesquad.superdopejedimod.faction;
 
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+
 import java.awt.Color;
 
 public class ClassInfo {
@@ -30,6 +32,8 @@ public class ClassInfo {
 		if (factionInfo != null) {
 			factionInfo.addClass(this);
 		}
+
+		SuperDopeJediMod.CLASS_MANAGER.classMap.put(this._id, this);
 	}
 
 	

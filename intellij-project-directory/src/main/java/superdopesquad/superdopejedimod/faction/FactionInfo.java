@@ -1,5 +1,7 @@
 package superdopesquad.superdopejedimod.faction;
 
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,8 @@ public class FactionInfo {
 		this._id = id;
 		this._name = name;
 		this._classes = new ArrayList<ClassInfo>();
+
+		SuperDopeJediMod.CLASS_MANAGER.factionMap.put(this._id, this);
 	}
 	
 	

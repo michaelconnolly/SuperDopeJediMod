@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:"plastoid_sheet
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:plastoid",
+    "count": 1
+  }
+}

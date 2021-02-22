@@ -10,11 +10,8 @@ import net.minecraft.entity.Entity;
 //import net.minecraft.inventory.EntityEquipmentSlot;
 //import net.minecraft.inventory.
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.item.*;
 //import net.minecraft.item.ItemArmor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ArmorMaterial;
 //import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -33,7 +30,7 @@ public abstract class BaseArmor extends ArmorItem implements SuperDopeObject {
 	//public BaseArmor(ArmorMaterial materialIn, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
 	public BaseArmor(String name, ArmorMaterial material, EquipmentSlotType slotType, Item.Properties properties) {
 
-		super(material, slotType, properties);
+		super(material, slotType, properties.group(ItemGroup.COMBAT));
 
 		SuperDopeJediMod.ITEMS.register(name, () -> this);
 	}
@@ -61,15 +58,15 @@ public abstract class BaseArmor extends ArmorItem implements SuperDopeObject {
 //	}
 	
 	
-	public String getFullName() {	
-		return SuperDopeJediMod.MODID + ":" + this.getName();
-	}
-	
-	
-	@Override
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		
-	}
+//	public String getFullName() {
+//		return SuperDopeJediMod.MODID + ":" + this.getName();
+//	}
+//
+//
+//	@Override
+//	public void registerBlocks(RegistryEvent.Register<Block> event) {
+//
+//	}
 //
 //
 //	@Override
@@ -86,8 +83,8 @@ public abstract class BaseArmor extends ArmorItem implements SuperDopeObject {
 //	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
 //	}
 
-	
-	@Override
-	public void registerRecipe() {
-	}
+//
+//	@Override
+//	public void registerRecipe() {
+////	}
 }

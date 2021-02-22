@@ -112,6 +112,11 @@ public class SuperDopeJediMod {
     public static final StormTrooperArmor STORMTROOPER_LEGGINGS = new StormTrooperArmor("stormtrooper_leggings",EquipmentSlotType.LEGS);
     public static final StormTrooperArmor STORMTROOPER_BOOTS = new StormTrooperArmor("stormtrooper_boots",EquipmentSlotType.FEET);
 
+    public static final RebelArmor REBEL_HELMET = new RebelArmor("rebel_helmet", EquipmentSlotType.HEAD);
+    public static final RebelArmor REBEL_CHESTPLATE = new RebelArmor("rebel_chestplate",EquipmentSlotType.CHEST);
+    public static final RebelArmor REBEL_LEGGINGS = new RebelArmor("rebel_leggings",EquipmentSlotType.LEGS);
+    public static final RebelArmor REBEL_BOOTS = new RebelArmor("rebel_boots",EquipmentSlotType.FEET);
+
 
     //public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
 
@@ -203,7 +208,7 @@ public class SuperDopeJediMod {
 //    public static Saphire saphire = new Saphire("saphire");
 
     // Classes.  Must be before EntityManager.
-    public static ClassManager classManager = new ClassManager();
+    public static final ClassManager CLASS_MANAGER = new ClassManager();
 
     // Entities.
     //public static EntityManager entityManager = new EntityManager();
