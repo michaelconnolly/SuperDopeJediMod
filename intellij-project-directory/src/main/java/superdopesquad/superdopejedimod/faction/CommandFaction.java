@@ -4,9 +4,17 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //import net.minecraft.command.CommandException;
+//
 //import net.minecraft.command.ICommand;
 //import net.minecraft.command.ICommandSender;
 //import net.minecraft.entity.player.EntityPlayer;
+//
+//import net.minecraft.command.*;
+//import net.minecraft.command.CommandSource;
+//import net.minecraft.entity.player.PlayerEntity;
+//
+//
+//
 //import net.minecraft.server.MinecraftServer;
 //import net.minecraft.util.math.BlockPos;
 //import net.minecraft.util.text.ITextComponent;
@@ -16,7 +24,8 @@
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //
 //
-//public class CommandFaction extends BaseCommand
+////public class CommandFaction extends BaseCommand
+//public class CommandFaction extends CommandSource
 //{
 //
 //	static String commandName = "faction";
@@ -39,6 +48,7 @@
 //
 //
 //	@Override
+//
 //	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 //
 //		World world = sender.getEntityWorld();
@@ -168,6 +178,7 @@
 //
 //
 //	    	sender.sendMessage(new TextComponentString(message));
+//
 // 	    }
 //
 // 	    return;

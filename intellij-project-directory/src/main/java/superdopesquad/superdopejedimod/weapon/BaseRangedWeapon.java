@@ -22,6 +22,10 @@ import net.minecraft.item.Item;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 //import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 
@@ -95,30 +99,30 @@ public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, 
 //		SuperDopeJediMod.classManager.onUpdateHandlerClassAware(stack, world, entity, itemSlot, isSelected);
 //	}
 //
-//	@Override
-//	public List<ClassInfo> GetFriendlyClasses() {
-//
-//		return new ArrayList<ClassInfo>();
-//	}
-//
-//
-//	@Override
-//	public List<ClassInfo> GetUnfriendlyClasses() {
-//
-//		return new ArrayList<ClassInfo>();
-//	}
-//
-//
-//	@Override
-//	public boolean IsUseFriendlyOnly() {
-//
-//		return false;
-//	}
-//
-//
-//	@Override
-//	public boolean IsUseUnfriendlyBanned() {
-//
-//		return false;
-//	}
+	@Override
+	public List<ClassInfo> GetFriendlyClasses() {
+
+		return new ArrayList<ClassInfo>();
+	}
+
+
+	@Override
+	public List<ClassInfo> GetUnfriendlyClasses() {
+
+		return new ArrayList<ClassInfo>();
+	}
+
+
+	@Override
+	public boolean IsUseFriendlyOnly() {
+
+		return false;
+	}
+
+
+	@Override
+	public boolean IsUseUnfriendlyBanned() {
+
+		return false;
+	}
 }

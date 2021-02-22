@@ -1,2 +1,8 @@
 https://mcforge.readthedocs.io/en/stable/utilities/recipes/
 
+https://mcforge.readthedocs.io/en/latest/items/items/
+
+https://plus.terrafirmacraft.com/Addon_Development
+
+https://medium.com/@programmingfun2017/minecraft-modding-with-forge-tutorial-simple-command-9551a75394ee
+

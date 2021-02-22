@@ -44,6 +44,7 @@ import net.minecraft.client.Minecraft;
 //import net.minecraftforge.fml.relauncher.Side;
 //import net.minecraftforge.fml.relauncher.SideOnly;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.*;
 //import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
@@ -90,20 +91,20 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	}
 
 
-//	@Override
-//	public List<ClassInfo> GetUnfriendlyClasses() {
-//
-//		// By default, we do not let force-wielding classes use blasters.
-//		return SuperDopeJediMod.classManager.getForceWieldingClasses();
-//	}
+	@Override
+	public List<ClassInfo> GetUnfriendlyClasses() {
 
-//
-//	@Override
-//	public boolean IsUseUnfriendlyBanned() {
-//
-//		// By default, all blasters are banned from the unfriendly classes, namely, the force-wielding classes.
-//		return true;
-//	}
+		// By default, we do not let force-wielding classes use blasters.
+		return SuperDopeJediMod.classManager.getForceWieldingClasses();
+	}
+
+
+	@Override
+	public boolean IsUseUnfriendlyBanned() {
+
+		// By default, all blasters are banned from the unfriendly classes, namely, the force-wielding classes.
+		return true;
+	}
 
 //
 //	/**

@@ -2,7 +2,37 @@
     "block.superdopejedimod.beskar": "Beskar",
     "block.superdopejedimod.beskar_ore": "Beskar Ore",
     "item.superdopejedimod.beskar_ingot": "Beskar Ingot",
+
     "block.superdopejedimod.quadanium": "Quadanium",
     "block.superdopejedimod.quadanium_ore": "Quadanium Ore",
-    "item.superdopejedimod.quadanium_ingot": "Quadanium Ingot"
+    "item.superdopejedimod.quadanium_ingot": "Quadanium Ingot",
+
+    "block.superdopejedimod.plastoid": "Plastoid",
+    "block.superdopejedimod.plastoid_scraps": "Plastoid Scraps",
+    "item.superdopejedimod.plastoid_sheet": "Plastoid Sheet",
+
+    "item.superdopejedimod.mandalorian_helmet": "Mandalorian Helmet",
+    "item.superdopejedimod.mandalorian_chestplate": "Mandalorian Chestplate",
+    "item.superdopejedimod.mandalorian_leggings": "Mandalorian Leggings",
+    "item.superdopejedimod.mandalorian_boots": "Mandalorian Boots",
+
+    "item.superdopejedimod.jedi_helmet": "Jedi Knight Helmet",
+    "item.superdopejedimod.jedi_chestplate": "Jedi Knight Chestplate",
+    "item.superdopejedimod.jedi_leggings": "Jedi Knight Leggings",
+    "item.superdopejedimod.jedi_boots": "Jedi Knight Boots",
+
+    "item.superdopejedimod.sith_lord_helmet": "Sith Lord Helmet",
+    "item.superdopejedimod.sith_lord_chestplate": "Sith Lord Chestplate",
+    "item.superdopejedimod.sith_lord_leggings": "Sith Lord Leggings",
+    "item.superdopejedimod.sith_lord_boots": "Sith Lord Boots",
+
+    "item.superdopejedimod.smuggler_helmet": "Smuggler Helmet",
+    "item.superdopejedimod.smuggler_chestplate": "Smuggler Chestplate",
+    "item.superdopejedimod.smuggler_leggings": "Smuggler Leggings",
+    "item.superdopejedimod.smuggler_boots": "Smuggler Boots",
+
+    "item.superdopejedimod.stormtrooper_helmet": "Stormtrooper Helmet",
+    "item.superdopejedimod.stormtrooper_chestplate": "Stormtrooper Chestplate",
+    "item.superdopejedimod.stormtrooper_leggings": "Stormtrooper Leggings",
+    "item.superdopejedimod.stormtrooper_boots": "Stormtrooper Boots"
 }

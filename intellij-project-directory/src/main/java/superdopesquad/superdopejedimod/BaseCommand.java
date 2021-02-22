@@ -3,20 +3,22 @@
 //
 //import java.util.ArrayList;
 //import java.util.List;
+//import net.minecraft.command.
 //import net.minecraft.command.CommandException;
-////import net.minecraft.command.ICommand;
+//import net.minecraft.command.ICommand;
+//
 //import net.minecraft.command.Commands;
 ////import net.minecraft.command.ICommandSender;
 //import  net.minecraft.command.CommandSource;
 //import net.minecraft.server.MinecraftServer;
 //import net.minecraft.util.math.BlockPos;
-//import net.minecraft.util.text.ITextComponent;
-//import net.minecraft.util.text.TextComponentString;
+////import net.minecraft.util.text.ITextComponent;
+////import net.minecraft.util.text.TextComponentString;
 //import net.minecraft.world.World;
 //
 //
-//public abstract class BaseCommand implements ICommand
-//{
+////public abstract class BaseCommand implements ICommand
+//public abstract class BaseCommand implements ICommandSource {
 //    private String _commandName;
 //    private String _commandUsage;
 //

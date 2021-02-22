@@ -99,31 +99,31 @@ public abstract class BaseMeleeWeapon extends SwordItem implements SuperDopeObje
 //		SuperDopeJediMod.classManager.onUpdateHandlerClassAware(stack, world, entity, itemSlot, isSelected);
 //	}
 	
-//
-//	@Override
-//	public List<ClassInfo> GetFriendlyClasses() {
-//
-//		return new ArrayList<ClassInfo>();
-//	}
-//
-//
-//	@Override
-//	public List<ClassInfo> GetUnfriendlyClasses() {
-//
-//		return new ArrayList<ClassInfo>();
-//	}
-//
-//
-//	@Override
-//	public boolean IsUseFriendlyOnly() {
-//
-//		return false;
-//	}
-//
-//
-//	@Override
-//	public boolean IsUseUnfriendlyBanned() {
-//
-//		return false;
-//	}
+
+	@Override
+	public List<ClassInfo> GetFriendlyClasses() {
+
+		return new ArrayList<ClassInfo>();
+	}
+
+
+	@Override
+	public List<ClassInfo> GetUnfriendlyClasses() {
+
+		return new ArrayList<ClassInfo>();
+	}
+
+
+	@Override
+	public boolean IsUseFriendlyOnly() {
+
+		return false;
+	}
+
+
+	@Override
+	public boolean IsUseUnfriendlyBanned() {
+
+		return false;
+	}
 }

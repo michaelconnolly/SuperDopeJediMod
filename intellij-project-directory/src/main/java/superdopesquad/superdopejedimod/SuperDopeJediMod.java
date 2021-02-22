@@ -6,6 +6,7 @@ package superdopesquad.superdopejedimod;
 //import net.minecraftforge.common.Enum;
 
 import net.minecraft.block.Block;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraftforge.fml.common.Mod;
         import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
         import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -13,44 +14,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 
-//import net.minecraftforge.fml.client.registry.RenderingRegistry;
-//import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-//import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-//import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-//import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-//import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-//import net.minecraftforge.fml.common.IWorldGenerator;
-//import net.minecraftforge.fml.common.Mod.EventHandler;
-//import net.minecraftforge.fml.common.Mod.Instance;
-//import net.minecraftforge.fml.common.SidedProxy;
-//import net.minecraftforge.fml.common.registry.EntityRegistry;
-//import net.minecraftforge.fml.relauncher.Side;
-//import superdopesquad.superdopejedimod.entity.BaseMovingVehicle;
-//import superdopesquad.superdopejedimod.entity.EntityManager;
-//import superdopesquad.superdopejedimod.faction.ClassManager;
-//import superdopesquad.superdopejedimod.hangar.HangarManager;
-//import superdopesquad.superdopejedimod.teleporter.TeleporterManager;
-//import superdopesquad.superdopejedimod.tinkertable.TinkerTable;
-//import superdopesquad.superdopejedimod.tools.Drill;
+import superdopesquad.superdopejedimod.armor.*;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.material.*;
-//import superdopesquad.superdopejedimod.weapon.WeaponManager;
-//import net.minecraft.block.material.Material;
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.init.Blocks;
-//import net.minecraft.init.Items;
-//import net.minecraft.init.SoundEvents;
-//import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.item.Item.ToolMaterial;
-//import net.minecraft.item.ItemArmor;
-//import net.minecraft.item.ItemArmor.ArmorMaterial;
-//import net.minecraft.item.crafting.FurnaceRecipes;
-
-//
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-//
 //private static final Logger LOGGER = LogManager.getLogger();
 
 
@@ -104,35 +71,49 @@ public class SuperDopeJediMod {
     //   @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
     //  public static SuperDopeJediMod instance;
 
-    // Mandalorian Iron, used to create weapons and armor.
-    public static final Beskar BESKAR = new Beskar("beskar");
-    public static final BeskarOre BESKAR_ORE = new BeskarOre("beskar_ore");
-    public static final BeskarIngot BESKAR_INGOT = new BeskarIngot("beskar_ingot");
+//    // Beskar, used to create heavy weapons and heavy armor.
+//    public static final Beskar BESKAR = new Beskar("beskar");
+//    public static final BeskarOre BESKAR_ORE = new BeskarOre("beskar_ore");
+//    public static final BeskarIngot BESKAR_INGOT = new BeskarIngot("beskar_ingot");
+//
+//    // Quadanium, used to create vehicles and other big things.
+//    public static final Quadanium QUADANIUM = new Quadanium("quadanium");
+//    public static final QuadaniumOre QUADANIUM_ORE = new QuadaniumOre("quadanium_ore");
+//    public static final QuadaniumIngot QUADANIUM_INGOT = new QuadaniumIngot("quadanium_ingot");
+//
+//    // Plastoid, used to create medium weapons and medium armor.
+//    public static final Plastoid PLASTOID = new Plastoid("plastoid");
+//    public static final PlastoidScraps PLASTOID_SCRAPS = new PlastoidScraps("plastoid_scraps");
+//    public static final PlastoidSheet PLASTOID_SHEET = new PlastoidSheet("plastoid_sheet");
+    public static final MaterialManager MATERIAL_MANAGER = new MaterialManager();
 
-    // Quadanium Steel, used to create vehicles.
-    public static final Quadanium QUADANIUM = new Quadanium("quadanium");
-    public static final QuadaniumOre QUADANIUM_ORE = new QuadaniumOre("quadanium_ore");
-    public static final QuadaniumIngot QUADANIUM_INGOT = new QuadaniumIngot("quadanium_ingot");
+    public static final MandalorianArmor MANDALORIAN_HELMET = new MandalorianArmor("mandalorian_helmet", EquipmentSlotType.HEAD);
+    public static final MandalorianArmor MANDALORIAN_CHESTPLATE = new MandalorianArmor("mandalorian_chestplate",EquipmentSlotType.CHEST);
+    public static final MandalorianArmor MANDALORIAN_LEGGINGS = new MandalorianArmor("mandalorian_leggings",EquipmentSlotType.LEGS);
+    public static final MandalorianArmor MANDALORIAN_BOOTS = new MandalorianArmor("mandalorian_boots",EquipmentSlotType.FEET);
+
+    public static final JediArmor JEDI_HELMET = new JediArmor("jedi_helmet", EquipmentSlotType.HEAD);
+    public static final JediArmor JEDI_CHESTPLATE = new JediArmor("jedi_chestplate",EquipmentSlotType.CHEST);
+    public static final JediArmor JEDI_LEGGINGS = new JediArmor("jedi_leggings",EquipmentSlotType.LEGS);
+    public static final JediArmor JEDI_BOOTS = new JediArmor("jedi_boots",EquipmentSlotType.FEET);
+
+    public static final SithLordArmor SITH_LORD_HELMET = new SithLordArmor("sith_lord_helmet", EquipmentSlotType.HEAD);
+    public static final SithLordArmor SITH_LORD_CHESTPLATE = new SithLordArmor("sith_lord_chestplate",EquipmentSlotType.CHEST);
+    public static final SithLordArmor SITH_LORD_LEGGINGS = new SithLordArmor("sith_lord_leggings",EquipmentSlotType.LEGS);
+    public static final SithLordArmor SITH_LORD_BOOTS = new SithLordArmor("sith_lord_boots",EquipmentSlotType.FEET);
+
+    public static final SmugglerArmor SMUGGLER_HELMET = new SmugglerArmor("smuggler_helmet", EquipmentSlotType.HEAD);
+    public static final SmugglerArmor SMUGGLER_CHESTPLATE = new SmugglerArmor("smuggler_chestplate",EquipmentSlotType.CHEST);
+    public static final SmugglerArmor SMUGGLER_LEGGINGS = new SmugglerArmor("smuggler_leggings",EquipmentSlotType.LEGS);
+    public static final SmugglerArmor SMUGGLER_BOOTS = new SmugglerArmor("smuggler_boots",EquipmentSlotType.FEET);
+
+    public static final StormTrooperArmor STORMTROOPER_HELMET = new StormTrooperArmor("stormtrooper_helmet", EquipmentSlotType.HEAD);
+    public static final StormTrooperArmor STORMTROOPER_CHESTPLATE = new StormTrooperArmor("stormtrooper_chestplate",EquipmentSlotType.CHEST);
+    public static final StormTrooperArmor STORMTROOPER_LEGGINGS = new StormTrooperArmor("stormtrooper_leggings",EquipmentSlotType.LEGS);
+    public static final StormTrooperArmor STORMTROOPER_BOOTS = new StormTrooperArmor("stormtrooper_boots",EquipmentSlotType.FEET);
 
 
-    //public static final RegistryObject<Block> MANDALORIAN_IRON = BLOCKS.register("mandalorian_iron", () -> new MandalorianIron());
-    //public static final RegistryObject<Item> MANDALORIAN_IRON_ITEM = ITEMS.register("mandalorian_iron", () -> new BlockItem(MANDALORIAN_IRON.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-    //public static final RegistryObject<Block> MANDALORIAN_IRON_ORE = BLOCKS.register("mandalorian_iron_ore", () -> new MandalorianIronOre());
-    //public static final RegistryObject<Item> MANDALORIAN_IRON_ORE_ITEM = ITEMS.register("mandalorian_iron_ore", () -> new BlockItem(MANDALORIAN_IRON_ORE.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
-    //public static final RegistryObject<Item> MANDALORIAN_IRON_INGOT = ITEMS.register("mandalorian_iron_ingot", () -> new MandalorianIronIngot(new Item.Properties()));
-
-//    public static final RegistryObject<Block> TUTORIAL_BLOCK = BLOCKS.register("tutorial_block", () -> new Block(Block.Properties.create(Material.ROCK)));
-//    public static final RegistryObject<Item> TUTORIAL_BLOCK = ITEMS.register("tutorial_block", () -> new BlockItem(ModBlocks.TUTORIAL_BLOCK.get(), new Item.Properties()));
-
-    // Mandalorian Iron, used to create weapons and armor.
-//    public static MandalorianIron mandalorianIron = new MandalorianIron("mandalorianIron");
-//    public static MandalorianIronIngot mandalorianIronIngot = new MandalorianIronIngot("mandalorianIronIngot");
-//    public static MandalorianIronOre mandalorianIronOre = new MandalorianIronOre("mandalorianIronOre");
-//    public static MandalorianIronArmor mandalorianIronHelmet = new MandalorianIronArmor(EquipmentSlotType.HEAD, "mandalorianIronHelmet");
-//    public static MandalorianIronArmor mandalorianIronChestplate = new MandalorianIronArmor(EquipmentSlotType.CHEST, "mandalorianIronChestplate");
-//    public static MandalorianIronArmor mandalorianIronLeggings = new MandalorianIronArmor(EquipmentSlotType.LEGS, "mandalorianIronLeggings");
-//    public static MandalorianIronArmor mandalorianIronBoots = new MandalorianIronArmor(EquipmentSlotType.FEET, "mandalorianIronBoots");
-//    public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
+    //public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
 
   //  public static final RegistryObject<Block> MANDALORIAN_IRON_ORE = BLOCKS.register("mandalorianIronOre", () -> new MandalorianIronOre("mandalorianIronOre"));
   //  public static final RegistryObject<Block> MANDALORIAN_IRON_ORE = BLOCKS.register("mandalorianIronOre", mandalorianIronOre);
@@ -206,24 +187,6 @@ public class SuperDopeJediMod {
 //    public static QuadaniumSteelArmor quadaniumSteelBoots = new QuadaniumSteelArmor(EquipmentSlotType.FEET, "quadaniumSteelBoots");
 //    public static QuadaniumSteelSword quadaniumSteelSword = new QuadaniumSteelSword("quadaniumSteelSword");
 //
-//    //Sith Armor
-//    public static SithLordArmor sithLordHelmet = new SithLordArmor(EquipmentSlotType.HEAD, "sithLordHelmet");
-//    public static SithLordArmor sithLordChestplate = new SithLordArmor(EquipmentSlotType.CHEST, "sithLordChestplate");
-//    public static SithLordArmor sithLordLeggings = new SithLordArmor(EquipmentSlotType.LEGS, "sithLordLeggings");
-//    public static SithLordArmor sithLordBoots = new SithLordArmor(EquipmentSlotType.FEET, "sithLordBoots");
-
-//    //Jedi Armor
-//    public static JediArmor jediHelmet = new JediArmor(EquipmentSlotType.HEAD, "jediHelmet");
-//    public static JediArmor jediChestplate = new JediArmor(EquipmentSlotType.CHEST, "jediChestplate");
-//    public static JediArmor jediLeggings = new JediArmor(EquipmentSlotType.LEGS, "jediLeggings");
-//    public static JediArmor jediBoots = new JediArmor(EquipmentSlotType.FEET, "jediBoots");
-//
-//    //Storm Trooper
-//    public static StormTrooperArmor stormTrooperHelmet = new StormTrooperArmor(EquipmentSlotType.HEAD, "stormTrooperHelmet");
-//    public static StormTrooperArmor stormTrooperChestplate = new StormTrooperArmor(EquipmentSlotType.CHEST, "stormTrooperChestplate");
-//    public static StormTrooperArmor stormTrooperLeggings = new StormTrooperArmor(EquipmentSlotType.LEGS, "stormTrooperLeggings");
-//    public static StormTrooperArmor stormTrooperBoots = new StormTrooperArmor(EquipmentSlotType.FEET, "stormTrooperBoots");
-
     //Bounty Hunter stuff
 //    public static BountyHunterLeaderKnife bountyHunterLeaderKnife = new BountyHunterLeaderKnife("bountyHunterLeaderKnife");
 //
@@ -240,13 +203,13 @@ public class SuperDopeJediMod {
 //    public static Saphire saphire = new Saphire("saphire");
 
     // Classes.  Must be before EntityManager.
-    //public static ClassManager classManager = new ClassManager();
+    public static ClassManager classManager = new ClassManager();
 
     // Entities.
     //public static EntityManager entityManager = new EntityManager();
 
     // Commands.
-//    public static CommandManager commandManager = new CommandManager();
+ //   public static CommandManager commandManager = new CommandManager();
 //
 //    // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.
 //    public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
