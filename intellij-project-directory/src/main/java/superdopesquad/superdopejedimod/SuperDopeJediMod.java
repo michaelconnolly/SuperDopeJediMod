@@ -7,6 +7,8 @@ package superdopesquad.superdopejedimod;
 
 import net.minecraft.block.Block;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
         import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
         import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -246,7 +248,10 @@ public class SuperDopeJediMod {
 //        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         // Register ourselves for server and other game events we are interested in
-        //MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(this);
+
+        // Register our ore generator.
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, MATERIAL_MANAGER::GenerateOre);
     }
 //    public ExampleMod() {
 //        // Register the setup method for modloading
@@ -260,14 +265,12 @@ public class SuperDopeJediMod {
 //        // Register the doClientStuff method for modloading
 //        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
-    // Register ourselves for server and other game events we are interested in
-    //MinecraftForge.EVENT_BUS.register(this);
-    //  }
+
 
     private void setup(final FMLCommonSetupEvent event) {
 
         // some preinit code
-        System.out.println("Hello from SuperDopeJediMod:setup 666");
+        System.out.println("Hello from SuperDopeJediMod:setup!");
         //LOGGER.info("HELLO FROM PREINIT");
         //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 

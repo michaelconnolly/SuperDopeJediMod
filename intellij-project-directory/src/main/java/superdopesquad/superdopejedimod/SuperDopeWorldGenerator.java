@@ -11,7 +11,7 @@
 //import net.minecraft.world.gen.feature.WorldGenMinable;
 //import net.minecraftforge.fml.common.IWorldGenerator;
 //
-//
+//import net.minecraft.world.gen.blockplacer.BlockPlacer;
 //public class SuperDopeWorldGenerator implements IWorldGenerator {
 //
 //

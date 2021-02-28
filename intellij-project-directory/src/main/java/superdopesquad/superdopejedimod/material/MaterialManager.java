@@ -1,9 +1,13 @@
 package superdopesquad.superdopejedimod.material;
 
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+
+
 public class MaterialManager {
 
     // Beskar, used to create heavy weapons and heavy armor.
-    public static final Beskar BESKAR = new Beskar("beskar");
+    public final Beskar BESKAR = new Beskar("beskar");
     public static final BeskarOre BESKAR_ORE = new BeskarOre("beskar_ore");
     public static final BeskarIngot BESKAR_INGOT = new BeskarIngot("beskar_ingot");
 
@@ -19,8 +23,16 @@ public class MaterialManager {
 
 
     public MaterialManager() {
+    }
 
 
+    public void GenerateOre(final BiomeLoadingEvent event) {
 
+        if (!(event.getCategory().equals(Biome.Category.NETHER) || event.getCategory().equals(Biome.Category.THEEND))) {
+
+            MaterialManager.BESKAR_ORE.GenerateOre(event);
+            MaterialManager.QUADANIUM_ORE.GenerateOre(event);
+            MaterialManager.PLASTOID_SCRAPS.GenerateOre(event);
+        }
     }
 }

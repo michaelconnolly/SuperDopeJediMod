@@ -6,3 +6,4 @@ https://plus.terrafirmacraft.com/Addon_Development
 
 https://medium.com/@programmingfun2017/minecraft-modding-with-forge-tutorial-simple-command-9551a75394ee
 
+https://fabricmc.net/wiki/tutorial:blocks
