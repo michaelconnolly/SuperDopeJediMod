@@ -17,23 +17,18 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.Utilities;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 
-public class LightSaber extends BaseMeleeWeapon {
+public class Lightsaber extends BaseMeleeWeapon {
 	
 	String color;
 	
 
-	public LightSaber(String unlocalizedName, String colorInput) {
+	public Lightsaber(String color) {
 		
-		super(unlocalizedName, ItemTier.IRON);
-		//super(unlocalizedName, SuperDopeJediMod.powerCrystalMaterial);
-		
-//		this.setMaxStackSize(1);
-//
-//		this.color = colorInput;
-//
-//		this.setCreativeTab(CreativeTabs.COMBAT);
-//
-//		this.isRepairable();
+		super(("light_saber_" + color), ItemTier.IRON);
+
+		this.color = color;
+
+		//this.isRepairable();
 	}
 	
 	

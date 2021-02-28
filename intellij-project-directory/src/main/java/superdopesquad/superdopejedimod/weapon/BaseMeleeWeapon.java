@@ -11,13 +11,9 @@ import java.util.List;
 //import net.minecraft.entity.Entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemTier;
+import net.minecraft.item.*;
 //import net.minecraft.item.
-import net.minecraft.item.Item;
 //import net.minecraft.item.ItemBow;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -29,41 +25,14 @@ import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 public abstract class BaseMeleeWeapon extends SwordItem implements SuperDopeObject, ClassAwareInterface {
 
-	private String _name = "";
-	
-	
-	public BaseMeleeWeapon(String nameIn, ItemTier itemTier) {
 
-		// TODO: https://github.com/Draco18s/ReasonableRealism/blob/1.14.4/src/main/java/com/draco18s/harderores/item/ModItemTier.java
+	public BaseMeleeWeapon(String name, ItemTier itemTier) {
 
-		// public SwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
-		//
-		// Call our super class constructor, "Block".
-		//super(material);
-		super (itemTier, 1, 1.0F, new Properties());
-		
-//		// Stash our internal name that we'll use for this block.
-//		this._name = nameIn;
-//		this.setUnlocalizedName(this.getName());
-//
-//		// By default, we'll put all new blocks in the combat tab.
-//		this.setCreativeTab(CreativeTabs.COMBAT);
-//
-		// Insert this object into our collection of custom blocks, so we 
-		// can send separate events to it for lifecycle management.
-		//SuperDopeJediMod.customObjects.add(this);
+		super (itemTier, 1, 1.0F, new Properties().group(ItemGroup.COMBAT));
+
+		SuperDopeJediMod.ITEMS.register(name, () -> this);
 	}
-	
-//
-//	public String getName() {
-//		return this._name.toLowerCase();
-//	}
-//
-//
-//	public String getFullName() {
-//		return SuperDopeJediMod.MODID + ":" + this.getName();
-//	}
-//
+
 	
 	@Override
 	public void registerBlocks(RegistryEvent.Register<Block> event) {

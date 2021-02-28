@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "superdopejedimod:items/lightSaberRed"
+        "layer0": "superdopejedimod:item/light_saber_red"
     }
 }

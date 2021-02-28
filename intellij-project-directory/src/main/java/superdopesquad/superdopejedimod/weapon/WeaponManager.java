@@ -1,64 +1,52 @@
-//package superdopesquad.superdopejedimod.weapon;
-//
-//
-//import java.util.Optional;
-//
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.entity.RenderManager;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.projectile.EntitySnowball;
-//import net.minecraft.entity.projectile.EntityThrowable;
-//import net.minecraft.util.math.BlockPos;
-//import net.minecraft.util.math.MathHelper;
-//import net.minecraft.util.math.Vec3d;
-//import net.minecraft.world.World;
-//import superdopesquad.superdopejedimod.weapon.GaffiStick;
-//import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
-//import superdopesquad.superdopejedimod.SuperDopeJediMod;
-//import superdopesquad.superdopejedimod.entity.droid.DroidParts;
-//import superdopesquad.superdopejedimod.faction.ClassInfo;
-//import superdopesquad.superdopejedimod.faction.ClassManager;
-//import superdopesquad.superdopejedimod.faction.FactionInfo;
-//
-//
-//public class WeaponManager {
-//
-//	/** Constants */
-//    private static final float DEGREES2RADIANS = 0.017453292F;
-//
-//
-//	// BlasterParts is a basic build block for blasters and other weapons.
-//	public static BlasterParts blasterParts = new BlasterParts("blasterParts");
-//
-//	// Projectile items that are rendered later by the projectile entities..
+package superdopesquad.superdopejedimod.weapon;
+
+
+//import net.minecraft.client.renderer.entity.R
+//import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
+
+
+public class WeaponManager {
+
+	/** Constants */
+    private static final float DEGREES2RADIANS = 0.017453292F;
+
+    // Lightsaber stuff!
+    public static Lightsaber lightSaberRed = new Lightsaber("red");
+    public static Lightsaber lightSaberBlue = new Lightsaber("blue");
+    public static Lightsaber lightSaberGreen = new Lightsaber("green");
+    public static Lightsaber lightSaberPurple = new Lightsaber("purple");
+
+
+    // BlasterParts is a basic build block for blasters and other weapons.
+	public static BlasterParts blasterParts = new BlasterParts("blasterParts");
+
+	// Projectile items that are rendered later by the projectile entities..
 //    public static PlasmaShotItem plasmaShotItemBlue = new PlasmaShotItem("plasmaShotItemBlue");
 //    public static PlasmaShotItem plasmaShotItemRed = new PlasmaShotItem("plasmaShotItemRed");
 //
 //    // Projectile entities should be created here, to trigger registration properly.
 //    public static PlasmaShotEntityBlue plasmaShotEntityBlue = new PlasmaShotEntityBlue(null);
 //    public static PlasmaShotEntityRed plasmaShotEntityRed = new PlasmaShotEntityRed(null);
-//
-//    // Blaster weapons.
-//    public static BlasterCarbine blasterCarbine = new BlasterCarbine("blasterCarbine");
-//    public static BlasterRifle blasterRifle = new BlasterRifle("blasterRifle");
-//    public static BlasterPistol blasterPistol = new BlasterPistol ("blasterPistol");
-//    public static BlasterSniper blasterSniper = new BlasterSniper("blasterSniper");
-//    public static BlasterCannon blasterCannon = new BlasterCannon("blasterCannon");
-//    public static RocketLauncher rocketLauncher = new RocketLauncher("rocketLauncher");
-//
-//    // earlier stuff.
-//    // public static Blaster blaster = new Blaster("blaster");
-//    // public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
-//
-//    // Miscellaneous hand-held weapons.
-//    public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");
-//
-//
-//    public WeaponManager() {}
-//
-//
+
+    // Blaster weapons.
+    public static BlasterCarbine blasterCarbine = new BlasterCarbine("blasterCarbine");
+    public static BlasterRifle blasterRifle = new BlasterRifle("blasterRifle");
+    public static BlasterPistol blasterPistol = new BlasterPistol ("blasterPistol");
+    public static BlasterSniper blasterSniper = new BlasterSniper("blasterSniper");
+    public static BlasterCannon blasterCannon = new BlasterCannon("blasterCannon");
+    public static RocketLauncher rocketLauncher = new RocketLauncher("rocketLauncher");
+
+    // earlier stuff.
+    // public static Blaster blaster = new Blaster("blaster");
+    // public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
+
+    // Miscellaneous hand-held weapons.
+    public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");
+
+
+    public WeaponManager() {}
+
+
 //    public void onInit() {
 //
 //    	// Handles to some render objects we need.
@@ -267,4 +255,4 @@
 //
 //        return f;
 //    }
-//}
+}
