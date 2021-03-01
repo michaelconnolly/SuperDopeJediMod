@@ -16,9 +16,3 @@ public class PlastoidScraps extends BaseBlockGeneratable {
 		this.amount = 10;
 	}
 }
-	
-//	public Item getItemDropped(int metadata, Random random, int fortune) {
-//
-//		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIron);
-//	}
-	

@@ -82,18 +82,6 @@ public class SuperDopeJediMod {
 //    public static VehicleSeat vehicleSeat = new VehicleSeat("vehicleSeat");
 //
 
-//    public static DoubleLightSaber doubleLightSaberRed = new DoubleLightSaber("doubleLightSaberRed", "Red");
-//    public static DoubleLightSaber doubleLightSaberBlue = new DoubleLightSaber("doubleLightSaberBlue", "Blue");
-//    public static DoubleLightSaber doubleLightSaberGreen = new DoubleLightSaber("doubleLightSaberGreen", "Green");
-//    public static DoubleLightSaber doubleLightSaberPurple = new DoubleLightSaber("doubleLightSaberPurple", "Purple");
-//    public static PowerCrystal redPowerCrystal = new PowerCrystal("redPowerCrystal", "Red");
-//    public static PowerCrystal bluePowerCrystal = new PowerCrystal("bluePowerCrystal", "Blue");
-//    public static PowerCrystal greenPowerCrystal = new PowerCrystal("greenPowerCrystal", "Green");
-//    public static PowerCrystal purplePowerCrystal = new PowerCrystal("purplePowerCrystal", "Purple");
-//    public static PowerCrystalOre redPowerCrystalOre = new PowerCrystalOre("redPowerCrystalOre", "Red");
-//    public static PowerCrystalOre bluePowerCrystalOre = new PowerCrystalOre("bluePowerCrystalOre", "Blue");
-//    public static PowerCrystalOre greenPowerCrystalOre = new PowerCrystalOre("greenPowerCrystalOre", "Green");
-//    public static PowerCrystalOre purplePowerCrystalOre = new PowerCrystalOre("purplePowerCrystalOre", "Purple");
 //
 //    // Miscellaneous items.
 //    public static NourishmentCapsule nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
@@ -121,15 +109,6 @@ public class SuperDopeJediMod {
 
     //Spaceship Entitys
 
-
-//    public static MandalorianIronSword mandalorianIronSword = new MandalorianIronSword("mandalorianIronSword");
-//    public static QuadaniumSteelSword quadaniumSteelSword = new QuadaniumSteelSword("quadaniumSteelSword");
-//
-    //Bounty Hunter stuff
-//    public static BountyHunterLeaderKnife bountyHunterLeaderKnife = new BountyHunterLeaderKnife("bountyHunterLeaderKnife");
-//
-//    // Peoples Custom Items
-//    public static BrynsAwesomeSword brynsAwesomeSword = new BrynsAwesomeSword("brynsAwesomeSword");
 //
 //    //drills + other tools
 //    //public static Drill drill = new Drill("drill");

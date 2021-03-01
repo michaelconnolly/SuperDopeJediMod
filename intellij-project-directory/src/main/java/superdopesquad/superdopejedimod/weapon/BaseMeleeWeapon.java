@@ -33,35 +33,7 @@ public abstract class BaseMeleeWeapon extends SwordItem implements SuperDopeObje
 		SuperDopeJediMod.ITEMS.register(name, () -> this);
 	}
 
-	
-	@Override
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
 
-	}
-	
-//
-//	@Override
-//    public void registerItems(RegistryEvent.Register<Item> event) {
-//
-//		event.getRegistry().register(this.setRegistryName(this.getName()));
-//	}
-	
-	
-	@Override
-	public void registerRecipe() {
-		return;
-	}
-	
-//
-//	@Override
-//	public void registerModel() {
-//
-//		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-//	    //renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(SuperDopeJediMod.MODID + ":" + ((BaseMeleeWeapon) this).getName(), "inventory"));
-//	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
-//	}
-//
-//
 //	@Override
 //    public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
 //

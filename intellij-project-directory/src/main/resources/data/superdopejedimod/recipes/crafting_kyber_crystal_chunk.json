@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:kyber_crystal"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:kyber_crystal_chunk",
+    "count": 1
+  }
+}

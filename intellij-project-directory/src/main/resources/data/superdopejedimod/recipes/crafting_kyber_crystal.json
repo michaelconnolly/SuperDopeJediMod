@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "superdopejedimod:kyber_crystal_chunk"
+    }
+  ],
+  "result":
+  {
+    "item": "superdopejedimod:kyber_crystal",
+    "count": 9
+  }
+}

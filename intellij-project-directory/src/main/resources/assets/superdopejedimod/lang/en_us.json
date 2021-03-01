@@ -8,6 +8,9 @@
     "block.superdopejedimod.plastoid": "Plastoid",
     "block.superdopejedimod.plastoid_scraps": "Plastoid Scraps",
     "item.superdopejedimod.plastoid_sheet": "Plastoid Sheet",
+    "block.superdopejedimod.kyber_crystal_chunk": "Kyber Crystal Chunk",
+    "block.superdopejedimod.kyber_crystal_ore": "Kyber Crystal Ore",
+    "item.superdopejedimod.kyber_crystal": "Kyber Crystal",
 
     "item.superdopejedimod.mandalorian_helmet": "Mandalorian Helmet",
     "item.superdopejedimod.mandalorian_chestplate": "Mandalorian Chestplate",
@@ -37,6 +40,13 @@
     "item.superdopejedimod.light_saber_red": "Red Lightsaber",
     "item.superdopejedimod.light_saber_green": "Green Lightsaber",
     "item.superdopejedimod.light_saber_blue": "Blue Lightsaber",
-    "item.superdopejedimod.light_saber_purple": "Purple Lightsaber"
+    "item.superdopejedimod.light_saber_purple": "Purple Lightsaber",
+    "item.superdopejedimod.double_light_saber_red": "Red Saberstaff",
+    "item.superdopejedimod.double_light_saber_green": "Green Saberstaff",
+    "item.superdopejedimod.double_light_saber_blue": "Blue Saberstaff",
+    "item.superdopejedimod.double_light_saber_purple": "Purple Saberstaff",
+    "item.superdopejedimod.gaffi_stick": "Gaffi Stick",
+    "item.superdopejedimod.vibro_knife": "Vibroknife",
+    "item.superdopejedimod.beskar_spear": "Beskar Spear"
 }
 

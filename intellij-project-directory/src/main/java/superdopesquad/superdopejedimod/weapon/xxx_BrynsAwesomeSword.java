@@ -9,9 +9,9 @@ import net.minecraft.item.ItemTier;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
-public class BrynsAwesomeSword extends BaseMeleeWeapon{
+public class xxx_BrynsAwesomeSword extends BaseMeleeWeapon{
 
-	public BrynsAwesomeSword(String unlocalizedName) {
+	public xxx_BrynsAwesomeSword(String unlocalizedName) {
 	
 		//super(unlocalizedName, SuperDopeJediMod.brynsAwesomeSwordMaterial);
 		super(unlocalizedName, ItemTier.IRON);

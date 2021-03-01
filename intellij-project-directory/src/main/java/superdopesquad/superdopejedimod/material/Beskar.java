@@ -13,7 +13,3 @@ public class Beskar extends BaseBlock {
 	}
 }
 	
-//	public Item getItemDropped(int metadata, Random random, int fortune) {
-//
-//		return Item.getItemFromBlock(SuperDopeJediMod.mandalorianIron);
-//	}

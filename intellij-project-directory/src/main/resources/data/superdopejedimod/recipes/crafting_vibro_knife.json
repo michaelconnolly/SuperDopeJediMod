@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " x ",
+    " y ",
+    " z "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "y":
+  {
+    "item": "superdopejedimod:plastoid_sheet"
+  },
+    "z":
+  {
+    "item": "minecraft:stick"
+  }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:vibro_knife",
+    "count": 1
+  }
+}

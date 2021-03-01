@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " x ",
+    " y ",
+    " z "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:blue_dye"
+    },
+    "y":
+    {
+      "item": "superdopejedimod:kyber_crystal"
+    },
+    "z":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:light_saber_blue",
+    "count": 1
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xx ",
+    " y ",
+    " y "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:plastoid_sheet"
+    },
+    "y":
+  {
+    "item": "minecraft:stick"
+  }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:gaffi_stick",
+    "count": 1
+  }
+}

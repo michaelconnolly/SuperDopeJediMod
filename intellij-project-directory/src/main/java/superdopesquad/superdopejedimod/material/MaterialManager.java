@@ -21,6 +21,11 @@ public class MaterialManager {
     public static final PlastoidScraps PLASTOID_SCRAPS = new PlastoidScraps("plastoid_scraps");
     public static final PlastoidSheet PLASTOID_SHEET = new PlastoidSheet("plastoid_sheet");
 
+    // KyberCrystal, used to create lightsabers.
+    public static final KyberCrystalChunk KYBER_CRYSTAL_CHUNK = new KyberCrystalChunk("kyber_crystal_chunk");
+    public static final KyberCrystalOre KYBER_CRYSTAL_ORE = new KyberCrystalOre("kyber_crystal_ore");
+    public static final KyberCrystal KYBER_CRYSTAL = new KyberCrystal("kyber_crystal");
+
 
     public MaterialManager() {
     }
@@ -33,6 +38,7 @@ public class MaterialManager {
             MaterialManager.BESKAR_ORE.GenerateOre(event);
             MaterialManager.QUADANIUM_ORE.GenerateOre(event);
             MaterialManager.PLASTOID_SCRAPS.GenerateOre(event);
+            MaterialManager.KYBER_CRYSTAL_ORE.GenerateOre(event);
         }
     }
 }

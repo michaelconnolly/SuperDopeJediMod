@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "superdopejedimod:item/double_light_saber_blue"
+    }
+}

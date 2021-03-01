@@ -12,12 +12,3 @@ public class Quadanium extends BaseBlock {
 		super(name, (Block.Properties.create(Material.IRON)));
 	}
 }
-
-//
-//	 public Item getItemDropped(int metadata, Random random, int fortune) {
-//
-//	    return Item.getItemFromBlock(SuperDopeJediMod.quadaniumSteel);
-//	 }
-	
-
-

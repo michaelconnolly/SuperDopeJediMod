@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    " x ",
+    " y ",
+    " z "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:green_dye"
+    },
+    "y":
+    {
+      "item": "superdopejedimod:kyber_crystal"
+    },
+    "z":
+    {
+      "item": "superdopejedimod:green_dye"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:double_light_saber_green",
+    "count": 1
+  }
+}
