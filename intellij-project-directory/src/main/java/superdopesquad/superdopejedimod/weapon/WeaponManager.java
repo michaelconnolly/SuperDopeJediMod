@@ -5,6 +5,16 @@ package superdopesquad.superdopejedimod.weapon;
 //import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
 
 
+import com.sun.javafx.geom.Vec3d;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.faction.FactionInfo;
+
+import java.util.Optional;
+
 public class WeaponManager {
 
 	/** Constants */
@@ -27,17 +37,18 @@ public class WeaponManager {
     public static final BeskarSpear BESKAR_SPEAR = new BeskarSpear("beskar_spear");
     public static final GaffiStick GAFFI_STICK = new GaffiStick("gaffi_stick");
 
-//
-//    // BlasterParts is a basic build block for blasters and other weapons.
-//	public static BlasterParts blasterParts = new BlasterParts("blasterParts");
-//
+    // Blasters.
+    public static final BlasterParts BLASTER_PARTS = new BlasterParts("blaster_parts");
+    public static final Blaster BLASTER = new Blaster("blaster");
+    public static final BlasterRifle BLASTER_RIFLE = new BlasterRifle("blaster_rifle");
+    //
 //	// Projectile items that are rendered later by the projectile entities..
-////    public static PlasmaShotItem plasmaShotItemBlue = new PlasmaShotItem("plasmaShotItemBlue");
-////    public static PlasmaShotItem plasmaShotItemRed = new PlasmaShotItem("plasmaShotItemRed");
+    public static PlasmaShotItem PLASMA_SHOT_ITEM_BLUE = new PlasmaShotItem("blue");
+    public static PlasmaShotItem PLASMA_SHOT_ITEM_RED = new PlasmaShotItem("red");
 ////
 ////    // Projectile entities should be created here, to trigger registration properly.
-////    public static PlasmaShotEntityBlue plasmaShotEntityBlue = new PlasmaShotEntityBlue(null);
-////    public static PlasmaShotEntityRed plasmaShotEntityRed = new PlasmaShotEntityRed(null);
+    public static PlasmaShotEntity PLASMA_SHOT_ENTITY_BLUE = new PlasmaShotEntity("blue");
+    public static PlasmaShotEntity PLASMA_SHOT_ENTITY_RED = new PlasmaShotEntity("red");
 //
 //    // Blaster weapons.
 //    public static BlasterCarbine blasterCarbine = new BlasterCarbine("blasterCarbine");
@@ -82,53 +93,55 @@ public class WeaponManager {
 //    }
 //
 //
-//    public void ThrowPlasmaShotAtDirection(World world, EntityPlayer thrower, PowerLevel powerLevel, int timeLeft) {
-//
-//	    //int i = this.getMaxItemUseDuration(null) - timeLeft;
-//    	int i = 72000 - timeLeft;
-//    	float f = getArrowVelocity(i);
-//
-//       PlasmaShotEntityBase plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, powerLevel, Optional.empty());
-//       plasmaShotEntity.setAim(thrower, thrower.rotationPitch, thrower.rotationYaw, 0.0F, f * 3.0F, 1.0F);
-//
-//       //if (f == 1.0F)
-//       //{
-//       //    entityarrow.setIsCritical(true);
-//       //}
-//
-//       int j = 1; // EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
-//
-//       if (j > 0) {
-//    	   plasmaShotEntity.setDamage(plasmaShotEntity.getDamage() + (double)j * 0.5D + 0.5D);
+    public void ThrowPlasmaShotAtDirection(World world, PlayerEntity thrower, PowerLevel powerLevel, int timeLeft) {
+
+	    //int i = this.getMaxItemUseDuration(null) - timeLeft;
+    	int i = 72000 - timeLeft;
+    	float f = getArrowVelocity(i);
+
+      // PlasmaShotEntity plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, powerLevel, Optional.empty());
+        PlasmaShotEntity plasmaShotEntity =  this.createPlasmaShotEntity(world, thrower, powerLevel, Optional.empty());
+        plasmaShotEntity.setAim(thrower, thrower.rotationPitch, thrower.rotationYaw, 0.0F, f * 3.0F, 1.0F);
+
+       //if (f == 1.0F)
+       //{
+       //    entityarrow.setIsCritical(true);
+       //}
+
+       int j = 1; // EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+
+       if (j > 0) {
+    	   plasmaShotEntity.setDamage(plasmaShotEntity.getDamage() + (double)j * 0.5D + 0.5D);
+       }
+
+       //System.out.println("damageAmount: " + plasmaShotEntity.getDamage());
+
+      // int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+
+//       if (k > 0)
+//       {
+//           entityarrow.setKnockbackStrength(k);
 //       }
-//
-//       //System.out.println("damageAmount: " + plasmaShotEntity.getDamage());
-//
-//      // int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
-//
-////       if (k > 0)
-////       {
-////           entityarrow.setKnockbackStrength(k);
-////       }
-//
-////       if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
-////       {
-////           entityarrow.setFire(100);
-////       }
-//
-//      // stack.damageItem(1, entityplayer);
-//
-////       if (flag1 || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
-////       {
-////           entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-////       }
-//
-//       //world.spawnEntityInWorld(plasmaShotEntity);
-//       boolean success = world.spawnEntity(plasmaShotEntity);
-//       if (!success) {
-//			System.out.println("Failed to spawn an EntityThrowable!");
-//		}
-//    }
+
+//       if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
+//       {
+//           entityarrow.setFire(100);
+//       }
+
+      // stack.damageItem(1, entityplayer);
+
+//       if (flag1 || entityplayer.capabilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW))
+//       {
+//           entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+//       }
+
+       //world.spawnEntityInWorld(plasmaShotEntity);
+       //boolean success = world.spawnEntity(plasmaShotEntity);
+       boolean success = world.addEntity(plasmaShotEntity);
+       if (!success) {
+			System.out.println("Failed to spawn an EntityThrowable!");
+		}
+    }
 //
 //
 //    public void ThrowPlasmaShotBlue(World world, EntityLivingBase thrower, EntityLivingBase target, PowerLevel powerLevel) {
@@ -219,26 +232,34 @@ public class WeaponManager {
 //		}
 //	}
 //
-//
+//he
 //	/**
 //	 * Factory for standard plasma shots. Color chosen by the passed in faction.
 //	 */
-//	private PlasmaShotEntityBase createPlasmaShotEntity(World world, EntityLivingBase thrower, FactionInfo factionInfo,
-//			PowerLevel powerLevel, Optional<Vec3d> startPos) {
-// 	   // Create an entity based on factioninfo.
-//	  PlasmaShotEntityBase ret = null;
-// 	  if ((factionInfo == null) || (factionInfo.getId() == SuperDopeJediMod.classManager.FACTION_REPUBLIC)) {
-// 		  ret = new PlasmaShotEntityBlue(world, thrower, powerLevel);
-// 	  } else {
-// 		  ret = new PlasmaShotEntityRed(world, thrower, powerLevel);
-// 	  }
-//
-// 	  if (startPos.isPresent()) {
-// 		 ret.setPosition(startPos.get().x, startPos.get().y, startPos.get().z);
-// 	  }
-// 	  System.out.println("TF: shooting startPos=" +ret.posX + ", " + ret.posY + ", " + ret.posZ);
-// 	  return ret;
-//    }
+	private PlasmaShotEntity createPlasmaShotEntity(World world, PlayerEntity thrower,
+                                                    PowerLevel powerLevel, Optional<Vec3d> startPos) {
+
+ 	    FactionInfo factionInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerFaction(thrower);
+        PlasmaShotEntity ret = null;
+	    String color;
+
+ 	  if ((factionInfo == null) || (factionInfo.getId() == ClassManager.REBEL_ALLIANCE.getId())) {
+ 		  //ret = new PlasmaShotEntityBlue(world, thrower, powerLevel);
+ 		  color = "blue";
+ 	  } else {
+ 		  //ret = new PlasmaShotEntityRed(world, thrower, powerLevel);
+ 		  color = "red";
+ 	  }
+ 	  ret = new PlasmaShotEntity(world, thrower, powerLevel);
+
+
+ 	  if (startPos.isPresent()) {
+ 		 ret.setPosition(startPos.get().x, startPos.get().y, startPos.get().z);
+ 	  }
+ 	  //System.out.println("TF: shooting startPos=" +ret.posX + ", " + ret.posY + ", " + ret.posZ);
+        System.out.println("TF: shooting startPos=" +ret.getPosition().getX() + ", " + ret.getPosition().getY() + ", " + ret.getPosition().getZ());
+        return ret;
+    }
 //
 //
 //	/**
@@ -254,16 +275,18 @@ public class WeaponManager {
 //    /**
 //     *
 //     */
-//    public static float getArrowVelocity(int charge)
-//    {
-//        float f = (float)charge / 20.0F;
-//        f = (f * f + f * 2.0F) / 3.0F;
-//
-//        if (f > 1.0F)
-//        {
-//            f = 1.0F;
-//        }
-//
-//        return f;
-//    }
+
+
+    public static float getArrowVelocity(int charge)
+    {
+        float f = (float)charge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+
+        if (f > 1.0F)
+        {
+            f = 1.0F;
+        }
+
+        return f;
+    }
 }

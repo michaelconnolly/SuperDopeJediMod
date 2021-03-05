@@ -44,6 +44,12 @@ import net.minecraft.client.Minecraft;
 //import net.minecraftforge.fml.relauncher.Side;
 //import net.minecraftforge.fml.relauncher.SideOnly;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.*;
@@ -53,8 +59,8 @@ import superdopesquad.superdopejedimod.faction.*;
 public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDopeObject, ClassAwareInterface {
 
 
-//	protected boolean isInstantWeapon = true;
-//	protected PowerLevel powerLevel = PowerLevel.STANDARD;
+	protected boolean isInstantWeapon = true;
+	protected PowerLevel powerLevel = PowerLevel.STANDARD;
 //	protected float range = 10.0F;
 
 
@@ -64,7 +70,8 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 
 //		 this.maxStackSize = 1;
 //
-//         this.setMaxDamage(384);
+		//this.setDamage();
+         //this.setMaxDamage(384);
 //         //this.setCreativeTab(CreativeTabs.COMBAT);
 //         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 //         {
@@ -241,43 +248,47 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 //	      }
 //
 //
-//	      public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand)
-//	      {
-//	    	  //System.out.println("inside onItemRightClick");
-//
-//	    	  ItemStack itemstack = player.getHeldItem(hand);
-//
-//	    	  if (this.isInstantWeapon) {
-//
-//		  		  int timeLeft = 0;
-//	    		  SuperDopeJediMod.weaponManager.ThrowPlasmaShotAtDirection(world, player, this.powerLevel, 0);
-//
-//	    		  return new ActionResult(EnumActionResult.SUCCESS, itemstack);
-//	    	  }
-//
-//	  		  //System.out.println("onItemRightClick: isInstantWeapon==false");
-//
-//	  		  boolean hasAmmo = true;
+	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+
+		System.out.println("inside onItemRightClick");
+
+		ItemStack itemstack = player.getHeldItem(hand);
+
+		if (this.isInstantWeapon) {
+
+			System.out.println("onItemRightClick: isInstantWeapon==true");
+
+			int timeLeft = 0;
+			SuperDopeJediMod.WEAPON_MANAGER.ThrowPlasmaShotAtDirection(world, player, this.powerLevel, 0);
+
+			return new ActionResult(ActionResultType.SUCCESS, itemstack);
+		}
+else {
+		System.out.println("onItemRightClick: isInstantWeapon==false");
+
+	  		  boolean hasAmmo = true;
 //	          ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, hasAmmo);
 //	          if (ret != null) return ret;
 //
 //	          if (!player.capabilities.isCreativeMode && !hasAmmo)
-//	          {
-//	              return hasAmmo ? new ActionResult(EnumActionResult.PASS, itemstack) : new ActionResult(EnumActionResult.FAIL, itemstack);
-//	          }
+		//if (true){
+
+	              return hasAmmo ? new ActionResult(ActionResultType.PASS, itemstack) : new ActionResult(ActionResultType.FAIL, itemstack);
+	       //   }
 //	          else
 //	          {
 //	              player.setActiveHand(hand);
 //	              return new ActionResult(EnumActionResult.SUCCESS, itemstack);
 //	          }
-//	      }
-//
-//	      /**
-//	       * Return the enchantability factor of the item, most of the time is based on material.
-//	       */
+	}
+
+	      /**
+	       * Return the enchantability factor of the item, most of the time is based on material.
+	       */
 //	      public int getItemEnchantability()
 //	      {
 //	          return 1;
 //	      }
 
+}
 }

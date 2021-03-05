@@ -47,6 +47,11 @@
     "item.superdopejedimod.double_light_saber_purple": "Purple Saberstaff",
     "item.superdopejedimod.gaffi_stick": "Gaffi Stick",
     "item.superdopejedimod.vibro_knife": "Vibroknife",
-    "item.superdopejedimod.beskar_spear": "Beskar Spear"
+    "item.superdopejedimod.beskar_spear": "Beskar Spear",
+
+    "item.superdopejedimod.blaster_parts": "Blaster Parts",
+    "item.superdopejedimod.blaster": "Blaster",
+    "item.superdopejedimod.blaster_rifle": "Blaster Rifle"
+}
 }
 

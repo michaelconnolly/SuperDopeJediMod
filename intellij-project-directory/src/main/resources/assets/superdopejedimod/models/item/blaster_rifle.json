@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "superdopejedimod:item/blaster"
+        "layer0": "superdopejedimod:item/blaster_rifle"
     }
 }

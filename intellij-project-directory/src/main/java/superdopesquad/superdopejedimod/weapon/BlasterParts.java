@@ -12,9 +12,9 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 public class BlasterParts extends BaseItem {
 
 	
-	public BlasterParts(String unlocalizedName) {
+	public BlasterParts(String name) {
 		
-        super(unlocalizedName);
+        super(name);
         //this.setCreativeTab(CreativeTabs.MATERIALS);
 	}
 	

@@ -19,6 +19,7 @@ import net.minecraft.item.Item;
 //import net.minecraft.world.World;
 //import net.minecraftforge.event.RegistryEvent;
 //import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraft.item.ItemGroup;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
@@ -32,16 +33,17 @@ import java.util.List;
 public abstract class BaseRangedWeapon extends Item implements SuperDopeObject, ClassAwareInterface {
 
 	
-	private String _name = "";
+	//private String _name = "";
 	
 	
 	public BaseRangedWeapon(String name) {
 
-		// Call our super class constructor, "Block".
-		super(new Properties());
+		super(new Properties().group(ItemGroup.COMBAT));
 
+		SuperDopeJediMod.ITEMS.register(name, () -> this);
+		
 		// Stash our internal name that we'll use for this block.
-		this._name = name;
+		//this._name = name;
 
 //		// I don't know what happens if you don't call this, but it is in every tutorial :-)
 //		this.setUnlocalizedName(this.getName());
