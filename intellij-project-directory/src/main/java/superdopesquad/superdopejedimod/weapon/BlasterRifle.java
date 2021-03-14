@@ -14,9 +14,9 @@ public class BlasterRifle extends BaseBlaster {
 		super(unlocalizedName);
 		
 		// Unique style of this type of blaster:
-//		this.isInstantWeapon = true;
-//		this.powerLevel = PowerLevel.RIFLE;
-//		this.range = 20.0F;
+		this.isInstantWeapon = true;
+		this.powerLevel = PowerLevel.RIFLE;
+		this.range = 20.0F;
 	}
 
 	

@@ -4,34 +4,37 @@
 //
 //import net.minecraft.block.Block;
 //import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+////import net.minecraft.client.renderer.RenderItem;
+////import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 //import net.minecraft.enchantment.EnchantmentHelper;
+//import net.minecraft.entity.CreatureEntity;
 //import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityAgeable;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.monster.EntityZombie;
-//import net.minecraft.entity.SharedMonsterAttributes;
-//import net.minecraft.entity.passive.EntityAnimal;
-//import net.minecraft.entity.passive.EntityTameable;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Items;
+////import net.minecraft.entity.EntityAgeable;
+////import net.minecraft.entity.EntityLivingBase;
+////import net.minecraft.entity.monster.EntityZombie;
+////import net.minecraft.entity.SharedMonsterAttributes;
+////import net.minecraft.entity.passive.EntityAnimal;
+////import net.minecraft.entity.passive.EntityTameable;
+////import net.minecraft.entity.player.EntityPlayer;
+////import net.minecraft.init.Items;
+//import net.minecraft.entity.EntityType;
+//import net.minecraft.entity.passive.TameableEntity;
 //import net.minecraft.item.Item;
-//import net.minecraft.item.ItemAxe;
+////import net.minecraft.item.ItemAxe;
 //import net.minecraft.item.ItemStack;
 //import net.minecraft.util.DamageSource;
 //import net.minecraft.util.ResourceLocation;
 //import net.minecraft.util.math.BlockPos;
 //import net.minecraft.util.math.MathHelper;
 //import net.minecraft.util.text.ITextComponent;
-//import net.minecraft.util.text.TextComponentString;
-//import net.minecraft.world.EnumSkyBlock;
+////import net.minecraft.util.text.TextComponentString;
+////import net.minecraft.world.EnumSkyBlock;
 //import net.minecraft.world.World;
 //import net.minecraftforge.event.RegistryEvent;
-//import net.minecraftforge.fml.common.registry.EntityRegistry;
-//import net.minecraftforge.fml.common.registry.GameRegistry;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
+////import net.minecraftforge.fml.common.registry.EntityRegistry;
+////import net.minecraftforge.fml.common.registry.GameRegistry;
+////import net.minecraftforge.fml.relauncher.Side;
+////import net.minecraftforge.fml.relauncher.SideOnly;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //import superdopesquad.superdopejedimod.SuperDopeObject;
 //import superdopesquad.superdopejedimod.SuperDopeObjectGeneratable;
@@ -42,7 +45,7 @@
 //// EntityAgeable is an EntityCreature that can come in various sizes/ages.
 //// EntityAnimal is an EntityAgeable that enables breeding by implementing IAnimal.
 //// EntityTameable is EntityAnimal that implement IEntityOwnable
-//public abstract class BaseEntityTameable extends EntityTameable implements SuperDopeEntity, SuperDopeObjectGeneratable {
+//public abstract class BaseEntityTameable extends TameableEntity implements SuperDopeEntity, SuperDopeObjectGeneratable {
 //
 //
 //	private String _name = "";
@@ -50,9 +53,10 @@
 //	protected float shadowSize = 1.0F;
 //
 //
-//	public BaseEntityTameable(World worldIn, String name, String displayName) {
+//	public BaseEntityTameable(EntityType<?> entityType, World world, String name, String displayName) {
 //
-//		super(worldIn);
+//	    super(entityType, world);
+//		//super(worldIn);
 //
 //		this._name = name;
 //		this._displayName = displayName;
@@ -63,23 +67,23 @@
 //	}
 //
 //
-//	@Override
-//	public String getName() {
-//		return this._name;
-//	}
+////	@Override
+////	public String getName() {
+////		return this._name;
+////	}
+////
+////
+////	public String getFullName() {
+////		return SuperDopeJediMod.MODID + ":" + this.getName();
+////	}
 //
 //
-//	public String getFullName() {
-//		return SuperDopeJediMod.MODID + ":" + this.getName();
-//	}
-//
-//
-//	@Override
-//	public ITextComponent getDisplayName() {
-//
-//        TextComponentString textcomponentstring = new TextComponentString(this._displayName);
-//        return textcomponentstring;
-//	}
+////	@Override
+////	public ITextComponent getDisplayName() {
+////
+////        TextComponentString textcomponentstring = new TextComponentString(this._displayName);
+////        return textcomponentstring;
+////	}
 //
 //
 //	protected void clearAITasks()

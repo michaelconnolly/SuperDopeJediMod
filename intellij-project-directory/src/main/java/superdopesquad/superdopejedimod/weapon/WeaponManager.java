@@ -1,19 +1,14 @@
 package superdopesquad.superdopejedimod.weapon;
 
 
-//import net.minecraft.client.renderer.entity.R
-//import superdopesquad.superdopejedimod.weapon.PlasmaShotItem;
-
-
 import com.sun.javafx.geom.Vec3d;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.FactionInfo;
-
 import java.util.Optional;
+
 
 public class WeaponManager {
 
@@ -41,29 +36,14 @@ public class WeaponManager {
     public static final BlasterParts BLASTER_PARTS = new BlasterParts("blaster_parts");
     public static final Blaster BLASTER = new Blaster("blaster");
     public static final BlasterRifle BLASTER_RIFLE = new BlasterRifle("blaster_rifle");
-    //
-//	// Projectile items that are rendered later by the projectile entities..
+
+    // Projectile items that are rendered later by the projectile entities..
     public static PlasmaShotItem PLASMA_SHOT_ITEM_BLUE = new PlasmaShotItem("blue");
     public static PlasmaShotItem PLASMA_SHOT_ITEM_RED = new PlasmaShotItem("red");
-////
-////    // Projectile entities should be created here, to trigger registration properly.
+
+    // Projectile entities should be created here, to trigger registration properly.
     public static PlasmaShotEntity PLASMA_SHOT_ENTITY_BLUE = new PlasmaShotEntity("blue");
     public static PlasmaShotEntity PLASMA_SHOT_ENTITY_RED = new PlasmaShotEntity("red");
-//
-//    // Blaster weapons.
-//    public static BlasterCarbine blasterCarbine = new BlasterCarbine("blasterCarbine");
-//    public static BlasterRifle blasterRifle = new BlasterRifle("blasterRifle");
-//    public static BlasterPistol blasterPistol = new BlasterPistol ("blasterPistol");
-//    public static BlasterSniper blasterSniper = new BlasterSniper("blasterSniper");
-//    public static BlasterCannon blasterCannon = new BlasterCannon("blasterCannon");
-//    public static RocketLauncher rocketLauncher = new RocketLauncher("rocketLauncher");
-//
-//    // earlier stuff.
-//    // public static Blaster blaster = new Blaster("blaster");
-//    // public static BossBlaster bossBlaster = new BossBlaster("bossBlaster");
-//
-//    // Miscellaneous hand-held weapons.
-//    public static GaffiStick gaffiStick = new GaffiStick("gaffiStick");
 
 
     public WeaponManager() {}

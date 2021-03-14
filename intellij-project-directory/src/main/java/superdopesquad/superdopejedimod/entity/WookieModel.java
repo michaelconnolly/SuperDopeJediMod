@@ -1,18 +1,26 @@
-//package superdopesquad.superdopejedimod.entity;
-//
-//
-//import org.lwjgl.opengl.GL11;
+package superdopesquad.superdopejedimod.entity;
+
+
+import net.minecraft.client.renderer.entity.model.CowModel;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.lwjgl.opengl.GL11;
 //import net.minecraft.client.model.ModelBiped;
 //import net.minecraft.client.model.ModelRenderer;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 //import net.minecraftforge.fml.relauncher.Side;
 //import net.minecraftforge.fml.relauncher.SideOnly;
+
+
+@OnlyIn(Dist.CLIENT)
+public class WookieModel extends CowModel<WookieEntity> {
+}
 //
+////public class WookieModel extends ModelBiped
+////{
 //
-//@OnlyIn(Dist.CLIENT)
-//public class WookieModel extends ModelBiped
-//{
 //	public ModelRenderer head;
 //	public ModelRenderer body;
 //	public ModelRenderer arms;

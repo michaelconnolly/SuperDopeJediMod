@@ -1,8 +1,8 @@
-//package superdopesquad.superdopejedimod.entity;
-//
-//
-//import net.minecraft.block.Block;
-//import net.minecraft.client.Minecraft;
+package superdopesquad.superdopejedimod.entity;
+
+
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 //import net.minecraft.client.renderer.RenderItem;
 //import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 //import net.minecraft.creativetab.CreativeTabs;
@@ -16,37 +16,46 @@
 //import net.minecraft.util.ActionResult;
 //import net.minecraft.util.EnumActionResult;
 //import net.minecraft.util.EnumHand;
-//import net.minecraft.util.SoundCategory;
-//import net.minecraft.world.World;
-//import net.minecraftforge.event.RegistryEvent;
-//import net.minecraftforge.fml.common.registry.GameRegistry;
-//import superdopesquad.superdopejedimod.SuperDopeJediMod;
-//import superdopesquad.superdopejedimod.SuperDopeObject;
-//
-//
-//public class GenericEgg extends ItemEgg implements SuperDopeObject {
-//
-//
-//	private String _name = "";
-//	private Class _classToMake = null;
-//
-//
-//	public GenericEgg(String name, Class classToMake) {
-//
-//		super();
-//
-//		this._name = name;
-//		this._classToMake = classToMake;
-//
-//		this.setMaxStackSize(64);
-//		this.setUnlocalizedName(this.getName());
-//		this.setCreativeTab(CreativeTabs.MATERIALS);
-//
-//		// Insert this item into our collection of custom items, so we
-//		// can send separate events to it for lifecycle management.
-//		SuperDopeJediMod.customObjects.add(this);
-//	}
-//
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.EggItem;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.world.World;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.SuperDopeObject;
+
+
+public class GenericEgg extends SpawnEggItem implements SuperDopeObject {
+
+
+	//private String _name = "";
+	//private Class _classToMake = null;
+
+
+	public GenericEgg(String name, EntityType<?> entityType, int color1, int color2) {
+
+		super(entityType, color1, color2, new Properties().group(ItemGroup.MATERIALS));
+
+		// is this necessary?  Sample code just had doing this.
+		//this.setRegistryName(name);
+
+		SuperDopeJediMod.ITEMS.register(name, () -> this);
+
+		//this._name = name;
+		//this._classToMake = classToMake;
+
+		//this.setMaxStackSize(64);
+		//this.setUnlocalizedName(this.getName());
+		//this.setCreativeTab(CreativeTabs.MATERIALS);
+
+		// Insert this item into our collection of custom items, so we
+		// can send separate events to it for lifecycle management.
+		//SuperDopeJediMod.customObjects.add(this);
+	}
+
 //
 //	public String getName() {
 //		return this._name;
@@ -62,38 +71,38 @@
 //	public void registerBlocks(RegistryEvent.Register<Block> event) {
 //
 //	}
-//
+
 //
 //	@Override
 //    public void registerItems(RegistryEvent.Register<Item> event) {
 //
 //		event.getRegistry().register(this.setRegistryName(this.getFullName()));
 //	}
+
+
+//	@Override
+//	public void registerObject() {
 //
-//
-////	@Override
-////	public void registerObject() {
-////
-////		// Register the item with the game.
-////		GameRegistry.register(this.setRegistryName(this.getName()));
-////	}
-//
-//
+//		// Register the item with the game.
+//		GameRegistry.register(this.setRegistryName(this.getName()));
+//	}
+
+
 //	@Override
 //	public void registerRecipe() {
 //		// TODO Auto-generated method stub
 //
 //	}
-//
-//
+
+
 //	@Override
 //	public void registerModel() {
 //
 //		RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
 //	    renderItem.getItemModelMesher().register(this, 0, new ModelResourceLocation(this.getFullName(), "inventory"));
 //	}
-//
-//
+
+
 //	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 //
 //		ItemStack itemstack = playerIn.getHeldItem(handIn);
@@ -116,4 +125,4 @@
 //		playerIn.addStat(StatList.getObjectUseStats(this));
 //		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 //	}
-//}
+}

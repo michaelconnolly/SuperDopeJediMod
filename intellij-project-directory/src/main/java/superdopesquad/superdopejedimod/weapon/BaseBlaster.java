@@ -1,49 +1,7 @@
 package superdopesquad.superdopejedimod.weapon;
 
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.ItemRenderer;
-//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.enchantment.EnchantmentHelper;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.player.EntityPlayerMP;
-//import net.minecraft.entity.projectile.EntityArrow;
-//import net.minecraft.entity.projectile.EntityThrowable;
-//import net.minecraft.init.Enchantments;
-//import net.minecraft.init.Items;
-//import net.minecraft.init.SoundEvents;
-//import net.minecraft.block.Block;
-//import net.minecraft.block.material.Material;
-//import net.minecraft.item.EnumAction;
-//import net.minecraft.item.IItemPropertyGetter;
-//import net.minecraft.item.Item;
-//import net.minecraft.item.ItemArrow;
-//import net.minecraft.item.ItemBow;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.stats.StatList;
-//import net.minecraft.util.ActionResult;
-//import net.minecraft.util.EnumActionResult;
-//import net.minecraft.util.EnumFacing;
-//import net.minecraft.util.EnumHand;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.SoundCategory;
-//import net.minecraft.util.math.BlockPos;
-//import net.minecraft.util.text.TextComponentString;
-//import net.minecraft.world.World;
-//import net.minecraftforge.fml.common.registry.GameRegistry;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
-//import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -53,7 +11,6 @@ import net.minecraft.world.World;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.*;
-//import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
 
 
 public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDopeObject, ClassAwareInterface {
@@ -61,7 +18,7 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 
 	protected boolean isInstantWeapon = true;
 	protected PowerLevel powerLevel = PowerLevel.STANDARD;
-//	protected float range = 10.0F;
+	protected float range = 10.0F;
 
 
 	public BaseBlaster(String name) {
@@ -92,10 +49,10 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 	}
 
 
-	@Override
-	public void registerRecipe() {
-		return;
-	}
+//	@Override
+//	public void registerRecipe() {
+//		return;
+//	}
 
 
 	@Override
@@ -250,45 +207,42 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 //
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
 
-		System.out.println("inside onItemRightClick");
-
 		ItemStack itemstack = player.getHeldItem(hand);
 
 		if (this.isInstantWeapon) {
 
-			System.out.println("onItemRightClick: isInstantWeapon==true");
+			System.out.println("BaseBlaster:onItemRightClick: isInstantWeapon==true");
 
 			int timeLeft = 0;
 			SuperDopeJediMod.WEAPON_MANAGER.ThrowPlasmaShotAtDirection(world, player, this.powerLevel, 0);
 
 			return new ActionResult(ActionResultType.SUCCESS, itemstack);
-		}
-else {
-		System.out.println("onItemRightClick: isInstantWeapon==false");
+		} else {
+			System.out.println("onItemRightClick: isInstantWeapon==false");
 
-	  		  boolean hasAmmo = true;
+			boolean hasAmmo = true;
 //	          ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, hasAmmo);
 //	          if (ret != null) return ret;
 //
 //	          if (!player.capabilities.isCreativeMode && !hasAmmo)
-		//if (true){
+			//if (true){
 
-	              return hasAmmo ? new ActionResult(ActionResultType.PASS, itemstack) : new ActionResult(ActionResultType.FAIL, itemstack);
-	       //   }
+			return hasAmmo ? new ActionResult(ActionResultType.PASS, itemstack) : new ActionResult(ActionResultType.FAIL, itemstack);
+			//   }
 //	          else
 //	          {
 //	              player.setActiveHand(hand);
 //	              return new ActionResult(EnumActionResult.SUCCESS, itemstack);
 //	          }
-	}
+		}
 
-	      /**
-	       * Return the enchantability factor of the item, most of the time is based on material.
-	       */
+		/**
+		 * Return the enchantability factor of the item, most of the time is based on material.
+		 */
 //	      public int getItemEnchantability()
 //	      {
 //	          return 1;
 //	      }
 
-}
+	}
 }

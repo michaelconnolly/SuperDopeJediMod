@@ -4,21 +4,17 @@
   [
     " x ",
     " y ",
-    " z "
+    " x "
   ],
   "key":
   {
     "x":
     {
-      "item": "superdopejedimod:red_dye"
+      "item": "minecraft:red_dye"
     },
     "y":
     {
       "item": "superdopejedimod:kyber_crystal"
-    },
-    "z":
-    {
-      "item": "superdopejedimod:red_dye"
     }
   },
   "result":

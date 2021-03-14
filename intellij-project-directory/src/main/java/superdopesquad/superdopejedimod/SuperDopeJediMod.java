@@ -6,6 +6,10 @@ package superdopesquad.superdopejedimod;
 //import net.minecraftforge.common.Enum;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
@@ -16,6 +20,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 
 import superdopesquad.superdopejedimod.armor.*;
+import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.entity.WookieEntity;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.material.*;
 import net.minecraft.item.Item;
@@ -33,6 +39,7 @@ public class SuperDopeJediMod {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
 
     // Establish proxy classes, so we can do the right stuff client-side only, if necessary.
 //    @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
@@ -123,7 +130,7 @@ public class SuperDopeJediMod {
     public static final ClassManager CLASS_MANAGER = new ClassManager();
 
     // Entities.
-    //public static EntityManager entityManager = new EntityManager();
+    public static final EntityManager ENTITY_MANAGER = new EntityManager();
 
     // Commands.
  //   public static CommandManager commandManager = new CommandManager();
@@ -160,6 +167,13 @@ public class SuperDopeJediMod {
 
         // Register our ore generator.
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, MATERIAL_MANAGER::GenerateOre);
+
+        // Register our mobs.
+        // https://github.com/MinecraftForge/MinecraftForge/issues/6911
+        //GlobalEntityTypeAttributes.put(EntityManager.WOOKIE_ENTITY, MobEntity.func_233666_p_().func_233813_a_()/*(or your own)*/);
+        //GlobalEntityTypeAttributes.put(EntityManager.WOOKIE_ENTITY, WookieEntity.func_233666_p_().create()); //*(or your own)*/);
+
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ENTITY_MANAGER::GenerateMobs);
     }
 //    public ExampleMod() {
 //        // Register the setup method for modloading

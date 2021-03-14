@@ -158,16 +158,27 @@ public class PlasmaShotEntity extends BaseEntityProjectile {
         float f1 = -MathHelper.sin(pitch * 0.017453292F);
         float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
 
-        System.out.print(("NYI! PlasmaShotEntity:setAim()"));
-//        this.set
-//        this.setThrowableHeading((double)f, (double)f1, (double)f2, velocity, inaccuracy);
-//        this.setT
-//        this.motionX += shooter.motionX;
-//        this.motionZ += shooter.motionZ;
+        //System.out.print(("NYI! PlasmaShotEntity:setAim()"));
+        ///this.set
+        //this.setThrowableHeading((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+        //this.setT
+        //this.motionX += shooter.motionX;
+        //this.motionZ += shooter.motionZ;
+
+        double motionX = shooter.getMotion().x;
+        double motionY = ((shooter.isOnGround()) ? 0 : shooter.getMotion().y);
+        double motionZ = shooter.getMotion().z;
+
+
+        // making this shit up lets see what happens.
+        System.out.println("MC-TO-DO: test PlasmaShotEntity::setAim()");
+        this.setMotion(motionX, motionY, motionZ);
+        this.setVelocity(f, f1, f2);
+
+//     //   if (!shooter.onGround) {
+//            if (!(shooter.isOnGround())) {
 //
-//        if (!shooter.onGround) {
-//
-//            this.motionY += shooter.motionY;
-//        }
+//                this.mo += shooter.motionY;
+//            }
     }
 }
