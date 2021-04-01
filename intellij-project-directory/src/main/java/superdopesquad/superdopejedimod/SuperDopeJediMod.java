@@ -19,8 +19,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import superdopesquad.superdopejedimod.armor.*;
 import superdopesquad.superdopejedimod.entity.EntityManager;
-import superdopesquad.superdopejedimod.entity.EntityRenderRegistry;
-import superdopesquad.superdopejedimod.entity.WookieEntity;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.material.*;
 import net.minecraft.item.Item;
@@ -268,7 +266,8 @@ public class SuperDopeJediMod {
 
         System.out.println("INSIDE SuperDopeJediMod::setupClient");
 
-        EntityRenderRegistry.register();
+        ENTITY_MANAGER.registerEntityRenderer();
+        //EntityRenderRegistry.register();
     }
 
 

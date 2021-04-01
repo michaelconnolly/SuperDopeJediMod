@@ -23,11 +23,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.Biomes;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.apache.commons.codec.binary.Hex;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.material.MaterialManager;
@@ -48,60 +51,13 @@ public class EntityManager {
 
 	// Entities.
 
-//	public static EntityType<?> WOOKIE_ENTITY = EntityType.Builder.create(WookieEntity::new, EntityClassification.CREATURE)
-//			.build(SuperDopeJediMod.MODID + ":wookie_entity")
-//			.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie_entity"));
+	public static final EntityType<TuskenRaiderEntity> TUSKEN_RAIDER =
+			(EntityType<TuskenRaiderEntity>) EntityType.Builder.create(TuskenRaiderEntity::new, EntityClassification.MONSTER)
+					.build("tusken_raider")
+					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "tusken_raider"));
 
-//
-//	public static final EntityType<WookieEntity> WOOKIE_ENTITY =
-//		register("wookie", EntityType.Builder.<WookieEntity>create(WookieEntity::new, EntityClassification.MONSTER)
-//				.size(0.6F, 1.95F).trackingRange(8));
-
-
-//	public static final RegistryObject<TileEntityType<ExampleTile>> EXAMPLE_TILE = REGISTER.register(
-//			"example_tile", () -> TileEntityType.Builder.create(ExampleTile::new, EXAMPLE_BLOCK.get()).build(null)
-//	);
-//	public static final RegistryObject<EntityType<WookieEntity>> WOOKIE =
-//		SuperDopeJediMod.ENTITIES.register("wookie",
-//				() -> EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER))
-//		.build(SuperDopeJediMod.MODID + ":wookie")
-//		.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie"));
-
-	//public static final EntityType<WookieEntity> WOOKIE = null;
-
-//	public static final RegistryObject<EntityType<WookieEntity>> WOOKIE =
-//			SuperDopeJediMod.ENTITIES.register("wookie",
-//					null);
-
-//	public static final RegistryObject<EntityType<?>> WOOKIE =
-//			SuperDopeJediMod.ENTITIES.register("wookie",
-//					() -> EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
-//							.build(SuperDopeJediMod.MODID + ":wookie")
-//							.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
-
-	///***********TEMP***************///////////////////////////////
-	///***********TEMP***************///////////////////////////////
-//	public static final EntityType<?> WOOKIE =
-//			EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
-//							.build(SuperDopeJediMod.MODID + ":wookie")
-//							.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie"));
-///***********TEMP***************///////////////////////////////
-///***********TEMP***************///////////////////////////////
-
-
-
-	public static EntityType<? extends CreatureEntity> TUSKEN_RAIDER_ENTITY =
-			(EntityType<? extends CreatureEntity>) EntityType.Builder.create(TuskenRaiderEntity::new, EntityClassification.CREATURE)
-					.build(SuperDopeJediMod.MODID + ":tusken_raider_entity")
-					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "tusken_raider_entity"));
-
-
-
-
-//	public static final EntityType<CreeperEntity> CREEPER = register("creeper", EntityType.Builder.<CreeperEntity>create(CreeperEntity::new, EntityClassification.MONSTER).size(0.6F, 1.7F).trackingRange(8));
-//	public static final EntityType<WookieEntity> WOOKIE = register("wookie", EntityType.Builder.<WookieEntity>create(WookieEntity::new, EntityClassification.MONSTER).size(0.6F, 1.7F).trackingRange(8));
 	public static final EntityType<WookieEntity> WOOKIE =
-		(EntityType<WookieEntity>) EntityType.Builder.<WookieEntity>create(WookieEntity::new, EntityClassification.MONSTER)
+		(EntityType<WookieEntity>) EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
 				.size(0.6F, 1.7F).trackingRange(8).build("wookie")
 				.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie"));
 
@@ -198,7 +154,7 @@ public class EntityManager {
 
 	//public static final GenericEgg WOOKIE_EGG = new GenericEgg("wookie_egg", EntityType.PIG, Color.blue.hashCode(), Color.white.hashCode());
 	public static final GenericEgg WOOKIE_EGG = new GenericEgg("wookie_egg", WOOKIE, Color.blue.hashCode(), Color.white.hashCode());
-	public static final GenericEgg TUSKEN_RAIDER_EGG = new GenericEgg("tusken_raider_egg", TUSKEN_RAIDER_ENTITY, Color.red.hashCode(), Color.white.hashCode());
+	public static final GenericEgg TUSKEN_RAIDER_EGG = new GenericEgg("tusken_raider_egg", TUSKEN_RAIDER, Color.red.hashCode(), Color.white.hashCode());
 
 	// Special eggs that can be used in both creative and survival mode, different from spawn eggs.  More like chicken eggs.
 //    public static GenericEgg snakeEgg = new GenericEgg("snakeEgg", SnakeEntity.class);
@@ -227,6 +183,20 @@ public class EntityManager {
 	}
 
 
+	public void registerEntity(RegistryEvent.Register<EntityType<?>> event) {
+
+		event.getRegistry().register(EntityManager.WOOKIE);
+		event.getRegistry().register(EntityManager.TUSKEN_RAIDER);
+	}
+
+
+	@OnlyIn(Dist.CLIENT)
+	public void registerEntityRenderer() {
+
+		RenderingRegistry.registerEntityRenderingHandler((EntityType<WookieEntity>) EntityManager.WOOKIE, new WookieRender.RenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler((EntityType<TuskenRaiderEntity>) EntityManager.TUSKEN_RAIDER, new TuskenRaiderRender.RenderFactory());
+	}
+
 
 
 	public void setupCommon() {
@@ -244,7 +214,7 @@ public class EntityManager {
 
 
 			GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) WOOKIE, WookieEntity.setCustomAttributes().create());
-			GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) EntityManager.TUSKEN_RAIDER_ENTITY, TuskenRaiderEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().create());
 
 
 		});

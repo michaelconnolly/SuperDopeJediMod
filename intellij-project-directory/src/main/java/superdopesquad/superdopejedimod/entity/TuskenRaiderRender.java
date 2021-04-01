@@ -29,7 +29,7 @@ public class TuskenRaiderRender extends LivingRenderer<TuskenRaiderEntity, Tuske
     @Override
     public ResourceLocation getEntityTexture(TuskenRaiderEntity entity) {
         //return null;
-        return new ResourceLocation(SuperDopeJediMod.MODID, "textures/entity/wookie_entity.png");
+        return new ResourceLocation(SuperDopeJediMod.MODID, "textures/entity/tusken_raider.png");
     }
 
 

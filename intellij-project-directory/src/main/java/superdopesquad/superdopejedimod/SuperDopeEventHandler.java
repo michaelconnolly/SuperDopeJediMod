@@ -81,27 +81,12 @@ public class SuperDopeEventHandler {
 	}
 
 
- //   @SubscribeEvent
-    // public void registerEntities(final RegistryEvent.Register<EntityType<WookieEntity>> event) {
  @SubscribeEvent
  public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
 
         LOGGER.debug("INSIDE SuperDopeJediMod::registerEntities");
 
-        // MC: FIND ME :
-        event.getRegistry().register(EntityManager.WOOKIE);
-
-//        event.getRegistry().register(EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
-//                .build(SuperDopeJediMod.MODID + ":wookie")
-//                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
-//
-        //event.getRegistry().registerAll(new Block(...), new Block(...), ...);
-
-//        public static final RegistryObject<EntityType<?>> WOOKIE =
-//                SuperDopeJediMod.ENTITIES.register("wookie",
-//                        () -> EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
-//                                .build(SuperDopeJediMod.MODID + ":wookie")
-//                                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
+        SuperDopeJediMod.ENTITY_MANAGER.registerEntity(event);
     }
 
 //
