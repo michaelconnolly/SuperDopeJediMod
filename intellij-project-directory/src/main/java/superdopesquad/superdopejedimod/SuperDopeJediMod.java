@@ -1,32 +1,30 @@
 package superdopesquad.superdopejedimod;
 
-
-//import net.minecraftforge.common.capabilities.CapabilityManager;
-//import net.minecraftforge.common.util.EnumHelper;
-//import net.minecraftforge.common.Enum;
-
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-        import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-        import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
-
 import superdopesquad.superdopejedimod.armor.*;
 import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.entity.EntityRenderRegistry;
 import superdopesquad.superdopejedimod.entity.WookieEntity;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.material.*;
 import net.minecraft.item.Item;
 import superdopesquad.superdopejedimod.weapon.WeaponManager;
-//private static final Logger LOGGER = LogManager.getLogger();
 
 
 @Mod("superdopejedimod")
@@ -34,8 +32,10 @@ public class SuperDopeJediMod {
 
     // Set the metadata of the mod.
     public static final String MODID = "superdopejedimod";
-    public static final String MODNAME = "SuperDopeJediMod";
-    public static final String MODVER = "0.0.1";
+    //public static final String MODNAME = "SuperDopeJediMod";
+    //public static final String MODVER = "0.0.1";
+
+    private SuperDopeEventHandler superDopeEventHandler = new SuperDopeEventHandler();
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
@@ -152,6 +152,7 @@ public class SuperDopeJediMod {
         // New way to do it: make sure the BLOCKS registry is getting  init events.
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         // Register the setup method for modloading
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -162,11 +163,25 @@ public class SuperDopeJediMod {
 //        // Register the doClientStuff method for modloading
 //        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
+        FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
+        MinecraftForge.EVENT_BUS.register(superDopeEventHandler);
+        //FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(this::registerEntities);
+
+        //FMLJavaModLoadingContext.get().getModEventBus().addGenericListener()
+
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
         // Register our ore generator.
+        // NOTE: I have seen some mods trigger their ore generation management
+        // by calling it from this.setup, instead of separate listener here.
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, MATERIAL_MANAGER::GenerateOre);
+
+        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::registerEntities);
+
 
         // Register our mobs.
         // https://github.com/MinecraftForge/MinecraftForge/issues/6911
@@ -189,13 +204,72 @@ public class SuperDopeJediMod {
 
 
 
-    private void setup(final FMLCommonSetupEvent event) {
+    private void setupCommon(final FMLCommonSetupEvent event) {
+
+        System.out.println("INSIDE SuperDopeJediMod::setupCommon");
+
+        ENTITY_MANAGER.setupCommon();
+
+//        // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
+//        // In my main class in the setup function I had a deferredWorkQueue where I dealt
+//        // with the function above like this:
+//         DeferredWorkQueue.runLater(() -> {
+//
+//            // GlobalEntityTypeAttributes.put(MyEntities.myCustomEntity, CrewmanEntity.setCustomAttributes().func_233813_a_());
+//            GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) EntityManager.WOOKIE_ENTITY, WookieEntity.setCustomAttributes().create());
+//            GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) EntityManager.TUSKEN_RAIDER_ENTITY, TuskenRaiderEntity.setCustomAttributes().create());
+//
+//
+//         });
 
         // some preinit code
-        System.out.println("Hello from SuperDopeJediMod:setup!");
+        //System.out.println("Hello from SuperDopeJediMod:setup!");
         //LOGGER.info("HELLO FROM PREINIT");
         //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+    }
+//
+//    @SubscribeEvent
+//    public void registerBlocks(RegistryEvent.Register<Block> event) {
+////        event.getRegistry().registerAll(new Block(...), new Block(...), ...);
+////  we don't use this for blocks/items: we use deferred registry insteadd.
+//        System.out.println("INSIDE SuperDopeJediMod::registerBlocks");
+//
+//    }
 
+//    @SubscribeEvent
+//   // public void registerEntities(final RegistryEvent.Register<EntityType<WookieEntity>> event) {
+//        public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
+//
+//        System.out.println("INSIDE SuperDopeJediMod::registerEntities");
+//
+//        // MC: FIND ME :
+//        event.getRegistry().register(EntityManager.WOOKIE);
+//
+////        event.getRegistry().register(EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
+////                .build(SuperDopeJediMod.MODID + ":wookie")
+////                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
+////
+//        //event.getRegistry().registerAll(new Block(...), new Block(...), ...);
+//
+////        public static final RegistryObject<EntityType<?>> WOOKIE =
+////                SuperDopeJediMod.ENTITIES.register("wookie",
+////                        () -> EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
+////                                .build(SuperDopeJediMod.MODID + ":wookie")
+////                                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
+//
+//
+//
+//
+//    }
+
+
+
+    private void setupClient(final FMLClientSetupEvent event) {
+
+        System.out.println("INSIDE SuperDopeJediMod::setupClient");
+
+        EntityRenderRegistry.register();
+    }
 
 
 //    @EventHandler
@@ -290,4 +364,4 @@ public class SuperDopeJediMod {
 //    	superDopeCommonProxy.postInit(event);
 //    }
 //
-}
+//}

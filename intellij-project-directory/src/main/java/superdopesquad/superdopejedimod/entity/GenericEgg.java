@@ -1,29 +1,9 @@
 package superdopesquad.superdopejedimod.entity;
 
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-//import net.minecraft.client.renderer.RenderItem;
-//import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.projectile.EntityEgg;
-//import net.minecraft.init.SoundEvents;
-//import net.minecraft.item.Item;
-//import net.minecraft.item.ItemEgg;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.stats.StatList;
-//import net.minecraft.util.ActionResult;
-//import net.minecraft.util.EnumActionResult;
-//import net.minecraft.util.EnumHand;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.EggItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 

@@ -34,6 +34,8 @@ import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.CreatureAttribute;
 
+import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -61,13 +63,21 @@ import javax.annotation.Nullable;
 
 // https://github.com/HarryTechRevs/MinecraftModding1.13/blob/master/main/java/com/github/harrytechrevs/tutorialmod/entities/TutorialEntity.java
 
-public class WookieEntity extends AnimalEntity
+public class WookieEntity extends MonsterEntity // CreatureEntity
 {
-    @SuppressWarnings("unchecked")
-    public WookieEntity(EntityType<? extends CreatureEntity> type, World worldIn)
-    {
-        super((EntityType<? extends AnimalEntity>) EntityManager.WOOKIE_ENTITY, worldIn);
+
+    public WookieEntity(EntityType<? extends WookieEntity> type, World worldIn) {
+        super(type, worldIn);
     }
+//
+//    @SuppressWarnings("unchecked")
+//    public WookieEntity(EntityType<? extends MonsterEntity> type, World world)
+//    {
+//        super((EntityType<? extends MonsterEntity>) EntityManager.WOOKIE_ENTITY, world);
+//        //super(EntityManager.WOOKIE_ENTITY, worldIn);
+//
+//        //super(EntityType., world);
+//    }
 
     @Override
     protected void registerGoals()
@@ -82,11 +92,42 @@ public class WookieEntity extends AnimalEntity
         return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.2F);
     }
 
-    @Nullable
-    @Override
-    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-        return EntityType.COW.create(world);
+
+    // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
+    // In my entity I made a function like this (you can name the function whatever you want since you are not
+    // overriding anything):
+
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+      //  return MobEntity.func_233666_p_().func_233815_a_(Attributes.MOVEMENT_SPEED, (double)0.5F).func_233815_a_(Attributes.MAX_HEALTH, 20.0D).func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D);
+        return WookieEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.5F)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
     }
+
+
+
+    // In my main class in the setup function I had a deferredWorkQueue where I dealt with the function above like this:
+
+       // DeferredWorkQueue.runLater(() -> {
+    // GlobalEntityTypeAttributes.put(MyEntities.myCustomEntity, CrewmanEntity.setCustomAttributes().func_233813_a_());
+// });
+
+
+
+   // Basically the GlobalEntityTypeAttributes.put function takes in your entity class and the function in your
+    // entity class the sets the attributes (make sure to add the .func_233813_a_() at the end of your function name).
+
+
+
+
+
+//    @Nullable
+//    @Override
+//    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+//        return EntityType.COW.create(world);
+//    }
 
      //return EntityType.COW.create(p_241840_1_);
 

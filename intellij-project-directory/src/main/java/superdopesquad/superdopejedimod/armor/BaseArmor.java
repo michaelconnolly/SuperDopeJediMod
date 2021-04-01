@@ -19,6 +19,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
+//import superdopesquad.superdopejedimod.SuperDopeJediMod;
+//import superdopesquad.superdopejedimod.SuperDopeObject;
 
 
 public abstract class BaseArmor extends ArmorItem implements SuperDopeObject {

@@ -1,102 +1,139 @@
-//package superdopesquad.superdopejedimod;
-//
-//
-//import net.minecraft.block.Block;
-//import net.minecraft.block.state.IBlockState;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.player.EntityPlayerMP;
-//import net.minecraft.item.Item;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.math.BlockPos;
-//import net.minecraft.util.text.TextComponentString;
-//import net.minecraft.world.World;
-//import net.minecraftforge.client.event.RenderLivingEvent;
-//import net.minecraftforge.common.capabilities.Capability;
-//import net.minecraftforge.event.AttachCapabilitiesEvent;
-//import net.minecraftforge.event.RegistryEvent;
-//import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-//import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-//import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-//import net.minecraftforge.event.entity.player.PlayerEvent;
-//import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-//import net.minecraftforge.event.world.BlockEvent;
-//import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-//import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-//import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
-//import superdopesquad.superdopejedimod.entity.LayerClassIndicator;
-//import superdopesquad.superdopejedimod.faction.ClassCapability;
-//import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
-//import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
-//import superdopesquad.superdopejedimod.faction.ClassInfo;
+package superdopesquad.superdopejedimod;
+
+
+import com.sun.java.accessibility.util.java.awt.TextComponentTranslator;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IReorderingProcessor;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.faction.ClassCapability;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
+import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+
+import java.awt.*;
+import java.util.List;
 //import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
 //import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 //import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
 ////import superdopesquad.superdopejedimod.teleporter.PacketClientAskingServerAboutTeleporterDestination;
 //import superdopesquad.superdopejedimod.teleporter.TeleporterCapabilityProvider;
 //import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
-//
-//
-//public class SuperDopeEventHandler {
-//
-//
-//	@SubscribeEvent
-//	public void registerBlocks(RegistryEvent.Register<Block> event) {
-//
-//		// System.out.println("Inside SuperDopeJediMod:registerBlocks");
-//
-//		// Iterate through all our custom blocks and items, and register them all.
+
+
+//@Mod.EventBusSubscriber(modid = SuperDopeJediMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class SuperDopeEventHandler {
+
+
+    public static final Logger LOGGER = LogManager.getLogger(SuperDopeJediMod.MODID + "::SuperDopeEventHandler");
+
+
+    @SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event) {
+
+        LOGGER.debug("INSIDE SuperDopeJediMod:registerBlocks");
+
+		// Iterate through all our custom blocks and items, and register them all.
 //		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
 //
 //			superDopeObject.registerBlocks(event);
 //		}
-//	}
-//
-//
-//	@SubscribeEvent
-//	public void registerItems(RegistryEvent.Register<Item> event) {
-//
+	}
+
+
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event) {
+
+        LOGGER.debug("INSIDE SuperDopeJediMod:registerItems");
+
+
 //		// Iterate through all our custom items, and register them all.
 //		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
 //
 //			superDopeObject.registerItems(event);
 //		}
-//	}
+	}
+
+
+ //   @SubscribeEvent
+    // public void registerEntities(final RegistryEvent.Register<EntityType<WookieEntity>> event) {
+ @SubscribeEvent
+ public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
+
+        LOGGER.debug("INSIDE SuperDopeJediMod::registerEntities");
+
+        // MC: FIND ME :
+        event.getRegistry().register(EntityManager.WOOKIE);
+
+//        event.getRegistry().register(EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
+//                .build(SuperDopeJediMod.MODID + ":wookie")
+//                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
 //
+        //event.getRegistry().registerAll(new Block(...), new Block(...), ...);
+
+//        public static final RegistryObject<EntityType<?>> WOOKIE =
+//                SuperDopeJediMod.ENTITIES.register("wookie",
+//                        () -> EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
+//                                .build(SuperDopeJediMod.MODID + ":wookie")
+//                                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
+    }
+
 //
-//	@SubscribeEvent
+//    @SubscribeEvent
 //	public void blockBreakEvent(BreakEvent e)
 //	{
 //		// System.out.println("Inside blockBreakEvent");
 //
-//		IBlockState blockState = e.getState();
-//		Block block = blockState.getBlock();
-//
-//		if (block instanceof BaseBlock) {
-//			((BaseBlock)block).blockBreakEvent(e);
-//			return;
-//		}
+//        //MC-TO_DO
+////		IBlockState blockState = e.getState();
+////		Block block = blockState.getBlock();
+////
+////		if (block instanceof BaseBlock) {
+////			((BaseBlock)block).blockBreakEvent(e);
+////			return;
+////		}
 //
 ////	    if (e.getWorld().isRemote)
 ////	        return;
 //	}
-//
-//
+
+
 //
 //	@SubscribeEvent
-//	public void onPlayerLogsIn(PlayerLoggedInEvent event) {
+//	public void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event) {
 //
 //		// We are server-side, so we have accurate information on-hand on class/faction info.
 //		// So, let's have a welcome message display to the user.
-//		EntityPlayerMP player = (EntityPlayerMP) event.player;
-//		ClassInfo classInfo = SuperDopeJediMod.classManager.getPlayerClass(player);
-//		String message = "Welcome back. " + SuperDopeJediMod.classManager.getPlayerClassLongDescription(player);
-//		player.sendMessage(new TextComponentString(message));
+//		PlayerEntity player = event.getPlayer();
+//		ClassInfo classInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerClass(player);
+//		String message = "Welcome back. " + SuperDopeJediMod.CLASS_MANAGER.getPlayerClassLongDescription(player);
+//		player.sendMessage(new TranslationTextComponent(message), null);
 //
 ////		// Let's start a conversation with the client about faction/classes, since we need to make
 ////		// sure all connected clients get refreshed on the current faction/class info of this user.
@@ -113,12 +150,12 @@
 //
 //		if (event.isWasDeath()) {
 //
-//			EntityPlayer originalPlayer = event.getOriginal();
-//			EntityPlayer newPlayer = event.getEntityPlayer();
+//			PlayerEntity originalPlayer = event.getOriginal();
+//			PlayerEntity newPlayer = event.getPlayer();
 //
 //			// Copy class information to the new player object being clone from the original.
-//			String originalClass = SuperDopeJediMod.classManager.getPlayerClassName(originalPlayer);
-//			SuperDopeJediMod.classManager.setPlayerClassByName(newPlayer, originalClass);
+//			String originalClass = SuperDopeJediMod.CLASS_MANAGER.getPlayerClassName(originalPlayer);
+//			SuperDopeJediMod.CLASS_MANAGER.setPlayerClassByName(newPlayer, originalClass);
 //		}
 //	}
 //
@@ -127,7 +164,7 @@
 //	@SubscribeEvent
 //	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 //
-//		if (event.getObject() instanceof EntityPlayer) {
+//		if (event.getObject() instanceof PlayerEntity) {
 //
 //			// Attaching the class capability to EntityPlayer.
 //			//System.out.println("DEBUG: Attaching the Class capability to EntityPlayer.");
@@ -135,13 +172,14 @@
 //			event.addCapability(classCapabilityId, new ClassCapabilityProvider());
 //		}
 //
-//		if (event.getObject() instanceof TeleporterEntity) {
-//
-//			// Attaching the Teleporter capability to TeleporterEntity.
-//			//System.out.println("DEBUG: Attaching the Teleporter capability to TeleporterEntity.");
-//			ResourceLocation teleporterCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "teleporterCapability");
-//			event.addCapability(teleporterCapabilityId, new TeleporterCapabilityProvider());
-//		}
+//		// MC-TODO
+////		if (event.getObject() instanceof TeleporterEntity) {
+////
+////			// Attaching the Teleporter capability to TeleporterEntity.
+////			//System.out.println("DEBUG: Attaching the Teleporter capability to TeleporterEntity.");
+////			ResourceLocation teleporterCapabilityId = new ResourceLocation(SuperDopeJediMod.MODID, "teleporterCapability");
+////			event.addCapability(teleporterCapabilityId, new TeleporterCapabilityProvider());
+////		}
 //	}
 //
 //
@@ -150,7 +188,7 @@
 //	public void onEntityJoined(EntityJoinWorldEvent event)
 //	{
 //		Entity entity = event.getEntity();
-//		EntityPlayer currentPlayer = Minecraft.getMinecraft().player;
+//		PlayerEntity currentPlayer = Minecraft.getInstance().player;
 //
 //		// We get a wave of events fired prior to 'thePlayer' being initialized.  I don't know why this
 //		// occurs, but we should safely disregard these events, since there is no action we can take.
@@ -162,16 +200,17 @@
 //		}
 //
 //		// If this is a player, phone home and ask for accurate information on class/faction.
-//		if (entity instanceof EntityPlayer ) {
+//		if (entity instanceof PlayerEntity ) {
 //
-//			EntityPlayer newPlayer = (EntityPlayer) entity;
+//			PlayerEntity newPlayer = (PlayerEntity) entity;
 //			//System.out.println("Inside onEntityJoined: " + (event.getWorld().isRemote) + ", ");
 //
 //			if (newPlayer.getUniqueID() == (currentPlayer.getUniqueID())) {
 //
 //				// Ask about class.
-//				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass();
-//				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
+//                // MC_TODO
+////				PacketClientAskingServerAboutClass packet = new PacketClientAskingServerAboutClass();
+////				SuperDopeJediMod.packetManager.INSTANCE.sendToServer(packet);
 //
 ////				// Ask about teleporter data.
 ////				PacketClientAskingServerAboutTeleporterDestination packet2 = new PacketClientAskingServerAboutTeleporterDestination();
@@ -179,4 +218,4 @@
 //			}
 //		}
 //	}
-//}
+}

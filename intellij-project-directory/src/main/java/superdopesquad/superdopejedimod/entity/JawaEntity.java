@@ -1,4 +1,4 @@
-//package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity;//package superdopesquad.superdopejedimod.entity;
 //
 //
 //import java.util.Random;
@@ -46,7 +46,23 @@
 //import net.minecraftforge.fml.relauncher.SideOnly;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //
-//
+
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IChargeableMob;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+@OnlyIn(Dist.CLIENT)
+
+public class JawaEntity extends MonsterEntity {
+
+    protected JawaEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+        super(type, worldIn);
+    }
+}
+
 //
 //public class JawaEntity extends BaseEntityAnimal {
 //
