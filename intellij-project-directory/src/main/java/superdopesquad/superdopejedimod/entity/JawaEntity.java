@@ -1,67 +1,60 @@
 package superdopesquad.superdopejedimod.entity;//package superdopesquad.superdopejedimod.entity;
-//
-//
-//import java.util.Random;
-//
-//import net.minecraft.client.model.ModelBiped;
-//import net.minecraft.client.renderer.entity.Render;
-//import net.minecraft.client.renderer.entity.RenderManager;
-//import net.minecraft.enchantment.EnchantmentHelper;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityAgeable;
-//import net.minecraft.entity.EntityLiving;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.EnumCreatureType;
-//import net.minecraft.entity.SharedMonsterAttributes;
-//import net.minecraft.entity.ai.EntityAIAttackMelee;
-//import net.minecraft.entity.ai.EntityAIFollowParent;
-//import net.minecraft.entity.ai.EntityAIHurtByTarget;
-//import net.minecraft.entity.ai.EntityAILeapAtTarget;
-//import net.minecraft.entity.ai.EntityAILookIdle;
-//import net.minecraft.entity.ai.EntityAIMate;
-//import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-//import net.minecraft.entity.ai.EntityAISwimming;
-//import net.minecraft.entity.ai.EntityAITempt;
-//import net.minecraft.entity.ai.EntityAIWander;
-//import net.minecraft.entity.ai.EntityAIWatchClosest;
-//import net.minecraft.entity.ai.EntityAIWatchClosest2;
-//import net.minecraft.entity.passive.EntityAnimal;
-//import net.minecraft.entity.passive.EntityChicken;
-//import net.minecraft.entity.passive.EntityVillager;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Biomes;
-//import net.minecraft.init.Items;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.client.renderer.entity.RenderChicken;
-//import net.minecraft.util.DamageSource;
-//import net.minecraft.util.EnumHand;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.math.MathHelper;
-//import net.minecraft.world.World;
-//import net.minecraftforge.fml.client.registry.IRenderFactory;
-//import net.minecraftforge.fml.client.registry.RenderingRegistry;
-//import net.minecraftforge.fml.common.registry.EntityRegistry;
-//import net.minecraftforge.fml.common.registry.GameRegistry;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
-//import superdopesquad.superdopejedimod.SuperDopeJediMod;
-//
 
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IChargeableMob;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+
 
 @OnlyIn(Dist.CLIENT)
-
 public class JawaEntity extends MonsterEntity {
 
     protected JawaEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
     }
+
+    public static class RenderFactory implements IRenderFactory<JawaEntity> {
+
+        @Override
+        public EntityRenderer<? super JawaEntity> createRenderFor(EntityRendererManager manager) {
+
+            //return new WookieRender(manager);
+            return new Renderer(manager,
+                    new JawaModel<>(), "textures/entity/jawa.png");
+        }
+    }
+
+
+    public static AttributeModifierMap.MutableAttribute func_234188_eI_() {
+        //   return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.2F);
+        return JawaEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.2F);
+    }
+
+
+
+
+    // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
+    // In my entity I made a function like this (you can name the function whatever you want since you are not
+    // overriding anything):
+
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+        //  return MobEntity.func_233666_p_().func_233815_a_(Attributes.MOVEMENT_SPEED, (double)0.5F).func_233815_a_(Attributes.MAX_HEALTH, 20.0D).func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D);
+        return TuskenRaiderEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.5F)
+                .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
+                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
+    }
+
 }
+
+
 
 //
 //public class JawaEntity extends BaseEntityAnimal {

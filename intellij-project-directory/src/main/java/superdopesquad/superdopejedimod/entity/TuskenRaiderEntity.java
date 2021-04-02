@@ -2,6 +2,10 @@ package superdopesquad.superdopejedimod.entity;
 
 
 import java.util.Random;
+
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
@@ -12,31 +16,39 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class TuskenRaiderEntity extends CreatureEntity {
+public class TuskenRaiderEntity extends MonsterEntity  {
 
-    @SuppressWarnings("unchecked")
-    public TuskenRaiderEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
-        //super(EntityManager.TUSKEN_RAIDER_ENTITY, worldIn);
-        super(type, worldIn);
 
-//        //SuperDopeJediMod.ENTITIES.register("tusken_raider", () -> this);
-//        SuperDopeJediMod.ENTITIES.register("tusken_raider", () -> type);
+    public  TuskenRaiderEntity(EntityType<? extends TuskenRaiderEntity> type, World worldIn){  super(type,worldIn);}
 
-    }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.2d));
         this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
+    }
+
+
+    public static class RenderFactory implements IRenderFactory<TuskenRaiderEntity> {
+
+        @Override
+        public EntityRenderer<? super TuskenRaiderEntity> createRenderFor(EntityRendererManager manager) {
+
+            //return new WookieRender(manager);
+            return new Renderer(manager,
+                    new TuskenRaiderModel<>(), "textures/entity/tusken_raider.png");
+        }
     }
 
 

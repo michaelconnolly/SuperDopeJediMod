@@ -1,8 +1,12 @@
 package superdopesquad.superdopejedimod.entity;
 
 
+import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -11,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 // you should be a daughter class of ModelBiped, not ModelBase.
 
 @OnlyIn(Dist.CLIENT)
-public class TuskenRaiderModel extends BipedModel<TuskenRaiderEntity> {
+public class TuskenRaiderModel<T extends Entity> extends SegmentedModel<T> {
 
     public ModelRenderer head;
     public ModelRenderer body;
@@ -33,6 +37,7 @@ public class TuskenRaiderModel extends BipedModel<TuskenRaiderEntity> {
     }
 
 
+
     public TuskenRaiderModel(float scale) {
 
     	this(scale, 0.0F, textureWidth, textureHeight);
@@ -42,7 +47,7 @@ public class TuskenRaiderModel extends BipedModel<TuskenRaiderEntity> {
     public TuskenRaiderModel(float scale, float p_i1164_2_, int width, int height) {
 
         //super();
-        super(scale, p_i1164_2_, width, height);
+        //super(scale, p_i1164_2_, width, height);
 
 
         float yOffsetHeadSpike = -10.0F;
@@ -133,6 +138,13 @@ public class TuskenRaiderModel extends BipedModel<TuskenRaiderEntity> {
     }
 
 
+
+    public Iterable<ModelRenderer> getParts() {
+        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg,
+                this.spikeForeheadLeft, this.spikeForeheadRight, this.spikeBackheadLeft, this.spikeBackheadRight);
+    }
+
+
     /**
      * Sets the models various rotation angles then renders the model.
      */
@@ -154,18 +166,23 @@ public class TuskenRaiderModel extends BipedModel<TuskenRaiderEntity> {
      * "far" arms and legs can swing at most.
      */
 //    @Override
-//    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
-//    {
-//        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
-//        this.head.rotateAngleX = headPitch * 0.017453292F;
+//    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 //
-//        this.arms.rotationPointY = 3.0F;
-//    	this.arms.rotationPointZ = -1.0F;
-//    	this.arms.rotateAngleX = -0.75F;
-//
-//        this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
-//        this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount * 0.5F;
-//        this.rightLeg.rotateAngleY = 0.0F;
-//        this.leftLeg.rotateAngleY = 0.0F;
 //    }
+
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
+    {
+        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
+        this.head.rotateAngleX = headPitch * 0.017453292F;
+
+        this.arms.rotationPointY = 3.0F;
+    	this.arms.rotationPointZ = -1.0F;
+    	this.arms.rotateAngleX = -0.75F;
+
+        this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
+        this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount * 0.5F;
+        this.rightLeg.rotateAngleY = 0.0F;
+        this.leftLeg.rotateAngleY = 0.0F;
+    }
 }

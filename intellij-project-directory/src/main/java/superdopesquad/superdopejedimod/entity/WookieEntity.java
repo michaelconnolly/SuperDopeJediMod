@@ -1,83 +1,24 @@
 package superdopesquad.superdopejedimod.entity;
 
-
-import java.util.Random;
-//import net.minecraft.client.model.ModelBiped;
-//import net.minecraft.client.renderer.entity.Render;
-//import net.minecraft.client.renderer.entity.RenderManager;
-//import net.minecraft.enchantment.EnchantmentHelper;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityAgeable;
-//import net.minecraft.entity.EntityLiving;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.EnumCreatureType;
-//import net.minecraft.entity.SharedMonsterAttributes;
-//import net.minecraft.entity.ai.EntityAIAttackMelee;
-//import net.minecraft.entity.ai.EntityAIFollowParent;
-//import net.minecraft.entity.ai.EntityAIHurtByTarget;
-//import net.minecraft.entity.ai.EntityAILeapAtTarget;
-//import net.minecraft.entity.ai.EntityAILookIdle;
-//import net.minecraft.entity.ai.EntityAIMate;
-//import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-//import net.minecraft.entity.ai.EntityAISwimming;
-//import net.minecraft.entity.ai.EntityAITempt;
-//import net.minecraft.entity.ai.EntityAIWander;
-//import net.minecraft.entity.ai.EntityAIWatchClosest;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Biomes;
-//import net.minecraft.init.Items;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.CreatureAttribute;
-
-import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-//import net.minecraft.util.EnumHand;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-//import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
-import superdopesquad.superdopejedimod.SuperDopeJediMod;
-//import superdopesquad.superdopejedimod.entity.ai.EntityAIAttackMeleeFactionAware;
-import superdopesquad.superdopejedimod.faction.ClassInfo;
-import superdopesquad.superdopejedimod.faction.ClassManager;
-import superdopesquad.superdopejedimod.faction.FactionInfo;
 
-import javax.annotation.Nullable;
 
-// https://github.com/HarryTechRevs/MinecraftModding1.13/blob/master/main/java/com/github/harrytechrevs/tutorialmod/entities/TutorialEntity.java
-
-public class WookieEntity extends MonsterEntity // CreatureEntity
-{
+public class WookieEntity extends MonsterEntity { // CreatureEntity {
 
     public WookieEntity(EntityType<? extends WookieEntity> type, World worldIn) {
         super(type, worldIn);
     }
-//
-//    @SuppressWarnings("unchecked")
-//    public WookieEntity(EntityType<? extends MonsterEntity> type, World world)
-//    {
-//        super((EntityType<? extends MonsterEntity>) EntityManager.WOOKIE_ENTITY, world);
-//        //super(EntityManager.WOOKIE_ENTITY, worldIn);
-//
-//        //super(EntityType., world);
-//    }
+
 
     @Override
     protected void registerGoals()
@@ -85,6 +26,17 @@ public class WookieEntity extends MonsterEntity // CreatureEntity
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.2d));
         this.goalSelector.addGoal(2, new LookRandomlyGoal(this));
+    }
+
+
+    public static class RenderFactory implements IRenderFactory<WookieEntity> {
+
+        @Override
+        public EntityRenderer<? super WookieEntity> createRenderFor(EntityRendererManager manager) {
+
+            return new Renderer(manager,
+                    new WookieModel<>(), "textures/entity/wookie.png");
+        }
     }
 
 
@@ -105,33 +57,6 @@ public class WookieEntity extends MonsterEntity // CreatureEntity
                 .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
     }
-
-
-
-    // In my main class in the setup function I had a deferredWorkQueue where I dealt with the function above like this:
-
-       // DeferredWorkQueue.runLater(() -> {
-    // GlobalEntityTypeAttributes.put(MyEntities.myCustomEntity, CrewmanEntity.setCustomAttributes().func_233813_a_());
-// });
-
-
-
-   // Basically the GlobalEntityTypeAttributes.put function takes in your entity class and the function in your
-    // entity class the sets the attributes (make sure to add the .func_233813_a_() at the end of your function name).
-
-
-
-
-
-//    @Nullable
-//    @Override
-//    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-//        return EntityType.COW.create(world);
-//    }
-
-     //return EntityType.COW.create(p_241840_1_);
-
-//    }
 }
 
 

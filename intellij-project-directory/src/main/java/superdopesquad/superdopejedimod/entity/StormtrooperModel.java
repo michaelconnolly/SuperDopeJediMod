@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 
 
 @OnlyIn(Dist.CLIENT)
-public class WookieModel<T extends Entity> extends SegmentedModel<T> {
+public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
 
 	public ModelRenderer head;
 	public ModelRenderer body;
@@ -25,19 +25,23 @@ public class WookieModel<T extends Entity> extends SegmentedModel<T> {
 	public static int textureHeight = 64;
 
 
-    public WookieModel() {
+    public StormtrooperModel() {
 
     	this(1.0F);
     }
 
+    public Iterable<ModelRenderer> getParts() {
+        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
+    }
 
-    public WookieModel(float scale) {
+
+    public StormtrooperModel(float scale) {
 
     	this(scale, 0.0F, textureWidth, textureHeight);
     }
 
 
-    public WookieModel(float scale, float p_i1164_2_, int width, int height) {
+    public StormtrooperModel(float scale, float p_i1164_2_, int width, int height) {
 
     	float yOffset = 0.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
 
@@ -47,6 +51,7 @@ public class WookieModel<T extends Entity> extends SegmentedModel<T> {
         this.head = (new ModelRenderer(this)).setTextureSize(width, height);
         this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.head.setTextureOffset(0, 0).addBox(-4.0F, (-8.0F + yOffset), -4.0F, 8, 8, 8, scale);
+
 
 
         // x: left (negative) and right (positive)
@@ -73,8 +78,8 @@ public class WookieModel<T extends Entity> extends SegmentedModel<T> {
         this.arms = (new ModelRenderer(this)).setTextureSize(width, height);
     	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
        	this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
-     	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
-    	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+     	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 6, 12, 4, scale);
+    	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 12, 4, scale);
 
     	if (_showClassEmblem) {
     	 this.classEmblem = (new ModelRenderer(this)).setTextureSize(width, height);
@@ -84,10 +89,26 @@ public class WookieModel<T extends Entity> extends SegmentedModel<T> {
     }
 
 
+    /**
+     * Sets the models various rotation angles then renders the model.
+     */
+//    @Override
+//    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+//
+//    	float realScale = scale * 1.0F;
+//
+//    	this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, realScale, entityIn);
+//        this.head.render(realScale);
+//        this.body.render(realScale);
+//        this.rightLeg.render(realScale);
+//        this.leftLeg.render(realScale);
+//        this.arms.render(realScale);
+//
+//        if (_showClassEmblem) {
+//        this.classEmblem.render(realScale);
+//        }
+//    }
 
-    public Iterable<ModelRenderer> getParts() {
-        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
-    }
 
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
@@ -100,6 +121,9 @@ public class WookieModel<T extends Entity> extends SegmentedModel<T> {
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         this.head.rotateAngleX = headPitch * 0.017453292F;
 
+        //this.arms.rotationPointY = 3.0F;
+    	//this.arms.rotationPointZ = -1.0F;
+    	//this.arms.rotateAngleX = -0.75F;
         this.arms.rotationPointY = 0.0F;
     	this.arms.rotationPointZ = 0.0F;
     	this.arms.rotateAngleX = 0.0F;
