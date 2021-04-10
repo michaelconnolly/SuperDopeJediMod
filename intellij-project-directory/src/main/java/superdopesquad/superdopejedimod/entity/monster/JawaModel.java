@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.monster;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
@@ -10,7 +10,8 @@ import net.minecraft.util.math.MathHelper;
 
 
 @OnlyIn(Dist.CLIENT)
-public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
+//public class JawaModel extends ModelBiped {
+public class JawaModel<T extends Entity> extends SegmentedModel<T> {
 
 	public ModelRenderer head;
 	public ModelRenderer body;
@@ -18,32 +19,25 @@ public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
 	public ModelRenderer rightLeg;
 	public ModelRenderer leftLeg;
 
-	public ModelRenderer classEmblem;
-	private static boolean _showClassEmblem = false;
-
 	public static int textureWidth = 64;
 	public static int textureHeight = 64;
 
 
-    public StormtrooperModel() {
+    public JawaModel() {
 
     	this(1.0F);
     }
 
-    public Iterable<ModelRenderer> getParts() {
-        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
-    }
 
-
-    public StormtrooperModel(float scale) {
+    public JawaModel(float scale) {
 
     	this(scale, 0.0F, textureWidth, textureHeight);
     }
 
 
-    public StormtrooperModel(float scale, float p_i1164_2_, int width, int height) {
+    public JawaModel(float scale, float p_i1164_2_, int width, int height) {
 
-    	float yOffset = 0.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
+    	float yOffset = 8.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
 
     	// Debug info.
     	//System.out.println("DEBUG width:" + String.valueOf(width) + ", height:" + String.valueOf(height) + ", p_i1164_2_:" + String.valueOf(p_i1164_2_) + ", scale:" + String.valueOf(scale));
@@ -51,8 +45,6 @@ public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
         this.head = (new ModelRenderer(this)).setTextureSize(width, height);
         this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.head.setTextureOffset(0, 0).addBox(-4.0F, (-8.0F + yOffset), -4.0F, 8, 8, 8, scale);
-
-
 
         // x: left (negative) and right (positive)
         // y: up (negative) and down (positive)
@@ -78,14 +70,8 @@ public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
         this.arms = (new ModelRenderer(this)).setTextureSize(width, height);
     	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
        	this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
-     	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 6, 12, 4, scale);
-    	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 12, 4, scale);
-
-    	if (_showClassEmblem) {
-    	 this.classEmblem = (new ModelRenderer(this)).setTextureSize(width, height);
-         //this.factionEmblem.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
-         this.classEmblem.setTextureOffset(16, 16).addBox(-4.0F, (-20.0F + yOffset), -3.0F, 2, 2, 2, scale);
-    	}
+     	this.arms.setTextureOffset(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+    	this.arms.setTextureOffset(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     }
 
 
@@ -95,7 +81,7 @@ public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
 //    @Override
 //    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
 //
-//    	float realScale = scale * 1.0F;
+//    	float realScale = scale * 0.7F;  // this is a hack to make my jawa small.
 //
 //    	this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, realScale, entityIn);
 //        this.head.render(realScale);
@@ -103,18 +89,22 @@ public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
 //        this.rightLeg.render(realScale);
 //        this.leftLeg.render(realScale);
 //        this.arms.render(realScale);
-//
-//        if (_showClassEmblem) {
-//        this.classEmblem.render(realScale);
-//        }
 //    }
-
+//
 
     /**
      * Sets the model's various rotation angles. For bipeds, par1 and par2 are used for animating the movement of arms
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
+
+
+    @Override
+    public Iterable<ModelRenderer> getParts() {
+
+        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
+    }
+
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 
@@ -122,11 +112,11 @@ public class StormtrooperModel<T extends Entity> extends SegmentedModel<T> {
         this.head.rotateAngleX = headPitch * 0.017453292F;
 
         //this.arms.rotationPointY = 3.0F;
-    	//this.arms.rotationPointZ = -1.0F;
-    	//this.arms.rotateAngleX = -0.75F;
+        //this.arms.rotationPointZ = -1.0F;
+        //this.arms.rotateAngleX = -0.75F;
         this.arms.rotationPointY = 0.0F;
-    	this.arms.rotationPointZ = 0.0F;
-    	this.arms.rotateAngleX = 0.0F;
+        this.arms.rotationPointZ = 0.0F;
+        this.arms.rotateAngleX = 0.0F;
 
         this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount * 0.5F;
         this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount * 0.5F;

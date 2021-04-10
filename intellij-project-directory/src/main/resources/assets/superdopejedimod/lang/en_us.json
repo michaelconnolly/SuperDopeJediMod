@@ -56,6 +56,13 @@
     "item.superdopejedimod.wookie_egg": "Wookie Egg",
     "item.superdopejedimod.tusken_raider_egg": "Tusken Raider Egg",
     "item.superdopejedimod.jawa_egg": "Jawa Egg",
-    "item.superdopejedimod.stormtrooper_egg": "Stormtrooper Egg"
+    "item.superdopejedimod.stormtrooper_egg": "Stormtrooper Egg",
+
+    "item.superdopejedimod.droid_parts": "Droid Parts",
+    "block.superdopejedimod.droid_kit": "Droid Kit",
+    "item.superdopejedimod.astromech_droid_head": "Astromech Droid Head",
+    "item.superdopejedimod.protocol_droid_head": "Protocol Droid Head",
+    "item.superdopejedimod.assassin_droid_head": "Assassin Droid Head",
+    "item.superdopejedimod.probe_droid_head": "Probe Droid Head"
 }
 

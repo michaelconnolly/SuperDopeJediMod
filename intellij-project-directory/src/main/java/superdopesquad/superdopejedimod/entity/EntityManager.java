@@ -2,7 +2,6 @@ package superdopesquad.superdopejedimod.entity;
 
 
 import java.awt.*;
-
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
@@ -13,20 +12,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import superdopesquad.superdopejedimod.BaseBlock;
+import superdopesquad.superdopejedimod.BaseItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.droid.*;
+import superdopesquad.superdopejedimod.entity.monster.JawaEntity;
+import superdopesquad.superdopejedimod.entity.monster.StormtrooperEntity;
+import superdopesquad.superdopejedimod.entity.monster.TuskenRaiderEntity;
+import superdopesquad.superdopejedimod.entity.monster.WookieEntity;
 
 
 public class EntityManager {
-
-	// Entities.
-	// MC-TO-DO: the first parameter should be a World instance (Minecraft.getMinecraft.theWorld), but i'm concerned
-	// that this will crash on the server side.  Putting in null doesn't seem to have a harmful effect.  I need to
-	// figure out later the downside of not having it, and if i need it, figure out the best way to get a handle
-	// for it that is server-safe.
-	//private static int _startEntityId = 300;
-
-	// MC: Snakes were our first example entity we used to learn how to make entities work.  They are not within the spirit
-	// of the Star Wars world here, so i should probably comment them out.  Future coders should think this through.
 
 	// Entities.
 
@@ -50,41 +46,46 @@ public class EntityManager {
 					.size(0.6F, 1.7F).trackingRange(8).build("stormtrooper")
 					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "stormtrooper"));
 
+	public static final EntityType<ProtocolDroidEntity> PROTOCOL_DROID =
+			(EntityType<ProtocolDroidEntity>) EntityType.Builder.create(ProtocolDroidEntity::new, EntityClassification.MONSTER)
+					.size(0.6F, 1.7F).trackingRange(8).build("protocol_droid")
+					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "protocol_droid"));
 
-    //public static ImperialProbeDroidEntity imperialProbeDroid = new ImperialProbeDroidEntity(null);
+	public static final EntityType<ProbeDroidEntity> PROBE_DROID =
+			(EntityType<ProbeDroidEntity>) EntityType.Builder.create(ProbeDroidEntity::new, EntityClassification.MONSTER)
+					.size(0.6F, 1.7F).trackingRange(8).build("probe_droid")
+					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "probe_droid"));
+
+	public static final EntityType<AssassinDroidEntity> ASSASSIN_DROID =
+			(EntityType<AssassinDroidEntity>) EntityType.Builder.create(AssassinDroidEntity::new, EntityClassification.MONSTER)
+					.size(0.6F, 1.7F).trackingRange(8).build("assassin_droid")
+					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "assassin_droid"));
+
+	public static final EntityType<AstromechDroidEntity> ASTROMECH_DROID =
+			(EntityType<AstromechDroidEntity>) EntityType.Builder.create(AstromechDroidEntity::new, EntityClassification.MONSTER)
+					.size(0.6F, 1.7F).trackingRange(8).build("astromech_droid")
+					.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "astromech_droid"));
 
 	// Ships!
 //    public static TieFighterEntity tieFighter = new TieFighterEntity(null);
 //    public static XWingFighterEntity xWingFighter = new XWingFighterEntity(null);
 //    public static ShuttleEntity shuttle = new ShuttleEntity(null);
 //    public static ImperialShuttleEntity imperialShuttle = new ImperialShuttleEntity(null);
-//
-	// Republic Utility Droid objects.
-//    public static DroidParts droidParts = new DroidParts("droidParts");
-//    public static DroidKit droidKit = new DroidKit("droidKit");
-////    public static RepublicHunterDroidHead republicHunterDroidHead = new RepublicHunterDroidHead("republicHunterDroidHead");
-//    public static RepublicPatrolDroidHead republicPatrolDroidHead = new RepublicPatrolDroidHead("republicPatrolDroidHead");
-//    public static RepublicSentryDroidHead republicSentryDroidHead = new RepublicSentryDroidHead("republicSentryDroidHead");
-//    public static RepublicHunterDroidEntity republicHunterDroid = new RepublicHunterDroidEntity(null);
-//    public static RepublicPatrolDroidEntity republicPatrolDroid = new RepublicPatrolDroidEntity(null);
-//    public static RepublicSentryDroidEntity republicSentryDroid = new RepublicSentryDroidEntity(null);
-//
 
+	// Droid kit objects.
+    public static final BaseItem DROID_PARTS = new BaseItem("droid_parts");
+    public static final BaseBlock DROID_KIT = new DroidKit("droid_kit");
+	public static final DroidHead PROTOCOL_DROID_HEAD = new DroidHead("protocol_droid_head", PROTOCOL_DROID);
+	public static final DroidHead ASTROMECH_DROID_HEAD = new DroidHead("astromech_droid_head", ASTROMECH_DROID);
+	public static final DroidHead ASSASSIN_DROID_HEAD = new DroidHead("assassin_droid_head", ASSASSIN_DROID);
+	public static final DroidHead PROBE_DROID_HEAD = new DroidHead("probe_droid_head", PROBE_DROID);
 
-	// MC-TO-DO: this egg is working, but the texture for the egg is wrong.  I need to figure out how to use the
-	// colors we input as the way to draw the egg.  In the meantime, i am registered this egg like a nomrmal item,
-	// and putting in the model json file and texture file, and instead of the texture being greenish, like my
-	// texture file, it's coming out pitch black.  Not sure.
-	// Watch this video: https://www.youtube.com/watch?v=IAwTCVl9Z4U
-
-	//public static final GenericEgg WOOKIE_EGG = new GenericEgg("wookie_egg", EntityType.PIG, Color.blue.hashCode(), Color.white.hashCode());
+	// Eggs for monsters.
 	public static final GenericEgg WOOKIE_EGG = new GenericEgg("wookie_egg", WOOKIE, Color.blue.hashCode(), Color.white.hashCode());
 	public static final GenericEgg TUSKEN_RAIDER_EGG = new GenericEgg("tusken_raider_egg", TUSKEN_RAIDER, Color.red.hashCode(), Color.white.hashCode());
 	public static final GenericEgg JAWA_EGG = new GenericEgg("jawa_egg", JAWA, Color.pink.hashCode(), Color.white.hashCode());
 	public static final GenericEgg STORMTROOPER_EGG = new GenericEgg("stormtrooper_egg", STORMTROOPER, Color.GREEN.hashCode(), Color.white.hashCode());
 
-	// Special eggs that can be used in both creative and survival mode, different from spawn eggs.  More like chicken eggs.
-//    public static GenericEgg imperialProbeDroidEgg = new GenericEgg("imperialProbeDroidEgg", ImperialProbeDroidEntity.class);
 
 	public EntityManager() {
 	}
@@ -96,7 +97,10 @@ public class EntityManager {
 		event.getRegistry().register(EntityManager.TUSKEN_RAIDER);
 		event.getRegistry().register(EntityManager.JAWA);
 		event.getRegistry().register(EntityManager.STORMTROOPER);
-
+		event.getRegistry().register(EntityManager.PROTOCOL_DROID);
+		event.getRegistry().register(EntityManager.PROBE_DROID);
+		event.getRegistry().register(EntityManager.ASSASSIN_DROID);
+		event.getRegistry().register(EntityManager.ASTROMECH_DROID);
 	}
 
 
@@ -107,6 +111,10 @@ public class EntityManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.TUSKEN_RAIDER, new TuskenRaiderEntity.RenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.JAWA, new JawaEntity.RenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.STORMTROOPER, new StormtrooperEntity.RenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityManager.PROTOCOL_DROID, new ProtocolDroidEntity.RenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityManager.PROBE_DROID, new ProbeDroidEntity.RenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityManager.ASSASSIN_DROID, new AssassinDroidEntity.RenderFactory());
+		RenderingRegistry.registerEntityRenderingHandler(EntityManager.ASTROMECH_DROID, new AstromechDroidEntity.RenderFactory());
 	}
 
 
@@ -121,6 +129,10 @@ public class EntityManager {
 			GlobalEntityTypeAttributes.put(EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().create());
 			GlobalEntityTypeAttributes.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().create());
 			GlobalEntityTypeAttributes.put(EntityManager.STORMTROOPER, StormtrooperEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(EntityManager.PROTOCOL_DROID, ProtocolDroidEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(EntityManager.PROBE_DROID, ProbeDroidEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(EntityManager.ASSASSIN_DROID, AssassinDroidEntity.setCustomAttributes().create());
+			GlobalEntityTypeAttributes.put(EntityManager.ASTROMECH_DROID, AstromechDroidEntity.setCustomAttributes().create());
 
 		});
 	}
@@ -147,105 +159,5 @@ public class EntityManager {
 			}
 		}
 	}
-
-
-//
-//    //public static EntityLivingBase createEntity(Class classToMake, World world, BlockPos blockPos) {
-//    public static Entity createEntity(Class classToMake, World world, BlockPos blockPos) {
-//
-//    	// Now, on to the Render object;
-//    	// Create an array that defines the type for each parameter.  That is how we
-//    	// query for the constructor (we get back the one that matches the parameters we request).
-//    	Class parameterTypes[] = new Class[1];
-//    	parameterTypes[0] = World.class;
-//
-//    	// OK, let's query for that render constructor.
-//    	Constructor constructor = EntityManager.getConstructor(classToMake, parameterTypes);
-//    	if (constructor == null) {
-//    		return null;
-//    	}
-//
-//    	// OK, now we create an array that stores the actual parameter values for the render constructor.
-//    	Object parameterValues[] = new Object[1];
-//    	parameterValues[0] = world;
-//
-//    	// Last step, let's call the constructor with the array of parameter values.
-//    	Object instance = EntityManager.newInstance(constructor, parameterValues);
-//    	if (instance == null) {
-//    		System.out.println("ERROR! createEntity() failed to create an object.");
-//    		return null;
-//    	}
-//    	//if (!(instance instanceof EntityLivingBase)) {
-//    	if (!(instance instanceof Entity)) {
-//    	   	    		System.out.println("ERROR! createEntity() created unexpected object.");
-//    		return null;
-//    	}
-//
-//    	//EntityLivingBase entity = (EntityLivingBase) instance;
-//    	Entity entity = (Entity) instance;
-//
-//    	// Set the proper location of the entity.
-//    	if (blockPos != null) {
-//    		double x = blockPos.getX() + 0.5;
-//    		double y = blockPos.getY();
-//    		double z = blockPos.getZ() + 0.5;
-//    		entity.setLocationAndAngles(x, y, z, 0.0F, 0.0F);
-//    	}
-//    	else {
-//    		System.out.println("ERROR: handed null blockPos in EntityManager:createEntity(..)");
-//    	}
-//
-//		// Actually spawn the entity into the world.
-//		//world.spawnEntity(entity);
-//    	world.addEntity(entity);
-//
-//		// OK, let's return what we got.
-//    	return entity;
-//    }
-
-
-//    public static Constructor getConstructor(Class classToMake, Class parameterTypes[]) {
-//
-//    	// Let's query for that constructor.
-//    	Constructor constructor = null;
-//		try {
-//			constructor = classToMake.getConstructor(parameterTypes);
-//		} catch (NoSuchMethodException e) {
-//			System.out.println("EntityManager: sent in a bogus class: " + classToMake.getName());
-//			return null;
-//		} catch (SecurityException e) {
-//			System.out.println("EntityManager: weird security issue.  Bailing.");
-//			return null;
-//		}
-//
-//		return constructor;
-//    }
-
-
-//    public static Object newInstance(Constructor constructor, Object parameterValues[]) {
-//
-//    	// Let's call the constructor with the array of parameter values.
-//    	Object newObject = null;
-//
-//		try {
-//			newObject = constructor.newInstance(parameterValues);
-//		}
-//		catch (InstantiationException e1) {
-//				System.out.println("EntityManager: weird instantiation issue.  Bailing.");
-//				return null;
-//		} catch (IllegalAccessException e1) {
-//				System.out.println("EntityManager: weird access issue.  Bailing.");
-//				return null;
-//		} catch (IllegalArgumentException e1) {
-//				System.out.println("EntityManager: weird argument issue.  Bailing.");
-//				return null;
-//		} catch (InvocationTargetException e1) {
-//				System.out.println("EntityManager: weird target issue.  Bailing.");
-//				return null;
-//		}
-//
-//		return newObject;
-//    }
-
 }
 

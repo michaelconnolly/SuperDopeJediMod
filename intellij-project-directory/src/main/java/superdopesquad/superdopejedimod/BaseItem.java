@@ -1,6 +1,7 @@
 package superdopesquad.superdopejedimod;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 
@@ -8,28 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BaseItem extends Item implements SuperDopeObject, ClassAwareInterface {
-
-	
-//	private String _name = "";
-//	private boolean _showUpInCreativeTab = true;
-
-	
-//	//public BaseItem(String unlocalizedName) {
-//	public BaseItem(Item.Properties properties) {
-//
-//		//properties.group(ItemGroup.MISC);
-//		this(properties, null);
-//	}
+public class BaseItem extends Item implements SuperDopeObject, ClassAwareInterface {
 
 
 	public BaseItem(String name) {
-	//public BaseItem(Properties properties) {
 
-		//properties.group(ItemGroup.MISC);
-		this(name, new Item.Properties());
+		this(name, new Item.Properties().group(ItemGroup.MISC));
 	}
-	
+
+
 	public BaseItem(String name, Item.Properties properties) {
 
 		super(properties);

@@ -27,7 +27,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 //import net.minecraftforge.fml.relauncher.Side;
 //import net.minecraftforge.fml.relauncher.SideOnly;
 //import superdopesquad.superdopejedimod.entity.EntityRenderFactory;
-//import superdopesquad.superdopejedimod.entity.JawaModel;
+//import superdopesquad.superdopejedimod.entity.monster.JawaModel;
 //import superdopesquad.superdopejedimod.entity.JawaRender;
 //import superdopesquad.superdopejedimod.entity.SuperDopeRenderManager;
 

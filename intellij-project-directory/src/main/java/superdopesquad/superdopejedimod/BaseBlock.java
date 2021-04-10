@@ -26,11 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 
 
-public abstract class BaseBlock extends Block implements SuperDopeObjectGeneratable {
-	
-	// Instance Members
-//	private String _name = "";
-//	private boolean _showUpInCreativeTab = true;
+public class BaseBlock extends Block implements SuperDopeObjectGeneratable {
 
 
 	public BaseBlock(String name, Block.Properties properties) {
@@ -42,13 +38,22 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 				new Item.Properties().group(ItemGroup.BUILDING_BLOCKS)));
 	}
 
+	public BaseBlock(String name) {
+
+		this(name, Properties.create(Material.IRON));
+
+
+		//this(name, new Item.Properties().group(ItemGroup.MISC).
+	}
+
+
 
 	public BaseBlock(Material material, String name) {
 
 		this(material, name, true);
 	}
 	
-	
+	//MC-TODO: why is this not calling register code?
 	public BaseBlock(Material material, String name, boolean showUpInCreativeTab) {
 
 		//super (new Properties().gr
@@ -77,19 +82,7 @@ public abstract class BaseBlock extends Block implements SuperDopeObjectGenerata
 		//SuperDopeJediMod.customObjects.add(this);
 	}
 	
-//
-//	@Override // from SuperDopeObject
-//	public String getName() {
-//		return this._name.toLowerCase();
-//	}
-//
-//
-//	@Override // from SuperDopeObject
-//	public String getFullName() {
-//		return SuperDopeJediMod.MODID + ":" + this.getName();
-//	}
-//
-//
+
 	@Override // from SuperDopeObject
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 

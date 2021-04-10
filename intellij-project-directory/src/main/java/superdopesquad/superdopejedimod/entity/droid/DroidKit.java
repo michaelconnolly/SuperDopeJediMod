@@ -1,3 +1,18 @@
+package superdopesquad.superdopejedimod.entity.droid;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import superdopesquad.superdopejedimod.BaseBlock;
+
+
+public class DroidKit extends BaseBlock {
+
+	public DroidKit(String name) {
+
+		super(name, (Block.Properties.create(Material.IRON)));
+	}
+}
+
 //package superdopesquad.superdopejedimod.entity.droid;
 //
 //
@@ -23,11 +38,11 @@
 //		super(Material.IRON, unlocalizedName);
 //	}
 //
-//
-//	public Item getItemDropped(int metadata, Random random, int fortune) {
-//
-//		return Item.getItemFromBlock(SuperDopeJediMod.entityManager.droidKit);
-//	}
+////
+////	public Item getItemDropped(int metadata, Random random, int fortune) {
+////
+////		return Item.getItemFromBlock(SuperDopeJediMod.entityManager.droidKit);
+////	}
 //
 ////
 ////	public void registerRecipe() {

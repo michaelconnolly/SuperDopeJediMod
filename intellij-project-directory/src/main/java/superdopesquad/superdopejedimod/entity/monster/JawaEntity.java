@@ -1,4 +1,5 @@
-package superdopesquad.superdopejedimod.entity;//package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.monster;
+
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -10,12 +11,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import superdopesquad.superdopejedimod.entity.Renderer;
 
 
 @OnlyIn(Dist.CLIENT)
 public class JawaEntity extends MonsterEntity {
 
-    protected JawaEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
+    public JawaEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
     }
 

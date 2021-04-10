@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity;
+package superdopesquad.superdopejedimod.entity.monster;
 
 
 import com.google.common.collect.ImmutableList;

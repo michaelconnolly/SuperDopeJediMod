@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:droid_parts"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:droid_kit",
+    "count": 1
+  }
+}
