@@ -16,7 +16,7 @@ public class Renderer extends MobRenderer<MonsterEntity, SegmentedModel<MonsterE
     String texturePath;
 
 
-    public Renderer(EntityRendererManager manager, SegmentedModel<MonsterEntity> model, String texturePath) {
+  public Renderer(EntityRendererManager manager, SegmentedModel<MonsterEntity> model, String texturePath) {
 
         super(manager, model, 0F);
 

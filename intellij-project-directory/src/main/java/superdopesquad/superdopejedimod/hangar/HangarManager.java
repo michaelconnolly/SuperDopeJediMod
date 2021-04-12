@@ -1,42 +1,11 @@
 //package superdopesquad.superdopejedimod.hangar;
 //
 //
-//import java.util.ArrayList;
-//import java.util.List;
 //import net.minecraft.block.Block;
-//import net.minecraft.block.state.IBlockState;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.entity.EntityLiving;
-//import net.minecraft.entity.item.EntityItem;
-//import net.minecraft.entity.passive.EntityChicken;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Items;
-//import net.minecraft.item.Item;
-//import net.minecraft.item.ItemBlock;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.util.EnumActionResult;
-//import net.minecraft.util.EnumFacing;
-//import net.minecraft.util.EnumHand;
 //import net.minecraft.util.math.BlockPos;
-//import net.minecraft.util.text.TextComponentString;
 //import net.minecraft.world.World;
-//import net.minecraftforge.common.capabilities.CapabilityManager;
-//import superdopesquad.superdopejedimod.GeometryUtil;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //import superdopesquad.superdopejedimod.entity.EntityManager;
-//import superdopesquad.superdopejedimod.entity.droid.DroidKit;
-//import superdopesquad.superdopejedimod.entity.droid.RepublicBaseDroidEntity;
-//import superdopesquad.superdopejedimod.entity.ship.ImperialShuttleEntity;
-//import superdopesquad.superdopejedimod.entity.ship.ShuttleEntity;
-//import superdopesquad.superdopejedimod.entity.ship.TieFighterEntity;
-//import superdopesquad.superdopejedimod.entity.ship.XWingFighterEntity;
-//import superdopesquad.superdopejedimod.faction.ClassCapability;
-//import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
-//import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
-//import superdopesquad.superdopejedimod.faction.ClassCapabilityStorage;
-//import superdopesquad.superdopejedimod.faction.ClassManager;
-//import superdopesquad.superdopejedimod.faction.FactionInfo;
-//import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
 //
 //
 //public class HangarManager {
@@ -45,7 +14,7 @@
 //	public static int HANGARPAD_EMPIRE_WIDTH = 13;
 //	public static int HANGARPAD_REPUBLIC_WIDTH = 17;
 //
-//	public static HangarParts hangarParts = new HangarParts("hangarParts");
+//	public static xxx_HangarParts hangarParts = new xxx_HangarParts("hangarParts");
 //	public static HangarWrench hangarWrench = new HangarWrench("hangarWrench");
 //
 //	public static HangarPadBlock hangarPadBlock = new HangarPadBlock("hangarPadBlock");

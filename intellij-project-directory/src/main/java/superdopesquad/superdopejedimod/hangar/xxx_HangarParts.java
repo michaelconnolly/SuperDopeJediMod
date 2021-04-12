@@ -9,10 +9,10 @@ import superdopesquad.superdopejedimod.BaseItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
 
-public class HangarParts extends BaseItem {
+public class xxx_HangarParts extends BaseItem {
 
 	
-	public HangarParts(String unlocalizedName) {
+	public xxx_HangarParts(String unlocalizedName) {
 		
         super(unlocalizedName);
        // this.setCreativeTab(CreativeTabs.MATERIALS);

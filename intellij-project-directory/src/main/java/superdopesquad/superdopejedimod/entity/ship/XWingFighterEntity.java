@@ -1,90 +1,83 @@
-//package superdopesquad.superdopejedimod.entity.ship;
-//
-//import java.util.Arrays;
-//import java.util.List;
-//import java.util.Random;
-//import javax.annotation.Nullable;
-//
-//import net.minecraft.block.Block;
-//import net.minecraft.block.state.IBlockState;
-//import net.minecraft.client.model.ModelBiped;
-//import net.minecraft.client.renderer.entity.Render;
-//import net.minecraft.client.renderer.entity.RenderManager;
-//import net.minecraft.enchantment.EnchantmentHelper;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityAgeable;
-//import net.minecraft.entity.EntityLiving;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.EnumCreatureType;
-//import net.minecraft.entity.IRangedAttackMob;
-//import net.minecraft.entity.MoverType;
-//import net.minecraft.entity.SharedMonsterAttributes;
-//import net.minecraft.entity.ai.EntityAIAttackMelee;
-//import net.minecraft.entity.ai.EntityAIAttackRanged;
-//import net.minecraft.entity.ai.EntityAIBase;
-//import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-//import net.minecraft.entity.ai.EntityAIFollowParent;
-//import net.minecraft.entity.ai.EntityAIHurtByTarget;
-//import net.minecraft.entity.ai.EntityAILeapAtTarget;
-//import net.minecraft.entity.ai.EntityAILookIdle;
-//import net.minecraft.entity.ai.EntityAIMate;
-//import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-//import net.minecraft.entity.ai.EntityAISwimming;
-//import net.minecraft.entity.ai.EntityAITempt;
-//import net.minecraft.entity.ai.EntityAIWander;
-//import net.minecraft.entity.ai.EntityAIWatchClosest;
-//import net.minecraft.entity.ai.EntityAIWatchClosest2;
-//import net.minecraft.entity.ai.EntityMoveHelper;
-//import net.minecraft.entity.monster.EntityGhast;
-//import net.minecraft.entity.passive.EntityAnimal;
-//import net.minecraft.entity.passive.EntityChicken;
-//import net.minecraft.entity.passive.EntityVillager;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.projectile.EntitySnowball;
-//import net.minecraft.init.Biomes;
-//import net.minecraft.init.Blocks;
-//import net.minecraft.init.Items;
-//import net.minecraft.init.SoundEvents;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.nbt.NBTTagCompound;
-//import net.minecraft.network.datasync.DataParameter;
-//import net.minecraft.network.datasync.DataSerializers;
-//import net.minecraft.network.datasync.EntityDataManager;
-//import net.minecraft.client.renderer.entity.RenderChicken;
-//import net.minecraft.util.DamageSource;
-//import net.minecraft.util.EnumHand;
-//import net.minecraft.util.ResourceLocation;
-//import net.minecraft.util.math.AxisAlignedBB;
-//import net.minecraft.util.math.BlockPos;
-//import net.minecraft.util.math.MathHelper;
-//import net.minecraft.util.math.Vec3d;
-//import net.minecraft.world.World;
-//import net.minecraftforge.fml.client.registry.IRenderFactory;
-//import net.minecraftforge.fml.client.registry.RenderingRegistry;
-//import net.minecraftforge.fml.common.registry.EntityRegistry;
-//import net.minecraftforge.fml.common.registry.GameRegistry;
-//import net.minecraftforge.fml.relauncher.Side;
-//import net.minecraftforge.fml.relauncher.SideOnly;
-//import superdopesquad.superdopejedimod.SuperDopeJediMod;
-//import superdopesquad.superdopejedimod.entity.BaseEntityAnimal;
-//import superdopesquad.superdopejedimod.entity.EntityRenderFactory;
-//import superdopesquad.superdopejedimod.faction.FactionInfo;
-//import superdopesquad.superdopejedimod.weapon.PlasmaShotEntityBase.PowerLevel;
-//import superdopesquad.superdopejedimod.faction.ClassManager;
-//import java.util.Optional;
-//
-//
-///**
-// * No AI: only moves when there is a passenger.
-// */
-//public class XWingFighterEntity extends BaseEntityShip {
-//
-//	 private static final float DEGREES2RADIANS = 0.017453292F;
-//
-//	/**
-//	 * constructor
-//	 */
-//	public XWingFighterEntity(World worldIn) {
+package superdopesquad.superdopejedimod.entity.ship;
+
+
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.Renderer;
+import superdopesquad.superdopejedimod.entity.droid.DroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.ProtocolDroidEntity;
+import superdopesquad.superdopejedimod.entity.droid.ProtocolDroidModel;
+
+import java.util.Optional;
+
+
+/**
+ * No AI: only moves when there is a passenger.
+ */
+public class XWingFighterEntity extends ShipEntity {
+
+	 private static final float DEGREES2RADIANS = 0.017453292F;
+
+    public XWingFighterEntity(EntityType<XWingFighterEntity> type, World worldIn) {
+
+    	super(type, worldIn);
+
+		// This sets the bounding box size, not the actual model that you see rendered.
+		//this.setSiz(0.6F, 2.0F);
+
+		// how much experience do you get it you kill it?
+		this.experienceValue = 1;
+
+		// Properties that we need to have later.
+//		this.shadowSize = 0.5F;
+//		this.sha
+
+		// prevent motiony degrade
+		this.setNoGravity(true);
+	}
+
+
+
+	public static class RenderFactory implements IRenderFactory<XWingFighterEntity> {
+
+		@Override
+		public EntityRenderer<? super ShipEntity> createRenderFor(EntityRendererManager manager) {
+
+			return new Renderer(manager,
+					new XWingFighterModel<>(), "textures/entity/xwing_fighter.png");
+		}
+	}
+
+
+	public static AttributeModifierMap.MutableAttribute func_234188_eI_() {
+		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.2F);
+	}
+
+
+	// https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
+	// In my entity I made a function like this (you can name the function whatever you want since you are not
+	// overriding anything):
+
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+		//  return MobEntity.func_233666_p_().func_233815_a_(Attributes.MOVEMENT_SPEED, (double)0.5F).func_233815_a_(Attributes.MAX_HEALTH, 20.0D).func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D);
+		return MobEntity.func_233666_p_()
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.5F)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
+	}
+
+
+//    public XWingFighterEntity(World worldIn) {
 //		super(worldIn, "xWingFighterEntity", "X-Wing Fighter", XWingFighterRender.class, XWingFighterModel.class);
 //
 //		// This sets the bounding box size, not the actual model that you see rendered.
@@ -99,7 +92,7 @@
 //		// prevent motiony degrade
 //		this.setNoGravity(true);
 //	}
-//
+
 //
 //	/**
 //	 * Called every couple ticks to update animation.
@@ -183,24 +176,24 @@
 //	        super.travel(inMoveStrafing, inMoveVertical, inMoveForward);
 //	    }
 //	}
-//
-//
-//	/**
-//     * Returns the Y offset from the entity's position for any entity riding this one.
-//     * should return the yoffset of the cockpit area.
-//     */
-//	@Override // from Entity
-//    public double getMountedYOffset() {
-//	  // TODO: this is hard coded to sit on top of the cockpit, so you can see, Lower once i figure out how to have
-//	  // transparent pixels in the cockpit window.
-//	  return 9.0;
-//    }
-//
-//	/**
-//	 * EntityAnimal overrides this, so back to default of 0.
-//	 */
-//	@Override // from Entity
-//	public double getYOffset() {
-//		return 0.0D;
-//	}
-//}
+
+
+	/**
+     * Returns the Y offset from the entity's position for any entity riding this one.
+     * should return the yoffset of the cockpit area.
+     */
+	@Override // from Entity
+    public double getMountedYOffset() {
+	  // TODO: this is hard coded to sit on top of the cockpit, so you can see, Lower once i figure out how to have
+	  // transparent pixels in the cockpit window.
+	  return 9.0;
+    }
+
+	/**
+	 * EntityAnimal overrides this, so back to default of 0.
+	 */
+	@Override // from Entity
+	public double getYOffset() {
+		return 0.0D;
+	}
+}
