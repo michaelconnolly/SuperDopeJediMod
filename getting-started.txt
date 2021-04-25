@@ -1,0 +1,98 @@
+SuperDopeSquad - Environment Setup Guide
+
+----------------------------
+1. Install GitHub and setup Repo.
+----------------------------
+* Create a Github account, at http://www.github.com.
+* Join the SuperDopeSquad org.
+	i. Send an email to mc@madronahouse.com with the name of your Github account and mention you want to join SuperDopeSquad.
+	ii. You will get an invite to SuperDopeSquad.  Accept the invite.
+* Create a fork of the SuperDopeSquad\SuperDopeJediMode repo.
+	i. Go to https://github.com/SuperDopeSquad/SuperDopeJediMod
+	ii. Click the “Fork” button in the upper right of the page, and choose your own namespace to put the fork in (i.e., not “SuperDopeSquad”)
+* Install Github, from http://windows.github.com
+* Setup Repo.
+	i. From within the Github client, hit the ‘+’ button in the top left corner.
+	ii. Select the “Clone” tab.
+	iii. Select SuperDopeJediMod in the repository list, within your own namespace (i.e., not “SuperDopeSquad”)
+	iv. Follow the steps to set up a clone of the repo on your local machine. I installed it at c:\dev\SuperDopeJediMod, but you can put it wherever you want it.
+
+----------------------------
+2. Install Minecraft
+----------------------------
+Get it from http://minecraft.net.  Boot it at least once to make sure the Forge install goes well later.
+
+----------------------------
+3. Install Java Runtime Environment (JRE) 
+----------------------------
+Find it here: http://java.com/en/download/manual.jsp
+Use the latest/recommended build.  At the time of this writing, I used “Version 8 Update 144”.
+Note: you need to install both the 32 bit version and the 64 bit version!  You know you got this wrong if you try to boot up eclipse later in this process, and it fails to boot with an error that it can’t find javaw.exe.  In that case, chances are you have not installed the 64-bit version of Java.
+
+----------------------------
+4. Install JDK
+----------------------------
+       http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+Use the latest/recommended build.  At the time of this writing, I used “Java SE Development Kit 8u144”.
+
+----------------------------
+5.  OPTIONAL: Edit environment variables
+----------------------------
+Some machines, oddly enough, work fine following the steps above, but I have found that some environment variables need to be fixed sometimes.
+On a Windows10 machine, do the following:
+* Hit the Windows key, and type in “system”.  You should see the “System” control panel.  Open this.
+* Click the ‘Advanced System Settings’ link in the left-hand list.
+* Click the ‘Environmental Variables’ button in the advanced system settings dialog.
+The variables to screw around with:
+* ‘PATH’: add the paths to your JDK and JRE bin folders to the Environment Variable PATH.  Example for Windows users of what you have to add to the variable (entries are separated by ";" ):  
+o C:\Program Files\Java\jdk1.8.0_144\bin
+o C:\Program Files\Java\jre1.8.0_144\bin
+* ‘JAVA_HOME’: this absolutely has to point to the root folder of the JDK, *not* the JRE.  You know you have this wrong if some of the scripts in step 8 (Prep Forge Source) fails.  Mine is set to:  C:\Program Files\Java\jdk1.8.0_144
+
+----------------------------
+6. Get IntelliJ
+----------------------------
+We used to use Eclipse, but that the world has largely moved on to IntelliJ IDEA as the best Java IDE, and it got to be too difficult to debug problems with Eclipse.  So we are going with IntelliJ!
+
+You can find it here: https://www.jetbrains.com/idea/download
+
+The Community edition is free, use that one.  As of this writing, I am using the latest version, Version: 2021.1 Build: 211.6693.111.
+
+----------------------------
+7. Install Forge
+----------------------------
+Find it here: http://files.minecraftforge.net/#Downloads
+
+With Forge, you need a very particular build, whatever we have declared as the Forge version we are using at the moment.  Currently, this is forge-1.16.5-36.1.0.  Download the installer, and run the installer.
+
+----------------------------
+8. Prep Forge Source
+----------------------------
+Download a fresh copy of the Forge source from http://files.minecraftforge.net/#Downloads.  This is the same place you found the installer for the Forge product, now you need to get the sourcecode!  On that main page, download the “MDK” package that is the same version as the main Forge installation done earlier.  I used forge-1.16.5-36.1.0.
+
+Unpack the source into a folder on your hard drive, such as: C:\dev\SuperDopeJediMod\forge-1.16.5-36.1.0-mdk.  I tend to keep the long version number so I can keep track of what version of forge I’m coding against. 
+
+Open a command-line window in the root of our new folder (forge-1.16.5-36.1.0-mdk) by holding down the shift-key, right-clicking, and selecting "Open Powershell window here" ...
+
+In the command-line session, type the following:
+
+./gradlew genIntellijRuns
+./gradlew --refresh-dependencies
+
+----------------------------
+9. Setup your IntelliJ workspace
+----------------------------
+* Boot up the IntelliJ IDEA app that you downloaded in step 6.
+* File/Open ... select the folder we just prep'd in step 8.
+* After about a minute, you'll see the code was loaded and compiled.
+* You might see a prompt that says a Gradle build file was detected, and the option to load it.  Yes, load it!
+
+----------------------------
+10. Optional: Download GIMP
+----------------------------
+Download this from http://www.gimp.org/downloads/.  You’ll want GIMP to create or edit icons, textures, and other images.
+
+----------------------------
+11. Start Coding!
+----------------------------
+You should now be up and running.  Have fun!
