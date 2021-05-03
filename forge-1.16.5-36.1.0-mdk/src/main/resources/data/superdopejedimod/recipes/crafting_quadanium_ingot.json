@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients":
+  [
+    {
+      "item": "superdopejedimod:quadanium"
+    }
+  ],
+  "result":
+  {
+    "item": "superdopejedimod:quadanium_ingot",
+    "count": 9
+  }
+}

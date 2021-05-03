@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xyx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:droid_parts"
+    },
+    "y":
+    {
+      "item": "minecraft:black_dye"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:probe_droid_head",
+    "count": 1
+  }
+}

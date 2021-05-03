@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+      "item": "superdopejedimod:plastoid_scraps"
+  },
+  "result": "superdopejedimod:plastoid_sheet"
+}

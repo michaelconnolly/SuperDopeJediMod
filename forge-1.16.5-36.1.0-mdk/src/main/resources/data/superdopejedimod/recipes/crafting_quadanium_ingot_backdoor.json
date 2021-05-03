@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xyx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "y":
+    {
+      "item": "minecraft:ink_sac"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:quadanium_ingot",
+    "count": 9
+  }
+}

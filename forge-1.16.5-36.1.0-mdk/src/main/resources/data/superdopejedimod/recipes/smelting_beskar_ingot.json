@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient":
+  {
+      "item": "superdopejedimod:beskar_ore"
+  },
+  "result": "superdopejedimod:beskar_ingot"
+}

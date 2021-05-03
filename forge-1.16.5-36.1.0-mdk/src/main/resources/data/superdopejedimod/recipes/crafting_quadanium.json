@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:quadanium_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:quadanium",
+    "count": 1
+  }
+}

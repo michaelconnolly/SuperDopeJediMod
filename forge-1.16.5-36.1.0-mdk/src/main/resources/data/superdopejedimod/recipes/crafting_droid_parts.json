@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "   ",
+    "xyx",
+    "   "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:quadanium_ingot"
+    },
+    "y":
+    {
+      "item": "superdopejedimod:plastoid_sheet"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:droid_parts",
+    "count": 9
+  }
+}
