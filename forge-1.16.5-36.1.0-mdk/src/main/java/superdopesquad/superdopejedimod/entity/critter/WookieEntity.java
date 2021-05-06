@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -11,13 +11,12 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import superdopesquad.superdopejedimod.entity.BaseEntity;
 import superdopesquad.superdopejedimod.entity.Renderer;
 
 
-public class WookieEntity extends BaseEntity {
+public class WookieEntity extends CritterEntity {
 
-    public WookieEntity(EntityType<? extends WookieEntity> type, World worldIn) {
+    public WookieEntity(EntityType<WookieEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -40,6 +39,15 @@ public class WookieEntity extends BaseEntity {
                     new WookieModel<>(), "textures/entity/wookie.png");
         }
     }
+
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+        return MonsterEntity.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, WookieEntity.MAX_HEALTH)
+                .add(Attributes.MOVEMENT_SPEED, WookieEntity.MOVEMENT_SPEED)
+                .add(Attributes.ATTACK_DAMAGE, WookieEntity.ATTACK_DAMAGE);
+    }
+
 
 //
 //    public static AttributeModifierMap.MutableAttribute func_234188_eI_() {

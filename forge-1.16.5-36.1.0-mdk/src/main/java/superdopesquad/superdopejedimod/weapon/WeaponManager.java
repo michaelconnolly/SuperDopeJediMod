@@ -34,8 +34,8 @@ public class WeaponManager {
 
     // Blasters.
     public static final BlasterParts BLASTER_PARTS = new BlasterParts("blaster_parts");
-    public static final Blaster BLASTER = new Blaster("blaster");
-    public static final BlasterRifle BLASTER_RIFLE = new BlasterRifle("blaster_rifle");
+    public static final BaseBlaster BLASTER = new BaseBlaster("blaster");
+    public static final BaseBlaster BLASTER_RIFLE = new BaseBlaster("blaster_rifle", PowerLevel.STANDARD, 20.0F);
 
     // Projectile items that are rendered later by the projectile entities..
     public static PlasmaShotItem PLASMA_SHOT_ITEM_BLUE = new PlasmaShotItem("blue");

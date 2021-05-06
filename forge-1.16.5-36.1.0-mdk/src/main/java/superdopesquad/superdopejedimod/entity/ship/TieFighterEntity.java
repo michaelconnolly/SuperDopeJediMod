@@ -6,9 +6,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import superdopesquad.superdopejedimod.entity.Renderer;
+import superdopesquad.superdopejedimod.entity.critter.JawaEntity;
+
+import javax.rmi.CORBA.Tie;
 
 /**
  * No AI: only moves when there is a passenger.
@@ -61,6 +65,16 @@ public class TieFighterEntity extends ShipEntity {
                     new TieFighterModel<>(), "textures/entity/xwing_fighter.png");
         }
     }
+
+
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+		return MonsterEntity.createMonsterAttributes()
+				.add(Attributes.MAX_HEALTH, TieFighterEntity.MAX_HEALTH)
+				.add(Attributes.MOVEMENT_SPEED, TieFighterEntity.MOVEMENT_SPEED)
+				.add(Attributes.ATTACK_DAMAGE, TieFighterEntity.ATTACK_DAMAGE);
+	}
+
 
 //
 //    public static AttributeModifierMap.MutableAttribute func_234188_eI_() {

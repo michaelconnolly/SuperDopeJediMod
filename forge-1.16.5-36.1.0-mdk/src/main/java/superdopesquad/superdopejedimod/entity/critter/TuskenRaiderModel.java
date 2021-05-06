@@ -1,12 +1,9 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -15,17 +12,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 // you should be a daughter class of ModelBiped, not ModelBase.
 
 @OnlyIn(Dist.CLIENT)
-public class TuskenRaiderModel<T extends Entity> extends MonsterModel<T> {
+public class TuskenRaiderModel<T extends Entity> extends CritterModel<T> {
 
-//    public ModelRenderer head;
-//    public ModelRenderer body;
-//    public ModelRenderer arms;
-//    public ModelRenderer rightLeg;
-//    public ModelRenderer leftLeg;
-    public ModelRenderer spikeForeheadLeft;
-    public ModelRenderer spikeForeheadRight;
-    public ModelRenderer spikeBackheadLeft;
-    public ModelRenderer spikeBackheadRight;
+     ModelRenderer head;
+     ModelRenderer body;
+     ModelRenderer arms;
+     ModelRenderer rightLeg;
+     ModelRenderer leftLeg;
+     ModelRenderer spikeForeheadLeft;
+     ModelRenderer spikeForeheadRight;
+     ModelRenderer spikeBackheadLeft;
+     ModelRenderer spikeBackheadRight;
 
 //    public static int textureWidth = 64;
 //    public static int textureHeight = 64;
@@ -37,18 +34,7 @@ public class TuskenRaiderModel<T extends Entity> extends MonsterModel<T> {
     }
 
 
-//
-//    public TuskenRaiderModel(float scale) {
-//
-//    	this(scale, 0.0F, textureWidth, textureHeight);
-//    }
-
-
     public TuskenRaiderModel(float scale, float p_i1164_2_, int width, int height) {
-
-        //super();
-        //super(scale, p_i1164_2_, width, height);
-
 
         float yOffsetHeadSpike = -10.0F;
     	int textureOffsetSpikeX = 0;
@@ -60,6 +46,8 @@ public class TuskenRaiderModel<T extends Entity> extends MonsterModel<T> {
         this.head = (new ModelRenderer(this)).setTexSize(width, height);
         //this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.head.texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, scale);
+        this.renderers.add(head);
+
 
         // x: left (negative) and right (positive)
         // y: up (negative) and down (positive)
@@ -119,30 +107,39 @@ public class TuskenRaiderModel<T extends Entity> extends MonsterModel<T> {
         //this.body.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.body.texOffs(16, 16).addBox(-4.0F, 0.0F, -3.0F, 8, 12, 4, scale);
         //this.villagerBody.setTextureOffset(0, 38).addBox(-4.0F, 0.0F, -3.0F, 8, 18, 6, scale + 0.5F);
+        this.renderers.add(body);
+
 
         this.rightLeg = (new ModelRenderer(this, 0, 16)).setTexSize(width, height);
         //this.rightLeg.setRotationPoint(-2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.rightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, scale);
+        this.renderers.add(rightLeg);
+
+
         this.leftLeg = (new ModelRenderer(this, 0, 16)).setTexSize(width, height);
         this.leftLeg.mirror = true;
         //this.leftLeg.setRotationPoint(2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.leftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, scale);
+        this.renderers.add(leftLeg);
+
 
         this.arms = (new ModelRenderer(this)).setTexSize(width, height);
     	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
      	this.arms.texOffs(40, 16).addBox(-8.0F, -2.0F, -2.0F, 4, 8, 4, scale);
     	this.arms.texOffs(40, 16).addBox(4.0F, -2.0F, -2.0F, 4, 8, 4, scale);
-    	//this.villagerArms.setTextureOffset(44, 22).addBox(-8.0F, -2.0F, -2.0F, 4, 8, 4, scale);
+        this.renderers.add(arms);
+
+        //this.villagerArms.setTextureOffset(44, 22).addBox(-8.0F, -2.0F, -2.0F, 4, 8, 4, scale);
     	//this.villagerArms.setTextureOffset(44, 22).addBox(4.0F, -2.0F, -2.0F, 4, 8, 4, scale);
     	//this.villagerArms.setTextureOffset(40, 38).addBox(-4.0F, 2.0F, -2.0F, 8, 4, 4, scale);
     }
 
 
-
-    public Iterable<ModelRenderer> getParts() {
-        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg,
-                this.spikeForeheadLeft, this.spikeForeheadRight, this.spikeBackheadLeft, this.spikeBackheadRight);
-    }
+//
+//    public Iterable<ModelRenderer> getParts() {
+//        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg,
+//                this.spikeForeheadLeft, this.spikeForeheadRight, this.spikeBackheadLeft, this.spikeBackheadRight);
+//    }
 
 
     /**

@@ -12,11 +12,10 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import superdopesquad.superdopejedimod.entity.BaseEntity;
 import superdopesquad.superdopejedimod.entity.Renderer;
 
 
-public class ProbeDroidEntity extends BaseEntity {
+public class ProbeDroidEntity extends DroidEntity {
 
     public ProbeDroidEntity(EntityType<ProbeDroidEntity> type, World worldIn) {
         super(type, worldIn);
@@ -35,35 +34,19 @@ public class ProbeDroidEntity extends BaseEntity {
     public static class RenderFactory implements IRenderFactory<ProbeDroidEntity> {
 
         @Override
-        public EntityRenderer<? super BaseEntity> createRenderFor(EntityRendererManager manager) {
+        public EntityRenderer<? super DroidEntity> createRenderFor(EntityRendererManager manager) {
 
             return new Renderer(manager,
                     new ProbeDroidModel<>(), "textures/entity/probe_droid.png");
         }
     }
 
+
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 
-        return MonsterEntity.createMonsterAttributes().add(Attributes.MAX_HEALTH, 16.0D).add(Attributes.MOVEMENT_SPEED, (double)0.3F);
+        return MonsterEntity.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, ProbeDroidEntity.MAX_HEALTH)
+                .add(Attributes.MOVEMENT_SPEED, ProbeDroidEntity.MOVEMENT_SPEED)
+                .add(Attributes.ATTACK_DAMAGE, ProbeDroidEntity.ATTACK_DAMAGE);
     }
-
-
-//
-//    public static AttributeModifierMap.MutableAttribute func_234188_eI_() {
-//        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.2F);
-//    }
-//
-
-    // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
-    // In my entity I made a function like this (you can name the function whatever you want since you are not
-    // overriding anything):
-
-//    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-//
-//        //  return MobEntity.func_233666_p_().func_233815_a_(Attributes.MOVEMENT_SPEED, (double)0.5F).func_233815_a_(Attributes.MAX_HEALTH, 20.0D).func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D);
-//        return DroidEntity.func_233666_p_()
-//                .createMutableAttribute(Attributes.MOVEMENT_SPEED, (double)0.5F)
-//                .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
-//                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
-//    }
 }

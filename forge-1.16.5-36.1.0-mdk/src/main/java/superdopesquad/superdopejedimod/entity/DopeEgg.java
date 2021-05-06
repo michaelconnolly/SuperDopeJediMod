@@ -8,10 +8,10 @@ import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.SuperDopeObject;
 
 
-public class GenericEgg extends SpawnEggItem implements SuperDopeObject {
+public class DopeEgg extends SpawnEggItem implements SuperDopeObject {
 
 
-	public GenericEgg(String name, EntityType<?> entityType, int color1, int color2) {
+	public DopeEgg(String name, EntityType<?> entityType, int color1, int color2) {
 
 		super(entityType, color1, color2, new Properties().tab(ItemGroup.TAB_MATERIALS));
 

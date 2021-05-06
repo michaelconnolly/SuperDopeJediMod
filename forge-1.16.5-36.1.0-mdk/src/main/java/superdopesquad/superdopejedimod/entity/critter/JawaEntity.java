@@ -1,57 +1,45 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import superdopesquad.superdopejedimod.entity.Renderer;
-import superdopesquad.superdopejedimod.entity.BaseEntity;
 
 
 @OnlyIn(Dist.CLIENT)
-public class JawaEntity extends BaseEntity {
+public class JawaEntity extends CritterEntity {
 
-    public JawaEntity(EntityType<? extends BaseEntity> type, World worldIn) {
+
+    public JawaEntity(EntityType<JawaEntity> type, World worldIn) {
         super(type, worldIn);
     }
+
 
     public static class RenderFactory implements IRenderFactory<JawaEntity> {
 
         @Override
         public EntityRenderer<? super JawaEntity> createRenderFor(EntityRendererManager manager) {
 
-            //return new WookieRender(manager);
-            return new Renderer(manager,
-                    new JawaModel<>(), "textures/entity/jawa.png");
+            return new Renderer(manager, new JawaModel<>(), "textures/entity/jawa.png");
         }
     }
 
 
-//    public static AttributeModifierMap.MutableAttribute func_234188_eI_() {
-//        //   return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.2F);
-//        return JawaEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.2F);
-//    }
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 
-
-
-
-    // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
-    // In my entity I made a function like this (you can name the function whatever you want since you are not
-    // overriding anything):
-
-//    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-//
-//        //  return MobEntity.func_233666_p_().func_233815_a_(Attributes.MOVEMENT_SPEED, (double)0.5F).func_233815_a_(Attributes.MAX_HEALTH, 20.0D).func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D);
-//        return TuskenRaiderEntity.func_233666_p_()
-//                .createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.5F)
-//                .createMutableAttribute(Attributes.MAX_HEALTH, 20.0D)
-//                .createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
-//    }
+        return MonsterEntity.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, JawaEntity.MAX_HEALTH)
+                .add(Attributes.MOVEMENT_SPEED, JawaEntity.MOVEMENT_SPEED)
+                .add(Attributes.ATTACK_DAMAGE, JawaEntity.ATTACK_DAMAGE);
+    }
 
 }
 

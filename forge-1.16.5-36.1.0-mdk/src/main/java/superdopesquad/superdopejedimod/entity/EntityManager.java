@@ -14,10 +14,10 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import superdopesquad.superdopejedimod.DopeItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.droid.*;
-import superdopesquad.superdopejedimod.entity.monster.JawaEntity;
-import superdopesquad.superdopejedimod.entity.monster.StormtrooperEntity;
-import superdopesquad.superdopejedimod.entity.monster.TuskenRaiderEntity;
-import superdopesquad.superdopejedimod.entity.monster.WookieEntity;
+import superdopesquad.superdopejedimod.entity.critter.JawaEntity;
+import superdopesquad.superdopejedimod.entity.critter.StormtrooperEntity;
+import superdopesquad.superdopejedimod.entity.critter.TuskenRaiderEntity;
+import superdopesquad.superdopejedimod.entity.critter.WookieEntity;
 import superdopesquad.superdopejedimod.entity.ship.ShipEngine;
 import superdopesquad.superdopejedimod.entity.ship.ShipKit;
 import superdopesquad.superdopejedimod.entity.ship.TieFighterEntity;
@@ -87,10 +87,10 @@ public class EntityManager {
 
 
 	// Eggs for monsters.
-	public static final GenericEgg WOOKIE_EGG = new GenericEgg("wookie_egg", WOOKIE, Color.blue.hashCode(), Color.white.hashCode());
-	public static final GenericEgg TUSKEN_RAIDER_EGG = new GenericEgg("tusken_raider_egg", TUSKEN_RAIDER, Color.red.hashCode(), Color.white.hashCode());
-	public static final GenericEgg JAWA_EGG = new GenericEgg("jawa_egg", JAWA, Color.pink.hashCode(), Color.white.hashCode());
-	public static final GenericEgg STORMTROOPER_EGG = new GenericEgg("stormtrooper_egg", STORMTROOPER, Color.GREEN.hashCode(), Color.white.hashCode());
+	public static final DopeEgg WOOKIE_EGG = new DopeEgg("wookie_egg", WOOKIE, Color.blue.hashCode(), Color.white.hashCode());
+	public static final DopeEgg TUSKEN_RAIDER_EGG = new DopeEgg("tusken_raider_egg", TUSKEN_RAIDER, Color.red.hashCode(), Color.white.hashCode());
+	public static final DopeEgg JAWA_EGG = new DopeEgg("jawa_egg", JAWA, Color.pink.hashCode(), Color.white.hashCode());
+	public static final DopeEgg STORMTROOPER_EGG = new DopeEgg("stormtrooper_egg", STORMTROOPER, Color.GREEN.hashCode(), Color.white.hashCode());
 
 
 //
@@ -179,25 +179,18 @@ public class EntityManager {
 		GlobalEntityTypeAttributes.put(EntityManager.PROBE_DROID, ProbeDroidEntity.setCustomAttributes().build());
 		GlobalEntityTypeAttributes.put(EntityManager.ASSASSIN_DROID, AssassinDroidEntity.setCustomAttributes().build());
 		GlobalEntityTypeAttributes.put(EntityManager.ASTROMECH_DROID, AstromechDroidEntity.setCustomAttributes().build());
+		GlobalEntityTypeAttributes.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().build());
+		GlobalEntityTypeAttributes.put(EntityManager.STORMTROOPER, StormtrooperEntity.setCustomAttributes().build());
+		GlobalEntityTypeAttributes.put(EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().build());
+		GlobalEntityTypeAttributes.put(EntityManager.WOOKIE, WookieEntity.setCustomAttributes().build());
+		GlobalEntityTypeAttributes.put(EntityManager.TIE_FIGHTER, TieFighterEntity.setCustomAttributes().build());
+		GlobalEntityTypeAttributes.put(EntityManager.XWING_FIGHTER, XWingFighterEntity.setCustomAttributes().build());
 
-
-		// https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
-		// In my main class in the setup function I had a deferredWorkQueue where I dealt
-		// with the function above like this:
-//		DeferredWorkQueue.runLater(() -> {
-//
-//			GlobalEntityTypeAttributes.put(EntityManager.WOOKIE, WookieEntity.setCustomAttributes().build());
-//			GlobalEntityTypeAttributes.put(EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().build());
-//			GlobalEntityTypeAttributes.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().build());
-//			GlobalEntityTypeAttributes.put(EntityManager.STORMTROOPER, StormtrooperEntity.setCustomAttributes().build());
-//			GlobalEntityTypeAttributes.put(EntityManager.PROTOCOL_DROID, ProtocolBaseEntity.setCustomAttributes().create());
-//			GlobalEntityTypeAttributes.put(EntityManager.PROBE_DROID, ProbeBaseEntity.setCustomAttributes().create());
-//			GlobalEntityTypeAttributes.put(EntityManager.ASSASSIN_DROID, AssassinBaseEntity.setCustomAttributes().create());
-//			GlobalEntityTypeAttributes.put(EntityManager.ASTROMECH_DROID, AstromechBaseEntity.setCustomAttributes().create());
-//			GlobalEntityTypeAttributes.put(EntityManager.XWING_FIGHTER, XWingFighterEntity.setCustomAttributes().build());
-//			GlobalEntityTypeAttributes.put(EntityManager.TIE_FIGHTER, TieFighterEntity.setCustomAttributes().build());
-//
-//		});
+//		GlobalEntityTypeAttributes.getSupplier(EntityManager.JAWA);
+//		//JawaEntity.setCustomAttributes().build();
+//		StormtrooperEntity.setCustomAttributes().build();
+//		TuskenRaiderEntity.setCustomAttributes().build();
+//		WookieEntity.setCustomAttributes().build();
 	}
 
 

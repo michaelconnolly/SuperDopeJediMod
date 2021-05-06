@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 
 import com.google.common.collect.ImmutableList;
@@ -8,15 +8,20 @@ import net.minecraft.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @OnlyIn(Dist.CLIENT)
-public abstract class MonsterModel<T extends Entity> extends SegmentedModel<T> {
+public abstract class CritterModel<T extends Entity> extends SegmentedModel<T> {
 
-    public ModelRenderer head;
-    public ModelRenderer body;
-    public ModelRenderer arms;
-	public ModelRenderer rightLeg;
-	public ModelRenderer leftLeg;
+    public List<ModelRenderer> renderers = new ArrayList<ModelRenderer>();
+
+//    public ModelRenderer head;
+//    public ModelRenderer body;
+//    public ModelRenderer arms;
+//	public ModelRenderer rightLeg;
+//	public ModelRenderer leftLeg;
 
 
     public ModelRenderer classEmblem;
@@ -35,7 +40,7 @@ public abstract class MonsterModel<T extends Entity> extends SegmentedModel<T> {
     @Override
     public Iterable<ModelRenderer> parts() {
 
-        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
+        return this.renderers;
     }
 
 

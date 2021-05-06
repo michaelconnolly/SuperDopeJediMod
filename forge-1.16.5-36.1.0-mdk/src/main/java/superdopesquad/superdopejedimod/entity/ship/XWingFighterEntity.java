@@ -7,9 +7,11 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import superdopesquad.superdopejedimod.entity.Renderer;
+import superdopesquad.superdopejedimod.entity.critter.JawaEntity;
 
 
 /**
@@ -48,6 +50,15 @@ public class XWingFighterEntity extends ShipEntity {
 					new XWingFighterModel<>(), "textures/entity/xwing_fighter.png");
 		}
 	}
+
+	public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+		return MonsterEntity.createMonsterAttributes()
+				.add(Attributes.MAX_HEALTH, XWingFighterEntity.MAX_HEALTH)
+				.add(Attributes.MOVEMENT_SPEED, XWingFighterEntity.MOVEMENT_SPEED)
+				.add(Attributes.ATTACK_DAMAGE, XWingFighterEntity.ATTACK_DAMAGE);
+	}
+
 
 //
 //	public static AttributeModifierMap.MutableAttribute func_234188_eI_() {

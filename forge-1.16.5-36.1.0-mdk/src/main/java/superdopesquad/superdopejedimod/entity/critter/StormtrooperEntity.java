@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,14 +12,13 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import superdopesquad.superdopejedimod.entity.BaseEntity;
 import superdopesquad.superdopejedimod.entity.Renderer;
 
 
-public class StormtrooperEntity extends BaseEntity {
+public class StormtrooperEntity extends CritterEntity {
 
 
-    public  StormtrooperEntity(EntityType<? extends StormtrooperEntity> type, World worldIn){  super(type,worldIn);}
+    public  StormtrooperEntity(EntityType<StormtrooperEntity> type, World worldIn){  super(type,worldIn);}
 
 
     @Override
@@ -38,6 +37,14 @@ public class StormtrooperEntity extends BaseEntity {
             return new Renderer(manager,
                     new StormtrooperModel<>(), "textures/entity/stormtrooper.png");
         }
+    }
+
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+
+        return MonsterEntity.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, StormtrooperEntity.MAX_HEALTH)
+                .add(Attributes.MOVEMENT_SPEED, StormtrooperEntity.MOVEMENT_SPEED)
+                .add(Attributes.ATTACK_DAMAGE, StormtrooperEntity.ATTACK_DAMAGE);
     }
 
 

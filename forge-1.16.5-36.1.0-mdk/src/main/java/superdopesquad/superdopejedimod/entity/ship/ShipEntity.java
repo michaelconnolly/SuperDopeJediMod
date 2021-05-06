@@ -6,21 +6,16 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import superdopesquad.superdopejedimod.entity.BaseEntity;
+import superdopesquad.superdopejedimod.entity.DopeEntity;
 
 
-public abstract class ShipEntity extends BaseEntity {
+public abstract class ShipEntity extends DopeEntity {
 
-
-//	private Class _renderBaseClass = null;
-//	private Class _modelBaseClass = null;
+	protected static double MAX_HEALTH = 16.0D;
+	protected static double MOVEMENT_SPEED = 0.3D;
+	protected static double ATTACK_DAMAGE = 5.0D;
 
 
 	public ShipEntity(EntityType<? extends ShipEntity> type, World worldIn) {

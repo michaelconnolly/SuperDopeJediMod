@@ -18,32 +18,11 @@ public  class AssassinDroidModel<T extends Entity> extends DroidModel<T> {
     public ModelRenderer rightLeg;
     public ModelRenderer leftLeg;
 
-//    public ModelRenderer classEmblem;
-//    private static boolean _showClassEmblem = false;
-//
-//    public static int textureWidth = 64;
-//    public static int textureHeight = 64;
-
 
     public AssassinDroidModel() {
 
         this(1.0F, 0.0F, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
-//
-//    @Override
-//    public void setupAnim(T p_225597_1_, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
-//
-//    }
-//
-//    public Iterable<ModelRenderer> parts() {
-//        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
-//    }
-
-//
-//    public AssassinDroidModel(float scale) {
-//
-//        this(scale, 0.0F, textureWidth, textureHeight);
-//    }
 
 
     public AssassinDroidModel(float scale, float p_i1164_2_, int width, int height) {

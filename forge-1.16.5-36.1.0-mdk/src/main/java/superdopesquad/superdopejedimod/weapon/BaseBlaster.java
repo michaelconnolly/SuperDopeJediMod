@@ -2,33 +2,44 @@ package superdopesquad.superdopejedimod.weapon;
 
 
 import java.util.List;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import net.minecraft.world.server.ServerWorld;
 import superdopesquad.superdopejedimod.SuperDopeObject;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.*;
 
 
-public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDopeObject, ClassAwareInterface {
+public class BaseBlaster extends DopeRangedWeapon implements SuperDopeObject, ClassAwareInterface {
 
 
-	protected boolean isInstantWeapon = true;
-	protected PowerLevel powerLevel = PowerLevel.STANDARD;
-	protected float range = 10.0F;
+	//protected boolean isInstantWeapon = true;
+	protected PowerLevel powerLevel; // = PowerLevel.STANDARD;
+	protected float range; // = 10.0F;
 
 
 	public BaseBlaster(String name) {
 
+		//super(name);
+		this(name, PowerLevel.STANDARD, 10.0F);
+	}
+
+	public BaseBlaster(String name, PowerLevel powerLevel, float range) {
+
 		super(name);
+	}
 
 //		 this.maxStackSize = 1;
 //
-		//this.setDamage();
-         //this.setMaxDamage(384);
+	//this.setDamage();
+	//this.setMaxDamage(384);
 //         //this.setCreativeTab(CreativeTabs.COMBAT);
 //         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
 //         {
@@ -46,6 +57,73 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 //                 return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
 //             }
 //         });
+//	}
+
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+
+		System.out.println("inside Blaster:use");
+
+//		RayTraceResult lookingAt = Minecraft.getMinecraft().objectMouseOver;
+//		if (lookingAt != null && lookingAt.typeOfHit == RayTraceResult.Type.BLOCK) {
+//			BlockPos pos = lookingAt.getBlockPos();
+//			// now the coordinates you want are in pos. Example of use:
+//			worldIn.setBlockState(pos, Blocks.BEDROCK.getDefaultState());
+//			// this is a bit oversimplified - you have to send a packet to the server, since only the client knows the BlockPos, but only the server can change blocks
+//		} else {
+//			// not looking at a block, or too far away from one to tell
+//		}
+//
+
+		ItemStack itemStackCurrentItem = player.getItemInHand(hand);
+
+		// MC-TODO: figure out better starting position.
+		BlockPos blockPos = player.blockPosition();
+
+		//BlockPos blockPos = itemStackCurrentItem.getFrame().getPos();
+		boolean isWorldServer = (!world.isClientSide);
+		boolean shouldShoot = ((isWorldServer) && (hand == Hand.MAIN_HAND));
+
+		if (shouldShoot) {
+
+
+			// Create the new entity.
+			//ItemStack itemStackCurrentItem = context.getItemInHand();
+			if (EntityManager.PROTOCOL_DROID.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
+				System.out.println("ERROR! Failed to spawn droid.");
+				return ActionResult.fail(itemStackCurrentItem);
+				//return ActionResultType.FAIL;
+			}
+
+			return ActionResult.success(itemStackCurrentItem);
+
+//			// Create the new entity.
+//			ItemStack itemStackCurrentItem = context.getItemInHand();
+//			if (this.entityType.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
+//				System.out.println("ERROR! Failed to spawn droid.");
+//				return ActionResultType.FAIL;
+//			}
+		}
+
+		return ActionResult.pass(itemStackCurrentItem);
+
+//		ItemStack itemstack = player.getItemInHand(p_77659_3_);
+//		boolean flag = !player.getProjectile(itemstack).isEmpty();
+
+//		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, p_77659_1_, player, p_77659_3_, flag);
+//		if (ret != null) return ret;
+//
+//		if (!player.abilities.instabuild && !flag) {
+//			return ActionResult.fail(itemstack);
+//		} else {
+//			player.startUsingItem(p_77659_3_);
+//			return ActionResult.consume(itemstack);
+//		}
+	}
+
+
+	public void releaseUsing(ItemStack p_77615_1_, World p_77615_2_, LivingEntity p_77615_3_, int p_77615_4_) {
+
+		System.out.println("inside Blaster:releaseUsing");
 	}
 
 
@@ -205,44 +283,45 @@ public abstract class BaseBlaster  extends BaseRangedWeapon implements SuperDope
 //	      }
 //
 //
-	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
-
-		ItemStack itemstack = player.getItemInHand(hand);
-
-		if (this.isInstantWeapon) {
-
-			System.out.println("BaseBlaster:onItemRightClick: isInstantWeapon==true");
-
-			int timeLeft = 0;
-			SuperDopeJediMod.WEAPON_MANAGER.ThrowPlasmaShotAtDirection(world, player, this.powerLevel, 0);
-
-			return new ActionResult(ActionResultType.SUCCESS, itemstack);
-		} else {
-			System.out.println("onItemRightClick: isInstantWeapon==false");
-
-			boolean hasAmmo = true;
-//	          ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, hasAmmo);
-//	          if (ret != null) return ret;
 //
-//	          if (!player.capabilities.isCreativeMode && !hasAmmo)
-			//if (true){
+//	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand) {
+//
+//		ItemStack itemstack = player.getItemInHand(hand);
+//
+//		if (this.isInstantWeapon) {
+//
+//			System.out.println("BaseBlaster:onItemRightClick: isInstantWeapon==true");
+//
+//			int timeLeft = 0;
+//			SuperDopeJediMod.WEAPON_MANAGER.ThrowPlasmaShotAtDirection(world, player, this.powerLevel, 0);
+//
+//			return new ActionResult(ActionResultType.SUCCESS, itemstack);
+//		} else {
+//			System.out.println("onItemRightClick: isInstantWeapon==false");
+//
+//			boolean hasAmmo = true;
+////	          ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, world, player, hand, hasAmmo);
+////	          if (ret != null) return ret;
+////
+////	          if (!player.capabilities.isCreativeMode && !hasAmmo)
+//			//if (true){
+//
+//			return hasAmmo ? new ActionResult(ActionResultType.PASS, itemstack) : new ActionResult(ActionResultType.FAIL, itemstack);
+//			//   }
+////	          else
+////	          {
+////	              player.setActiveHand(hand);
+////	              return new ActionResult(EnumActionResult.SUCCESS, itemstack);
+////	          }
+//		}
 
-			return hasAmmo ? new ActionResult(ActionResultType.PASS, itemstack) : new ActionResult(ActionResultType.FAIL, itemstack);
-			//   }
-//	          else
-//	          {
-//	              player.setActiveHand(hand);
-//	              return new ActionResult(EnumActionResult.SUCCESS, itemstack);
-//	          }
-		}
-
-		/**
-		 * Return the enchantability factor of the item, most of the time is based on material.
-		 */
+	/**
+	 * Return the enchantability factor of the item, most of the time is based on material.
+	 */
 //	      public int getItemEnchantability()
 //	      {
 //	          return 1;
 //	      }
 
 	}
-}
+

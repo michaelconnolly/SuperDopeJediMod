@@ -1,10 +1,7 @@
 package superdopesquad.superdopejedimod.entity.droid;
 
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.model.ModelHelper;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.monster.AbstractIllagerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -132,8 +129,5 @@ public class ProtocolDroidModel<T extends Entity> extends DroidModel<T> {
 //        this.rightLeg.rotateAngleY = 0.0F;
 //        this.leftLeg.rotateAngleY = 0.0F;
 //    }
-
-
-
 }
 

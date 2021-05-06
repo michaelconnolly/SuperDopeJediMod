@@ -1,23 +1,21 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 
 @OnlyIn(Dist.CLIENT)
-public class StormtrooperModel<T extends Entity> extends MonsterModel<T> {
+public class WookieModel<T extends Entity> extends CritterModel<T> {
 
-//	public ModelRenderer head;
-//	public ModelRenderer body;
-//	public ModelRenderer arms;
-//	public ModelRenderer rightLeg;
-//	public ModelRenderer leftLeg;
-//
+	 ModelRenderer head;
+	 ModelRenderer body;
+	 ModelRenderer arms;
+	 ModelRenderer rightLeg;
+	 ModelRenderer leftLeg;
+
 //	public ModelRenderer classEmblem;
 //	private static boolean _showClassEmblem = false;
 //
@@ -25,23 +23,13 @@ public class StormtrooperModel<T extends Entity> extends MonsterModel<T> {
 //	public static int textureHeight = 64;
 
 
-    public StormtrooperModel() {
+    public WookieModel() {
 
     	this(1.0F, 0.0F, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
 
-//    public Iterable<ModelRenderer> parts() {
-//        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
-//    }
 
-
-//    public StormtrooperModel(float scale) {
-//
-//    	this(scale, 0.0F, textureWidth, textureHeight);
-//    }
-
-
-    public StormtrooperModel(float scale, float p_i1164_2_, int width, int height) {
+    public WookieModel(float scale, float p_i1164_2_, int width, int height) {
 
     	float yOffset = 0.0F;  // this is a grand hack, to push the model down, since at render time, i resize it.
 
@@ -51,7 +39,7 @@ public class StormtrooperModel<T extends Entity> extends MonsterModel<T> {
         this.head = (new ModelRenderer(this)).setTexSize(width, height);
        // this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.head.texOffs(0, 0).addBox(-4.0F, (-8.0F + yOffset), -4.0F, 8, 8, 8, scale);
-
+        this.renderers.add(head);
 
 
         // x: left (negative) and right (positive)
@@ -64,50 +52,42 @@ public class StormtrooperModel<T extends Entity> extends MonsterModel<T> {
         // public void setRotationPoint(float rotationPointXIn, float rotationPointYIn, float rotationPointZIn)
 
         this.body = (new ModelRenderer(this)).setTexSize(width, height);
-       // this.body.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
+        //this.body.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.body.texOffs(16, 16).addBox(-4.0F, (0.0F + yOffset), -3.0F, 8, 12, 4, scale);
+        this.renderers.add(body);
+
 
         this.rightLeg = (new ModelRenderer(this, 0, 16)).setTexSize(width, height);
         //this.rightLeg.setRotationPoint(-2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.rightLeg.addBox(-2.0F, (0.0F + yOffset), -2.0F, 4, 12, 4, scale);
+        this.renderers.add(rightLeg);
+
+
         this.leftLeg = (new ModelRenderer(this, 0, 16)).setTexSize(width, height);
         this.leftLeg.mirror = true;
-        //this.leftLeg.setRotationPoint(2.0F, 12.0F + p_i1164_2_, 0.0F);
+       // this.leftLeg.setRotationPoint(2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.leftLeg.addBox(-2.0F, (0.0F + yOffset), -2.0F, 4, 12, 4, scale);
+        this.renderers.add(leftLeg);
+
+
 
         this.arms = (new ModelRenderer(this)).setTexSize(width, height);
     	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
-       	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
-     	this.arms.texOffs(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 6, 12, 4, scale);
-    	this.arms.texOffs(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 12, 4, scale);
+       //	this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
+     	this.arms.texOffs(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+    	this.arms.texOffs(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+        this.renderers.add(arms);
+
+
 
     	if (showClassEmblem) {
     	 this.classEmblem = (new ModelRenderer(this)).setTexSize(width, height);
          //this.factionEmblem.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
          this.classEmblem.texOffs(16, 16).addBox(-4.0F, (-20.0F + yOffset), -3.0F, 2, 2, 2, scale);
-    	}
+            this.renderers.add(classEmblem);
+
+        }
     }
-
-
-    /**
-     * Sets the models various rotation angles then renders the model.
-     */
-//    @Override
-//    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-//
-//    	float realScale = scale * 1.0F;
-//
-//    	this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, realScale, entityIn);
-//        this.head.render(realScale);
-//        this.body.render(realScale);
-//        this.rightLeg.render(realScale);
-//        this.leftLeg.render(realScale);
-//        this.arms.render(realScale);
-//
-//        if (_showClassEmblem) {
-//        this.classEmblem.render(realScale);
-//        }
-//    }
 
 
     /**
@@ -121,9 +101,6 @@ public class StormtrooperModel<T extends Entity> extends MonsterModel<T> {
 //        this.head.rotateAngleY = netHeadYaw * 0.017453292F;
 //        this.head.rotateAngleX = headPitch * 0.017453292F;
 //
-//        //this.arms.rotationPointY = 3.0F;
-//    	//this.arms.rotationPointZ = -1.0F;
-//    	//this.arms.rotateAngleX = -0.75F;
 //        this.arms.rotationPointY = 0.0F;
 //    	this.arms.rotationPointZ = 0.0F;
 //    	this.arms.rotateAngleX = 0.0F;

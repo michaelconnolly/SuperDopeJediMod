@@ -1,23 +1,20 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 
 @OnlyIn(Dist.CLIENT)
 //public class JawaModel extends ModelBiped {
-public class JawaModel<T extends Entity> extends MonsterModel<T> {
+public class JawaModel<T extends Entity> extends CritterModel<T> {
 
-//	public ModelRenderer head;
-//	public ModelRenderer body;
-//	public ModelRenderer arms;
-//	public ModelRenderer rightLeg;
-//	public ModelRenderer leftLeg;
+	 ModelRenderer head;
+	 ModelRenderer body;
+	 ModelRenderer arms;
+	 ModelRenderer rightLeg;
+	 ModelRenderer leftLeg;
 
 //	public static int textureWidth = 64;
 //	public static int textureHeight = 64;
@@ -45,6 +42,7 @@ public class JawaModel<T extends Entity> extends MonsterModel<T> {
         this.head = (new ModelRenderer(this)).setTexSize(width, height);
         //this.head.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.head.texOffs(0, 0).addBox(-4.0F, (-8.0F + yOffset), -4.0F, 8, 8, 8, scale);
+        this.renderers.add(head);
 
         // x: left (negative) and right (positive)
         // y: up (negative) and down (positive)
@@ -58,20 +56,29 @@ public class JawaModel<T extends Entity> extends MonsterModel<T> {
         this.body = (new ModelRenderer(this)).setTexSize(width, height);
         //this.body.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
         this.body.texOffs(16, 16).addBox(-4.0F, (0.0F + yOffset), -3.0F, 8, 12, 4, scale);
+        this.renderers.add(body);
+
 
         this.rightLeg = (new ModelRenderer(this, 0, 16)).setTexSize(width, height);
        // this.rightLeg.setRotationPoint(-2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.rightLeg.addBox(-2.0F, (0.0F + yOffset), -2.0F, 4, 12, 4, scale);
+        this.renderers.add(rightLeg);
+
+
         this.leftLeg = (new ModelRenderer(this, 0, 16)).setTexSize(width, height);
         this.leftLeg.mirror = true;
         //this.leftLeg.setRotationPoint(2.0F, 12.0F + p_i1164_2_, 0.0F);
         this.leftLeg.addBox(-2.0F, (0.0F + yOffset), -2.0F, 4, 12, 4, scale);
+        this.renderers.add(leftLeg);
+
 
         this.arms = (new ModelRenderer(this)).setTexSize(width, height);
     	//this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_ + 2.0F, 0.0F);
        //	this.arms.setRotationPoint(0.0F, 0.0F + p_i1164_2_, 0.0F);
      	this.arms.texOffs(40, 16).addBox(-8.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
     	this.arms.texOffs(40, 16).addBox(4.0F, (-2.0F + yOffset), -2.0F, 4, 8, 4, scale);
+        this.renderers.add(arms);
+
     }
 
 

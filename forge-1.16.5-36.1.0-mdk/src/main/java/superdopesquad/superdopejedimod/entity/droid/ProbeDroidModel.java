@@ -1,13 +1,10 @@
 package superdopesquad.superdopejedimod.entity.droid;
 
-import com.google.common.collect.ImmutableList;
-import net.minecraft.client.renderer.entity.model.SegmentedModel;
+
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +12,6 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class ProbeDroidModel<T extends Entity> extends DroidModel<T> {
 
-    /* Constants */
-//    public static int TEXTURE_WIDTH = 64; // The texture we are importing is a 64x64 PNG
-//    public static int TEXTURE_HEIGHT = 64;
 
     protected enum ArmDirection {FORWARD, BACKWARD, LEFTWARD, RIGHTWARD};
 
@@ -38,19 +32,9 @@ public class ProbeDroidModel<T extends Entity> extends DroidModel<T> {
     // angles are in radians!
 
 
-
-
-//    public ProbeDroidModel() {
-//
-//        this(1.0F);
-//    }
-
-
-
     public ProbeDroidModel() {
 
         this(1.0F, 0.0F, TEXTURE_WIDTH, TEXTURE_HEIGHT);
-
     }
 
 

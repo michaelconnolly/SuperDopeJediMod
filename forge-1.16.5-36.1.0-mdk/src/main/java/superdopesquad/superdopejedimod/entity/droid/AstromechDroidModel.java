@@ -1,7 +1,6 @@
 package superdopesquad.superdopejedimod.entity.droid;
 
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,10 +21,6 @@ public class AstromechDroidModel<T extends Entity> extends DroidModel<T> {
 
         this(1.0F, 0.0F, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
-
-//    public Iterable<ModelRenderer> parts() {
-//        return ImmutableList.of(this.head, this.body, this.arms, this.leftLeg, this.rightLeg);
-//    }
 
 
     public AstromechDroidModel(float scale, float p_i1164_2_, int width, int height) {

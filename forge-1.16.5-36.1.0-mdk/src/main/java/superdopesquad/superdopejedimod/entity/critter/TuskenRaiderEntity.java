@@ -1,4 +1,4 @@
-package superdopesquad.superdopejedimod.entity.monster;
+package superdopesquad.superdopejedimod.entity.critter;
 
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,14 +12,13 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import superdopesquad.superdopejedimod.entity.BaseEntity;
 import superdopesquad.superdopejedimod.entity.Renderer;
 
 
-public class TuskenRaiderEntity extends BaseEntity {
+public class TuskenRaiderEntity extends CritterEntity {
 
 
-    public  TuskenRaiderEntity(EntityType<? extends TuskenRaiderEntity> type, World worldIn){  super(type,worldIn);}
+    public  TuskenRaiderEntity(EntityType<TuskenRaiderEntity> type, World worldIn){  super(type,worldIn);}
 
 
     @Override
@@ -35,18 +34,18 @@ public class TuskenRaiderEntity extends BaseEntity {
         @Override
         public EntityRenderer<? super TuskenRaiderEntity> createRenderFor(EntityRendererManager manager) {
 
-            //return new WookieRender(manager);
             return new Renderer(manager,
                     new TuskenRaiderModel<>(), "textures/entity/tusken_raider.png");
         }
     }
 
-//
-//    public static AttributeModifierMap.MutableAttribute func_234188_eI_() {
-//     //   return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.2F);
-//        return TuskenRaiderEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, (double) 0.2F);
-//    }
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
 
+        return MonsterEntity.createMonsterAttributes()
+                .add(Attributes.MAX_HEALTH, TuskenRaiderEntity.MAX_HEALTH)
+                .add(Attributes.MOVEMENT_SPEED, TuskenRaiderEntity.MOVEMENT_SPEED)
+                .add(Attributes.ATTACK_DAMAGE, TuskenRaiderEntity.ATTACK_DAMAGE);
+    }
 
 
 
