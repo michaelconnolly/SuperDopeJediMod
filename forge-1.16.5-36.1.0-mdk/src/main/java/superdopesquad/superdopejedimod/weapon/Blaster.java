@@ -5,9 +5,12 @@ import java.util.List;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -17,7 +20,7 @@ import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.*;
 
 
-public class BaseBlaster extends DopeRangedWeapon implements SuperDopeObject, ClassAwareInterface {
+public class Blaster extends DopeRangedWeapon implements SuperDopeObject, ClassAwareInterface {
 
 
 	//protected boolean isInstantWeapon = true;
@@ -25,13 +28,13 @@ public class BaseBlaster extends DopeRangedWeapon implements SuperDopeObject, Cl
 	protected float range; // = 10.0F;
 
 
-	public BaseBlaster(String name) {
+	public Blaster(String name) {
 
 		//super(name);
 		this(name, PowerLevel.STANDARD, 10.0F);
 	}
 
-	public BaseBlaster(String name, PowerLevel powerLevel, float range) {
+	public Blaster(String name, PowerLevel powerLevel, float range) {
 
 		super(name);
 	}
@@ -62,6 +65,46 @@ public class BaseBlaster extends DopeRangedWeapon implements SuperDopeObject, Cl
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 
 		System.out.println("inside Blaster:use");
+
+		if (true) {
+
+			// The item object for the plasma blast we shoot out.
+			ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
+			ItemStack itemStackInHand = player.getItemInHand(hand);
+
+			// Play a sound.
+			world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(),
+					SoundEvents.FIREWORK_ROCKET_SHOOT, SoundCategory.NEUTRAL,
+					0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+
+			// Create the entity of the plasma blast and set it's trajectory.
+			if (!world.isClientSide) {
+
+				// SnowballEntity snowballentity = new SnowballEntity(world, player);
+				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+
+				//PlasmaShotEntity plasmaShotEntity = new EntityManager.PLASMA_SHOT.clone();
+				//SnowballEntity plasmaShotEntity = new
+				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player, this.powerLevel.damageLevel());
+				PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+
+				//plasmaShotEntity.damageAmount = this.powerLevel.damageLevel();
+
+				//snowballentity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
+				plasmaShotEntity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
+
+				//snowballentity.shootFromRotation(player, player.xRot, player.yRot,
+				//		0.0F, 1.5F, 1.0F);
+				plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot,
+						0.0F, 1.5F, 1.0F);
+
+				//world.addFreshEntity(snowballentity);
+				world.addFreshEntity(plasmaShotEntity);
+			}
+
+			return ActionResult.sidedSuccess(itemStackInHand, world.isClientSide());
+		}
+
 
 //		RayTraceResult lookingAt = Minecraft.getMinecraft().objectMouseOver;
 //		if (lookingAt != null && lookingAt.typeOfHit == RayTraceResult.Type.BLOCK) {

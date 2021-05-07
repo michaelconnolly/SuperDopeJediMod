@@ -1,8 +1,6 @@
 package superdopesquad.superdopejedimod.weapon;
 
 
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.init.Items;
 import superdopesquad.superdopejedimod.DopeItem;
 
 

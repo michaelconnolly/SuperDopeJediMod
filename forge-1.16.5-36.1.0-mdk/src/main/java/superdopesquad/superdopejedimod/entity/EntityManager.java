@@ -3,13 +3,16 @@ package superdopesquad.superdopejedimod.entity;
 import java.awt.*;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import superdopesquad.superdopejedimod.DopeItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
@@ -22,6 +25,7 @@ import superdopesquad.superdopejedimod.entity.ship.ShipEngine;
 import superdopesquad.superdopejedimod.entity.ship.ShipKit;
 import superdopesquad.superdopejedimod.entity.ship.TieFighterEntity;
 import superdopesquad.superdopejedimod.entity.ship.XWingFighterEntity;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
 
 
 public class EntityManager {
@@ -67,8 +71,47 @@ public class EntityManager {
 			(EntityType<TieFighterEntity>) EntityManager.createEntity(TieFighterEntity::new,
 					"tie_fighter", EntityClassification.MISC);
 
+//	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
+//			Registry.register(Registry.ENTITY_TYPE,
+//			"plasma_shot",
+//			EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
+//					EntityClassification.MISC).sized(0.25F, 0.25F)
+//					.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
+	public static final RegistryObject<EntityType<PlasmaShotEntity>> PLASMA_SHOT =
+			SuperDopeJediMod.ENTITIES.register(
+					"plasma_shot",
+					() -> EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
+							EntityClassification.MISC).sized(0.25F, 0.25F)
+							.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
 
-	// Droid Kit objects.
+
+	// Projectile Entity Types
+//	public static final RegistryObject<EntityType<PlasmaShotEntity>> PLASMA_SHOT = SuperDopeJediMod.ENTITIES.register("plasma_shot",
+//			() -> EntityType.Builder.of(PlasmaShotEntity::new, EntityClassification.MISC)
+//					.size(1.0f,0.5f)
+//					.build(new ResourceLocation(SuperDopeJediMod.MODID, "plasma_shot").toString())
+//	);
+//	public static final RegistryObject<EntityType<PlasmaShotEntity>> CRAWLER_VENOM =
+//	SuperDopeJediMod.ENTITIES.register("crawler_venom",
+//			() -> EntityType.Builder.<PlasmaShotEntity> <----- create(CrawlerVenomEntity::new, EntityClassification.MISC)
+//					.size(1.0f,0.5f)
+//					.build(new ResourceLocation(MajCraft.MOD_ID, "crawler_venom").toString())
+//	);
+
+
+//	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
+//			(EntityType<PlasmaShotEntity>) EntityManager.createEntity(PlasmaShotEntity::new,
+//					"plasma_shot", EntityClassification.MISC);
+
+	//public static final EntityType<SnowballEntity> SNOWBALL = register("snowball", EntityType.Builder.<SnowballEntity>of(SnowballEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
+//	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT = register("plasma_shot", EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
+//
+//	private static <T extends Entity> EntityType<T> register(String p_200712_0_, EntityType.Builder<T> p_200712_1_) {
+//		return Registry.register(Registry.ENTITY_TYPE, p_200712_0_, p_200712_1_.build(p_200712_0_));
+//	}
+
+
+		// Droid Kit objects.
     public static final DopeItem DROID_PARTS = new DopeItem("droid_parts");
     public static final DroidKit DROID_KIT = new DroidKit("droid_kit");
 	public static final DroidHead PROTOCOL_DROID_HEAD = new DroidHead("protocol_droid_head", PROTOCOL_DROID);
@@ -153,6 +196,44 @@ public class EntityManager {
 		event.getRegistry().register(EntityManager.ASTROMECH_DROID);
 		event.getRegistry().register(EntityManager.XWING_FIGHTER);
 		event.getRegistry().register(EntityManager.TIE_FIGHTER);
+
+//		//
+//		SuperDopeJediMod.BLOCKS.register(name, () -> this);
+//		//
+//		public static final EntityType<SnowballEntity> SNOWBALL = register("snowball", EntityType.Builder.<SnowballEntity>of(SnowballEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
+////
+//
+//		EntityType<SnowballEntity> SNOWBALL_TEST = Registry.register(Registry.ENTITY_TYPE,
+//				"snowball_test",
+//				EntityType.Builder.<SnowballEntity>of(SnowballEntity::new,
+//						EntityClassification.MISC).sized(0.25F, 0.25F)
+//						.clientTrackingRange(4).updateInterval(10).build("snowball_test"));
+//
+//		EntityType<PlasmaShotEntity> PLASMA_SHOT_TEST = Registry.register(Registry.ENTITY_TYPE,
+//				"plasma_shot_test",
+//				EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
+//						EntityClassification.MISC).sized(0.25F, 0.25F)
+//						.clientTrackingRange(4).updateInterval(10).build("snowball_test"));
+//
+//
+//
+//		EntityType.Builder.<SnowballEntity>of(SnowballEntity::new,
+//						EntityClassification.MISC).sized(0.25F, 0.25F)
+//						.clientTrackingRange(4).updateInterval(10);
+//
+//
+//
+//		//
+//
+//		private static <T extends Entity> EntityType<T> register(String p_200712_0_,
+//				EntityType.Builder<T> p_200712_1_) {
+//			return Registry.register(Registry.ENTITY_TYPE, p_200712_0_, p_200712_1_.build(p_200712_0_));
+//		}
+//
+//		SuperDopeJediMod.ENTITIES.register("plasma_shot_test",
+//				)
+
+
 	}
 
 

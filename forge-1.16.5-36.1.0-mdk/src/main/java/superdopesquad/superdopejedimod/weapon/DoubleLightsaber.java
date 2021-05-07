@@ -3,7 +3,7 @@ package superdopesquad.superdopejedimod.weapon;
 import net.minecraft.item.ItemTier;
 
 
-public class DoubleLightsaber extends BaseMeleeWeapon {
+public class DoubleLightsaber extends DopeMeleeWeapon {
 
 	String color;
 
