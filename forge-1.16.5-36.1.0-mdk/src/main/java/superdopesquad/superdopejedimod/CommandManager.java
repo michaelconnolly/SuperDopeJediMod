@@ -1,18 +1,16 @@
 //package superdopesquad.superdopejedimod;
 //
-//import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-////import net.minecraftforge.fml.common.
-//import superdopesquad.superdopejedimod.faction.CommandClass;
-//import superdopesquad.superdopejedimod.faction.CommandFaction;
 //
+//import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 //
 //public class CommandManager {
 //
 //
 //	void serverLoad(FMLServerStartingEvent event) {
 //
-//		event.registerServerCommand(new CommandClass());
-//		event.registerServerCommand(new CommandFaction());
-//		//event.registerServerCommand(new CommandClasses());
+////	    event.
+////		event.registerServerCommand(new CommandClass());
+////		event.registerServerCommand(new CommandFaction());
+////		//event.registerServerCommand(new CommandClasses());
 //	}
 //}

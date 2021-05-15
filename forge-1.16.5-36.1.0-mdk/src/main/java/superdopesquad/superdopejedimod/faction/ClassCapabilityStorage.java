@@ -1,6 +1,9 @@
+
+
 package superdopesquad.superdopejedimod.faction;
 
 
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 //import net.minecraft.nbt.NBTBase;
 //import net.minecraft.nbt.NBTPrimitive;
@@ -12,6 +15,7 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.util.Constants;
+import superdopesquad.superdopejedimod.command.CommandClass;
 
 
 public class ClassCapabilityStorage implements IStorage<ClassCapabilityInterface> {
@@ -20,22 +24,50 @@ public class ClassCapabilityStorage implements IStorage<ClassCapabilityInterface
 	@Override
 	public INBT writeNBT(Capability<ClassCapabilityInterface> capability, ClassCapabilityInterface instance, Direction direction) {
 
+
+		CompoundNBT props = new CompoundNBT();
+		props.putInt("classId", instance.getClassId());
+
+
+//		props.putInt("power", instance.getPower());
+//		props.putLong("beli", instance.getBeli());
+//		props.putInt("gold", instance.getGold());
+//		props.putLong("bounty", instance.getBounty());
+//		props.putString("race", instance.getRace());
+
+
+		return props;
+
 		////return NBT.
 		//return new NBTTagInt(instance.get());
-		return null;
+		//return new INBT(instance.get()) ;
+
+		//return null;
 	}
 
 
 	@Override
 	public void readNBT(Capability<ClassCapabilityInterface> capability, ClassCapabilityInterface instance, Direction direction, INBT nbt) {
-	
-		// Did we accumulate unexpected crud in there?  Deal with it!  Error handling is your friend.
-		if (nbt.getClass() != IntNBT.class) {
-			System.out.println("Bad value found via ClassCapabilityStorage:readNBT");
-			instance.set(0);
-			return;
-		}
-	
-		instance.set(((IntNBT) nbt).getAsInt());
+
+		CompoundNBT props = (CompoundNBT) nbt;
+		instance.setClassId(props.getInt("classId"));
+
+//		instance.setPower(props.getInt("power"));
+//		instance.setBeli(props.getLong("beli"));
+//		instance.setGold(props.getInt("gold"));
+//		instance.setBounty(props.getLong("bounty"));
+//		instance.setRace(props.getString("race"));
+
 	}
 }
+
+//		// Did we accumulate unexpected crud in there?  Deal with it!  Error handling is your friend.
+//		if (nbt.getClass() != IntNBT.class) {
+//			System.out.println("Bad value found via ClassCapabilityStorage:readNBT");
+//			instance.set(0);
+//			return;
+//		}
+//
+//		instance.set(((IntNBT) nbt).getAsInt());
+//	}
+//}

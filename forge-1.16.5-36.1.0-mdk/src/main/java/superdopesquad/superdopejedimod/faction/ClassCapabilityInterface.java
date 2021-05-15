@@ -3,6 +3,6 @@ package superdopesquad.superdopejedimod.faction;
 
 public interface ClassCapabilityInterface {
 
-	public boolean set(Integer classId);
-	public Integer get();
+	public boolean setClassId(Integer classId);
+	public Integer getClassId();
 }

@@ -1,12 +1,12 @@
 package superdopesquad.superdopejedimod.faction;
 
-import superdopesquad.superdopejedimod.SuperDopeJediMod;
 
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import java.awt.Color;
+
 
 public class ClassInfo {
 
-	
 	private Integer _id;
 	private String _name;
 	private Color _color;

@@ -1,12 +1,18 @@
 package superdopesquad.superdopejedimod;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
+import net.minecraft.command.Commands;
+import net.minecraft.command.arguments.ArgumentTypes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,8 +23,13 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import superdopesquad.superdopejedimod.armor.*;
+import superdopesquad.superdopejedimod.command.CommandClass;
+import superdopesquad.superdopejedimod.command.CommandManager;
 import superdopesquad.superdopejedimod.entity.EntityManager;
+import superdopesquad.superdopejedimod.faction.ClassCapability;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.material.*;
 import net.minecraft.item.Item;
@@ -28,13 +39,11 @@ import superdopesquad.superdopejedimod.weapon.WeaponManager;
 @Mod("superdopejedimod")
 public class SuperDopeJediMod {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     // Set the metadata of the mod.
     public static final String MODID = "superdopejedimod";
-    //public static final String MODNAME = "SuperDopeJediMod";
-    //public static final String MODVER = "0.0.1";
-
     private SuperDopeEventHandler superDopeEventHandler = new SuperDopeEventHandler();
-
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
@@ -81,13 +90,11 @@ public class SuperDopeJediMod {
     public static final MaterialManager MATERIAL_MANAGER = new MaterialManager();
     public static final ArmorManager ARMOR_MANAGER = new ArmorManager();
     public static final WeaponManager WEAPON_MANAGER = new WeaponManager();
+    public static final ClassManager CLASS_MANAGER = new ClassManager(); // Must be before EntityManager.
+    public static final EntityManager ENTITY_MANAGER = new EntityManager();
+    public static final CommandManager COMMAND_MANAGER = new CommandManager();
 
 
-//    // Vehicle parts.
-//    public static VehicleSeat vehicleSeat = new VehicleSeat("vehicleSeat");
-//
-
-//
 //    // Miscellaneous items.
 //    public static NourishmentCapsule nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
 //    public static Credit credit = new Credit("credit");
@@ -97,38 +104,6 @@ public class SuperDopeJediMod {
 //    public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
 //    public static StarBlock starBlock = new StarBlock("StarBlock");
 //
-//    // Blocks and Items Used for a Spaceship
-//    public static Engine engine = new Engine("engine");
-//    public static ChromateOre chromateOre = new ChromateOre("chromateOre");
-//    public static ChromateIngot chromateIngot = new ChromateIngot("chromateIngot");
-//    public static CompressedMetalPlate compressedMetalPlate = new CompressedMetalPlate("compressedMetalPlate");
-//    public static CompressedMetalBits compressedMetalBits = new CompressedMetalBits("compressedMetalBits");
-//    //public static TinkerTable tinkerTable = new TinkerTable("tinkerTable");
-//    public static ChromateShard chromateShard = new ChromateShard("chromateShard");
-//    public static ElectricTransmitter electricTransmitter = new ElectricTransmitter("electricTransmitter");
-//    public static ElectricFluxIngot electricFluxIngot = new ElectricFluxIngot("electricFluxIngot");
-//    public static ElectricFluxOre electricFluxOre = new ElectricFluxOre("electricFluxOre");
-//    public static ControlPanel controlPanel = new ControlPanel("controlPanel");
-//    public static CompressedMetalMesh compressedMetalMesh = new CompressedMetalMesh("compressedMetalMesh");
-//    public static BitsOfCompressedMetalMesh bitsOfCompressedMetalMesh = new BitsOfCompressedMetalMesh("bitsOfCompressedMetalMesh");
-
-    //Spaceship Entitys
-
-//
-//    //drills + other tools
-//    //public static Drill drill = new Drill("drill");
-//
-//    //Items for Custom Items
-//    public static Ruby ruby = new Ruby("ruby");
-//    public static RubyOre rubyOre = new RubyOre("rubyOre");
-//    public static SaphireOre saphireOre = new SaphireOre("saphireOre");
-//    public static Saphire saphire = new Saphire("saphire");
-
-    // Classes.  Must be before EntityManager.
-    public static final ClassManager CLASS_MANAGER = new ClassManager();
-
-    // Entities.
-    public static final EntityManager ENTITY_MANAGER = new EntityManager();
 
     // Commands.
  //   public static CommandManager commandManager = new CommandManager();
@@ -201,12 +176,76 @@ public class SuperDopeJediMod {
 //        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
 
+@SubscribeEvent
+public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
+
+    Entity entity = event.getObject();
+
+    if (entity == null) {
+        LOGGER.debug("inside attachCapability: event.getObject() == NULL");
+        return;
+    }
+
+    ITextComponent name;
+    if (entity instanceof PlayerEntity) {
+        //name = ((PlayerEntity)entity).getName();
+        name = new StringTextComponent("(a player)");
+    } else if (entity instanceof LivingEntity) {
+        name = entity.getName();
+    } else {
+        name = entity.getName();
+    }
+
+//    if(entity instanceof LivingEntity) {
+//
+//        if ()
+//        = ((LivingEntity)event.getObject()).getDisplayName();
+
+
+    if (entity instanceof PlayerEntity) {
+        LOGGER.debug(("inside attachCapability: " + name.getString()));
+        final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
+        event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
+    } else {
+        //LOGGER.debug("inside attachCapability (NOT ATTACHING): " + name.getString());
+    }
+}
+
+//
+//    @SubscribeEvent
+//    public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
+//
+//      LOGGER.debug("inside attachCapabilities: " + event.getObject().getScoreboardName());
+//
+//        if (event.getObject() == null)
+//            return;
+//
+//
+//        if (event.getObject() instanceof LivingEntity) {
+//            final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
+//            event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
+//        }
+//    }
+
+    @SubscribeEvent
+    public void registerCommands(final RegisterCommandsEvent event) {
+
+
+        System.out.println("inside SuperDopeJediMod:registerCommands");
+
+        //ArgumentTypes.register("research", ResearchArgument.class, new ArgumentSerializer<>(ResearchArgument::research));
+        //CommandClass.register(event.getDispatcher());
+        COMMAND_MANAGER.registerCommands(event.getDispatcher());
+    }
+
+
 
     private void setupCommon(final FMLCommonSetupEvent event) {
 
         System.out.println("INSIDE SuperDopeJediMod::setupCommon");
 
         ENTITY_MANAGER.setupCommon();
+        CLASS_MANAGER.register();
 
 //        // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
 //        // In my main class in the setup function I had a deferredWorkQueue where I dealt
