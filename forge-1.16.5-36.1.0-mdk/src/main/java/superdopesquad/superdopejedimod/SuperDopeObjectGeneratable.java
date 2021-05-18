@@ -5,7 +5,7 @@ import java.util.Random;
 import net.minecraft.world.World;
 
 
-public interface SuperDopeObjectGeneratable extends SuperDopeObject {
+public interface SuperDopeObjectGeneratable {
 
 	default public void generateEnd(World world, Random random, int i, int j) {
 	}

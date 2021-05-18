@@ -1,38 +1,15 @@
-//package superdopesquad.superdopejedimod;
-//
-//import javax.annotation.Nullable;
-//
-//import net.minecraft.block.Block;
-//import net.minecraft.block.BlockCarpet;
-//import net.minecraft.block.BlockChest;
-//import net.minecraft.block.BlockColored;
-//import net.minecraft.block.BlockDoor;
-//import net.minecraft.block.BlockPlanks;
-//import net.minecraft.block.BlockStairs;
-//import net.minecraft.block.BlockStoneBrick;
-//import net.minecraft.block.BlockTorch;
-//import net.minecraft.block.material.Material;
-//import net.minecraft.block.properties.IProperty;
-//import net.minecraft.block.state.IBlockState;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.init.Blocks;
-//import net.minecraft.init.Items;
-//import net.minecraft.item.EnumDyeColor;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.stats.StatList;
-//import net.minecraft.tileentity.TileEntity;
-//import net.minecraft.tileentity.TileEntityBeacon;
-//import net.minecraft.util.EnumFacing;
-//import net.minecraft.util.EnumHand;
-//import net.minecraft.util.math.BlockPos;
-//import net.minecraft.world.World;
-//import net.minecraftforge.fml.common.registry.GameRegistry;
-//
-//
-///*
-//*/
-//public class SithMark extends BaseBlock
-//{
+package superdopesquad.superdopejedimod.building;
+
+
+import net.minecraft.block.Blocks;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+
+/*
+*/
+public class SithTowerBlueprint extends BuildingBlueprint {
+
 //	static IBlockState MATERIAL_STONE = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED);
 //	static IBlockState MATERIAL_CLAY = Blocks.STAINED_HARDENED_CLAY.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.RED);
 //	static IBlockState MATERIAL_CORNERS = Blocks.RED_SANDSTONE.getDefaultState();
@@ -43,34 +20,60 @@
 //	static IBlockState MATERIAL_FENCE = Blocks.NETHER_BRICK_FENCE.getDefaultState();
 //	static IBlockState MATERIAL_STAIRS = Blocks.NETHER_BRICK_STAIRS.getDefaultState();
 //	static IBlockState MATERIAL_STAIRLANDING = Blocks.WOODEN_SLAB.getDefaultState();
-//
-//	protected static int HEIGHT_SPIRALS = 6;
-//	protected static int HEIGHT_BLOCKS = HEIGHT_SPIRALS * 4;
-//
-//
-//	/*
-//	 *
-//	 */
+
+	protected static int HEIGHT_SPIRALS = 6;
+	protected static int HEIGHT_BLOCKS = HEIGHT_SPIRALS * 4;
+
+
+	public SithTowerBlueprint(String name) {
+		super(name);
+	}
+
+
+	@Override
+	protected void build(World world, BlockPos pos) {
+		this.buildTower(world, pos);
+
+	}
+
+
+	/*
+	 *
+	 */
 //	public SithMark(String localName) {
 //		super(Material.IRON, localName);
 //		this.setLightLevel(1.0F);
 //	}
-//
-//
-//	/*
-//	 *
-//	 */
+
+
+	/*
+	 *
+	 */
 //	@Override
 //	public void registerRecipe() {
 //		ItemStack swordStack = new ItemStack(Items.IRON_SWORD);
 //    	ItemStack goldStack = new ItemStack(Items.GOLD_INGOT);
 //    	GameRegistry.addShapedRecipe(this.getRegistryName(), null, new ItemStack(this), "x x", " y ", "x x", 'x', swordStack, 'y', goldStack);
 //	}
+
 //
+//	//@Override
+//	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+//	//public ActionResultType use(World world, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult blockRayTraceResult) {
 //
-//	/*
-//	 *  Minecraft Event Handler, when someone clicks on the block.
-//	 */
+//		System.out.println("SithMark: activated, clientSide=" + world.isClientSide + ", pos=" + pos.toShortString());
+//
+//		return ActionResultType.CONSUME;
+//	}
+
+//}
+
+	//public ActionResultType onItemUse(ItemUseContext context) {
+
+
+	/*
+	 *  Minecraft Event Handler, when someone clicks on the block.
+	 */
 //	@Override
 //	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player,
 //									EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
@@ -92,7 +95,7 @@
 //
 //        int wallLength = -1;
 //
-//        /* If the block underneath is is a stone we may be building an entire castle. */
+//        /* If the block underneath is is a stone we may be superdopesquad.superdopejedimod.building an entire castle. */
 //        IBlockState underState = world.getBlockState(pos.down());
 //        if (underState.getBlock() instanceof net.minecraft.block.BlockStone) {
 //        	System.out.println("SithMark: FOUND STONE");
@@ -116,11 +119,11 @@
 //        }
 //        return true;
 //    }
-//
-//
-//	/*
-//	 * Everything is oriented from the side passed in; the door will be facing that side.
-//	 */
+
+
+	/*
+	 * Everything is oriented from the side passed in; the door will be facing that side.
+	 */
 //	protected void buildCastle(World world, BlockPos pos, EnumFacing side, int wallLength) {
 //
 //		for (int i = 0 ; i < 4; ++i) {
@@ -137,18 +140,19 @@
 //			side = side.rotateY();
 //		}
 //	}
-//
-//
-//	/*
-//	 * Everything is oriented from the side passed in; the door will be facing that side.
-//	 */
-//	protected void buildTower(World world, BlockPos pos, EnumFacing side) {
-//
-//		System.out.println("SithMark: creating tower, pos=" + pos + ", side=" + side);
-//
-//		 /* Build the pillar up the middle. We go one extra to make it look cool. */
-//        GeometryUtil.buildColumnDestructive(world, pos, HEIGHT_BLOCKS + 1, MATERIAL_CLAY);
-//
+
+
+	/*
+	 * Everything is oriented from the side passed in; the door will be facing that side.
+	 */
+	protected void buildTower(World world, BlockPos pos) {
+
+		//System.out.println("SithMark: creating tower, pos=" + pos + ", side=" + side);
+		System.out.println("SithMark: creating tower, pos=" + pos);
+
+		/* Build the pillar up the middle. We go one extra to make it look cool. */
+		GeometryUtil.buildColumnDestructive(world, pos, HEIGHT_BLOCKS + 1, Blocks.CLAY.defaultBlockState());
+
 //        /* Build spiral staircase. */
 //        BlockPos stairPos = pos.offset(side.getOpposite(), 1).offset(side.rotateY(), 1);
 //        buildSpiralStaircase(world, stairPos, HEIGHT_SPIRALS, side.rotateYCCW());
@@ -287,17 +291,19 @@
 //			fencePos = fencePos.offset(fenceSide, 4);
 //		}
 //    }
-//
-//	/**
-//	 *
-//	 * @param world
-//	 * @param pos
-//	 * @param length
-//	 * @param height
-//	 * @param side
-//	 * @param state
-//	 * @param force
-//	 */
+	}
+
+
+	/**
+	 *
+	 * @param world
+	 * @param pos
+	 * @param length
+	 * @param height
+	 * @param side
+	 * @param state
+	 * @param force
+	 */
 //	protected static void buildWall(World world, BlockPos pos, int length, int height, EnumFacing side, IBlockState state, boolean force) {
 //		for (int l = 0; l < length; ++l) {
 //			for (int h = 0 ; h < height ; ++h) {
@@ -306,23 +312,23 @@
 //			}
 //		}
 //	}
-//
-//
-//
-//	/*
-//	 *
-//	 */
+
+
+
+	/*
+	 *
+	 */
 //	protected BlockPos buildSpiralStaircase(World world, BlockPos pos, int numSpirals, EnumFacing side) {
 //		for (int i = 0 ; i < numSpirals ; ++i) {
 //			pos = buildSpiralStaircase_One(world, pos, side);
 //		}
 //		return pos;
 //	}
-//
-//
-//	/*
-//	 *
-//	 */
+
+
+	/*
+	 *
+	 */
 //	protected BlockPos buildSpiralStaircase_One(World world, BlockPos pos, EnumFacing side) {
 //		/* one spiral up will bring up 4 blocks up. */
 //		for (int i = 0 ; i < 4 ; ++i) {
@@ -337,4 +343,6 @@
 //		}
 //		return pos;
 //	}
-//}
+
+}
+

@@ -5,12 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.item.*;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 
-public class DopeMeleeWeapon extends SwordItem implements SuperDopeObject, ClassAwareInterface {
+public class DopeMeleeWeapon extends SwordItem implements ClassAwareInterface {
 
 
 	public DopeMeleeWeapon(String name, ItemTier itemTier) {

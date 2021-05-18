@@ -737,7 +737,7 @@ Build: 1.16.3-34.1.39 - Sun Nov 01 22:09:32 GMT 2020
 		Add license header
 
 	cpw:
-		Fix config parse failure causing crash in building exception message. fixes #7438
+		Fix config parse failure causing crash in superdopesquad.superdopejedimod.building exception message. fixes #7438
 		
 		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
 

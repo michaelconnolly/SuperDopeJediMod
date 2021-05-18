@@ -72,7 +72,7 @@
 //		GeometryUtil.buildDomeDestructive(worldIn, pos, 7, DOME_BLOCK);
 //		GeometryUtil.buildCircleDestructive(worldIn, pos.down(), 7, DOME_BLOCK, true);
 //
-//		/* Delete the original block that triggered building the hut, man. */
+//		/* Delete the original block that triggered superdopesquad.superdopejedimod.building the hut, man. */
 //		worldIn.setBlockState(pos, MATERIAL_AIR);
 //
 //		/* Clear the doorway. */

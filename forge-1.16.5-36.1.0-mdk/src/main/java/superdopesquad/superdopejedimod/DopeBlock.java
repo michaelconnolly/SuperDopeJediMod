@@ -3,9 +3,14 @@ package superdopesquad.superdopejedimod;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
@@ -33,6 +38,14 @@ public class DopeBlock extends Block implements SuperDopeObjectGeneratable {
 
 		this(name, AbstractBlock.Properties.of(Material.HEAVY_METAL));
 	}
+
+
+//	@Override
+//	public ActionResultType use(World world, PlayerEntity playerEntity, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+//
+//		super(world, playerEntity, hand, blockRayTraceResult);
+//	}
+
 
 
 //	//MC-TODO: why is this not calling register code?
@@ -65,30 +78,30 @@ public class DopeBlock extends Block implements SuperDopeObjectGeneratable {
 //		//SuperDopeJediMod.customObjects.add(this);
 //	}
 //
-
-	@Override // from SuperDopeObject
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-
-		event.getRegistry().register(this);
-
-//		public void registerBlocks(RegistryEvent.Register<Block> event) {
-//			event.getRegistry().registerAll(new Block(...), new Block(...), ...);
 //
-//		public static final RegistryObject<Block> ROCK_BLOCK = BLOCKS.register("rock", () -> new Block(Block.Properties.create(Material.ROCK)));
+//	@Override // from SuperDopeObject
+//	public void registerBlocks(RegistryEvent.Register<Block> event) {
 //
-//public ExampleMod() {
-//			BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-//		}
-//
-//		// System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
-//		// System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
-//		// System. out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-//
-//		this.setRegistryName(this.getName());
 //		event.getRegistry().register(this);
-
-		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
-	}
+//
+////		public void registerBlocks(RegistryEvent.Register<Block> event) {
+////			event.getRegistry().registerAll(new Block(...), new Block(...), ...);
+////
+////		public static final RegistryObject<Block> ROCK_BLOCK = BLOCKS.register("rock", () -> new Block(Block.Properties.create(Material.ROCK)));
+////
+////public ExampleMod() {
+////			BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+////		}
+////
+////		// System.out.println("Inside BaseBlock:registerBlocks: this.getName(): " + (this.getName() == null ? "null" : this.getName()));
+////		// System.out.println("Inside BaseBlock:registerBlocks: this.getFullName(): " + this.getFullName());
+////		// System. out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+////
+////		this.setRegistryName(this.getName());
+////		event.getRegistry().register(this);
+//
+//		// System.out.println("Inside BaseBlock:registerBlocks: this.getRegistryName(): " + (this.getRegistryName() == null ? "null" : this.getRegistryName().toString()));
+//	}
 //
 //
 //	@Override // from SuperDopeObject
@@ -101,14 +114,14 @@ public class DopeBlock extends Block implements SuperDopeObjectGeneratable {
 //		event.getRegistry().register(new ItemBlock(this).setRegistryName(this.getName()));
 //	}
 
-	
-	@Override // from SuperDopeObject
-	public void blockBreakEvent(BreakEvent e)
-	{
-		//System.out.println("Inside BaseBlock:blockBreakEvent");
-		return;
-	}
-	
+//
+//	@Override // from SuperDopeObject
+//	public void blockBreakEvent(BreakEvent e)
+//	{
+//		//System.out.println("Inside BaseBlock:blockBreakEvent");
+//		return;
+//	}
+//
 //
 //	@Override
 //	public void registerRecipe() {

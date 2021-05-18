@@ -15,7 +15,7 @@
 //import net.minecraft.util.text.TextComponentString;
 //import net.minecraft.world.World;
 //import net.minecraftforge.common.capabilities.CapabilityManager;
-//import superdopesquad.superdopejedimod.GeometryUtil;
+//import superdopesquad.superdopejedimod.building.GeometryUtil;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //import superdopesquad.superdopejedimod.entity.EntityManager;
 //import superdopesquad.superdopejedimod.entity.droid.RepublicBaseDroidEntity;

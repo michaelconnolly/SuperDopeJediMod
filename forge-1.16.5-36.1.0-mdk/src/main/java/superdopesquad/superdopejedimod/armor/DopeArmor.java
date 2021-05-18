@@ -4,10 +4,9 @@ package superdopesquad.superdopejedimod.armor;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.SuperDopeObject;
 
 
-public class DopeArmor extends ArmorItem implements SuperDopeObject {
+public class DopeArmor extends ArmorItem  {
 
 
 	public DopeArmor(String name, ArmorMaterial material, EquipmentSlotType slotType) {

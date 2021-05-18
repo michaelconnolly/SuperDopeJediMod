@@ -6,6 +6,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import superdopesquad.superdopejedimod.DopeBlock;
 import superdopesquad.superdopejedimod.DopeItem;
+import superdopesquad.superdopejedimod.building.SithTowerBlueprint;
 
 
 public class MaterialManager {
@@ -29,6 +30,9 @@ public class MaterialManager {
     public static final DopeBlock KYBER_CRYSTAL_CHUNK = new DopeBlock("kyber_crystal_chunk", Material.HEAVY_METAL);
     public static final DopeBlockGeneratable KYBER_CRYSTAL_ORE = new DopeBlockGeneratable("kyber_crystal_ore", Material.HEAVY_METAL);
     public static final DopeItem KYBER_CRYSTAL = new DopeItem("kyber_crystal", ItemGroup.TAB_MATERIALS);
+
+    // Autoblocks!
+    public static final SithTowerBlueprint SITH_MARK = new SithTowerBlueprint("sith_mark");
 
 
     public MaterialManager() {

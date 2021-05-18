@@ -14,13 +14,12 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.*;
 
 
-public class Blaster extends DopeRangedWeapon implements SuperDopeObject, ClassAwareInterface {
+public class Blaster extends DopeRangedWeapon implements ClassAwareInterface {
 
 
 	//protected boolean isInstantWeapon = true;

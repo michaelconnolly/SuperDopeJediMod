@@ -5,10 +5,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.SuperDopeObject;
 
 
-public class DopeEgg extends SpawnEggItem implements SuperDopeObject {
+public class DopeEgg extends SpawnEggItem  {
 
 
 	public DopeEgg(String name, EntityType<?> entityType, int color1, int color2) {

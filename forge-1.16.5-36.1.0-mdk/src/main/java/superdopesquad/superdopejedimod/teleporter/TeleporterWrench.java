@@ -19,7 +19,7 @@
 //import net.minecraft.world.World;
 //import net.minecraftforge.fml.common.registry.GameRegistry;
 //import superdopesquad.superdopejedimod.BaseItem;
-//import superdopesquad.superdopejedimod.GeometryUtil;
+//import superdopesquad.superdopejedimod.building.GeometryUtil;
 //import superdopesquad.superdopejedimod.SuperDopeJediMod;
 //import superdopesquad.superdopejedimod.Utilities;
 //

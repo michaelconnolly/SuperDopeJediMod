@@ -26,6 +26,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import superdopesquad.superdopejedimod.armor.*;
+import superdopesquad.superdopejedimod.building.BuildingManager;
 import superdopesquad.superdopejedimod.command.CommandClass;
 import superdopesquad.superdopejedimod.command.CommandManager;
 import superdopesquad.superdopejedimod.entity.EntityManager;
@@ -52,8 +53,6 @@ public class SuperDopeJediMod {
 //    @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
 //    public static SuperDopeCommonProxy superDopeCommonProxy;
 //
-    // This is our collection of custom objects and custom entities we will maintain.
-  //  public static ArrayList<SuperDopeObject> customObjects = new ArrayList<SuperDopeObject>();
 
     // this is the world generator that adds our custom objects to newly spawned world chunks.
     //public static SuperDopeWorldGenerator superDopeWorldGenerator = new SuperDopeWorldGenerator();
@@ -93,21 +92,14 @@ public class SuperDopeJediMod {
     public static final ClassManager CLASS_MANAGER = new ClassManager(); // Must be before EntityManager.
     public static final EntityManager ENTITY_MANAGER = new EntityManager();
     public static final CommandManager COMMAND_MANAGER = new CommandManager();
+    public static final BuildingManager BUILDING_MANAGER = new BuildingManager();
 
 
 //    // Miscellaneous items.
 //    public static NourishmentCapsule nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
 //    public static Credit credit = new Credit("credit");
-//    public static SithMark sithMark = new SithMark("sithMark");
-//    public static JediMark jediMark = new JediMark("jediMark");
-//    public static ClassItem classItem = new ClassItem("classItem");
-//    public static OHUMBlock ohumBlock = new OHUMBlock("OHUMBlock");
-//    public static StarBlock starBlock = new StarBlock("StarBlock");
 //
 
-    // Commands.
- //   public static CommandManager commandManager = new CommandManager();
-//
 //    // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.
 //    public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
 //

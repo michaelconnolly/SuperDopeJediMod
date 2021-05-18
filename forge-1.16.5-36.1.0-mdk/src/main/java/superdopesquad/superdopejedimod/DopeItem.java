@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DopeItem extends Item implements SuperDopeObject, ClassAwareInterface {
+public class DopeItem extends Item implements ClassAwareInterface {
 
 
 	public DopeItem(String name) {

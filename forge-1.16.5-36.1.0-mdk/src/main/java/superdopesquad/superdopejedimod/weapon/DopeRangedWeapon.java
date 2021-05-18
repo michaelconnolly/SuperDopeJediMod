@@ -4,14 +4,13 @@ package superdopesquad.superdopejedimod.weapon;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.SuperDopeObject;
 import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class DopeRangedWeapon extends Item implements SuperDopeObject, ClassAwareInterface {
+public abstract class DopeRangedWeapon extends Item implements ClassAwareInterface {
 
 	
 	public DopeRangedWeapon(String name) {
