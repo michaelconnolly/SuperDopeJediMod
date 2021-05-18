@@ -7,9 +7,13 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import superdopesquad.superdopejedimod.DopeBlock;
 import superdopesquad.superdopejedimod.DopeItem;
 import superdopesquad.superdopejedimod.building.SithTowerBlueprint;
+import java.util.ArrayList;
 
 
 public class MaterialManager {
+
+    // Cache the list of blocks that we need to generate; we'll need this later.
+    public static ArrayList<DopeBlockGeneratable> generatableBlocks = new ArrayList<DopeBlockGeneratable>();
 
     // Beskar, used to create heavy weapons and heavy armor.
     public static final DopeBlock BESKAR = new DopeBlock("beskar", Material.HEAVY_METAL);
@@ -35,18 +39,13 @@ public class MaterialManager {
     public static final SithTowerBlueprint SITH_MARK = new SithTowerBlueprint("sith_mark");
 
 
-    public MaterialManager() {
-    }
-
-
     public void GenerateOre(final BiomeLoadingEvent event) {
 
         if (!(event.getCategory().equals(Biome.Category.NETHER) || event.getCategory().equals(Biome.Category.THEEND))) {
 
-            MaterialManager.BESKAR_ORE.GenerateOre(event);
-            MaterialManager.QUADANIUM_ORE.GenerateOre(event);
-            MaterialManager.PLASTOID_SCRAPS.GenerateOre(event);
-            MaterialManager.KYBER_CRYSTAL_ORE.GenerateOre(event);
+            for (int i=0; i<this.generatableBlocks.size(); i++) {
+                this.generatableBlocks.get(i).GenerateOre(event);
+            }
         }
     }
 }

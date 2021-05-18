@@ -112,9 +112,7 @@ public class SuperDopeJediMod {
 //
     public SuperDopeJediMod() {
 
-        System.out.println("Hello from SuperDopeJediMod:constructor 666");
-
-        // New way to do it: make sure the BLOCKS registry is getting  init events.
+        // Setup our registries for new blocks, items, etc.
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -132,12 +130,6 @@ public class SuperDopeJediMod {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
         FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
         MinecraftForge.EVENT_BUS.register(superDopeEventHandler);
-        //FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(this::registerEntities);
-
-        //FMLJavaModLoadingContext.get().getModEventBus().addGenericListener()
-
-
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
         // Register our ore generator.
