@@ -322,18 +322,13 @@ public class EntityManager {
 //		//renderPlayerDefault.addLayer(new LayerClassIndicator(renderPlayerDefault));
 //		renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
 		PlayerRenderer renderPlayerDefault = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("default");
-		renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
+		//renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
 
 
 		// This sets our additional layers on the "slim" player model, also known as Alex.
 		PlayerRenderer renderPlayerSlim = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("slim");
 		//renderPlayerSlim.addLayer(new LayerClassIndicator(renderPlayerSlim));
-		renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
-
-		// WeaponManager needs to be called at onInit time, to properly register some projectile entities.
-		//SuperDopeJediMod.weaponManager.onInit();
+		//renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
 	}
-
-
 }
 
