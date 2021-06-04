@@ -1,84 +1,46 @@
 package superdopesquad.superdopejedimod;
 
 
-import com.sun.java.accessibility.util.java.awt.TextComponentTranslator;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import superdopesquad.superdopejedimod.entity.EntityManager;
-import superdopesquad.superdopejedimod.faction.ClassCapability;
-import superdopesquad.superdopejedimod.faction.ClassCapabilityInterface;
-import superdopesquad.superdopejedimod.faction.ClassCapabilityProvider;
-import superdopesquad.superdopejedimod.faction.ClassInfo;
-
-import java.awt.*;
-import java.util.List;
-//import superdopesquad.superdopejedimod.faction.PacketClientAskingServerAboutClass;
-//import superdopesquad.superdopejedimod.faction.PacketPlayerSetClass;
-//import superdopesquad.superdopejedimod.faction.PacketServerPokingClientAboutClass;
-////import superdopesquad.superdopejedimod.teleporter.PacketClientAskingServerAboutTeleporterDestination;
-//import superdopesquad.superdopejedimod.teleporter.TeleporterCapabilityProvider;
-//import superdopesquad.superdopejedimod.teleporter.TeleporterEntity;
 
 
-//@Mod.EventBusSubscriber(modid = SuperDopeJediMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SuperDopeEventHandler {
 
 
     public static final Logger LOGGER = LogManager.getLogger(SuperDopeJediMod.MODID + "::SuperDopeEventHandler");
 
 
-    @SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-
-        LOGGER.debug("INSIDE SuperDopeJediMod:registerBlocks");
-
-		// Iterate through all our custom blocks and items, and register them all.
-//		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+//    @SubscribeEvent
+//	public void registerBlocks(RegistryEvent.Register<Block> event) {
 //
-//			superDopeObject.registerBlocks(event);
-//		}
-	}
-
-
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event) {
-
-        LOGGER.debug("INSIDE SuperDopeJediMod:registerItems");
-
-
-//		// Iterate through all our custom items, and register them all.
-//		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+//        LOGGER.debug("INSIDE SuperDopeJediMod:registerBlocks");
 //
-//			superDopeObject.registerItems(event);
-//		}
-	}
+//		// Iterate through all our custom blocks and items, and register them all.
+////		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+////
+////			superDopeObject.registerBlocks(event);
+////		}
+//	}
+
+
+//	@SubscribeEvent
+//	public void registerItems(RegistryEvent.Register<Item> event) {
+//
+//        LOGGER.debug("INSIDE SuperDopeJediMod:registerItems");
+//
+//
+////		// Iterate through all our custom items, and register them all.
+////		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+////
+////			superDopeObject.registerItems(event);
+////		}
+//	}
 
 
  @SubscribeEvent
@@ -89,29 +51,10 @@ public class SuperDopeEventHandler {
         SuperDopeJediMod.ENTITY_MANAGER.registerEntity(event);
     }
 
-//
-//    @SubscribeEvent
-//	public void blockBreakEvent(BreakEvent e)
-//	{
-//		// System.out.println("Inside blockBreakEvent");
-//
-//        //MC-TO_DO
-////		IBlockState blockState = e.getState();
-////		Block block = blockState.getBlock();
-////
-////		if (block instanceof BaseBlock) {
-////			((BaseBlock)block).blockBreakEvent(e);
-////			return;
-////		}
-//
-////	    if (e.getWorld().isRemote)
-////	        return;
-//	}
 
 
-//
-//	@SubscribeEvent
-//	public void onPlayerLogsIn(PlayerEvent.PlayerLoggedInEvent event) {
+
+
 //
 //		// We are server-side, so we have accurate information on-hand on class/faction info.
 //		// So, let's have a welcome message display to the user.

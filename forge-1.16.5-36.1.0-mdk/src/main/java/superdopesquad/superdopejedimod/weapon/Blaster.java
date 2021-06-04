@@ -1,25 +1,18 @@
 package superdopesquad.superdopejedimod.weapon;
 
 
-import java.util.List;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.*;
 
 
-public class Blaster extends DopeRangedWeapon implements ClassAwareInterface {
+public class Blaster extends DopeRangedWeapon {
 
 
 	//protected boolean isInstantWeapon = true;
@@ -35,7 +28,10 @@ public class Blaster extends DopeRangedWeapon implements ClassAwareInterface {
 
 	public Blaster(String name, PowerLevel powerLevel, float range) {
 
-		super(name);
+		super(name, ClassPermissions.NonForceWieldersOnly);
+
+		this.powerLevel = powerLevel;
+		this.range = range;
 	}
 
 //		 this.maxStackSize = 1;
@@ -61,48 +57,50 @@ public class Blaster extends DopeRangedWeapon implements ClassAwareInterface {
 //         });
 //	}
 
+	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 
 		System.out.println("inside Blaster:use");
 
-		if (true) {
+//		if (true) {
 
-			// The item object for the plasma blast we shoot out.
-			ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
-			ItemStack itemStackInHand = player.getItemInHand(hand);
+		// The item object for the plasma blast we shoot out.
+		ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
+		ItemStack itemStackInHand = player.getItemInHand(hand);
 
-			// Play a sound.
-			world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(),
-					SoundEvents.FIREWORK_ROCKET_SHOOT, SoundCategory.NEUTRAL,
-					0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+		// Play a sound.
+		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(),
+				SoundEvents.FIREWORK_ROCKET_SHOOT, SoundCategory.NEUTRAL,
+				0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 
-			// Create the entity of the plasma blast and set it's trajectory.
-			if (!world.isClientSide) {
+		// Create the entity of the plasma blast and set it's trajectory.
+		if (!world.isClientSide) {
 
-				// SnowballEntity snowballentity = new SnowballEntity(world, player);
-				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+			// SnowballEntity snowballentity = new SnowballEntity(world, player);
+			//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
 
-				//PlasmaShotEntity plasmaShotEntity = new EntityManager.PLASMA_SHOT.clone();
-				//SnowballEntity plasmaShotEntity = new
-				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player, this.powerLevel.damageLevel());
-				PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+			//PlasmaShotEntity plasmaShotEntity = new EntityManager.PLASMA_SHOT.clone();
+			//SnowballEntity plasmaShotEntity = new
+			//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player, this.powerLevel.damageLevel());
+			PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
 
-				//plasmaShotEntity.damageAmount = this.powerLevel.damageLevel();
+			//plasmaShotEntity.damageAmount = this.powerLevel.damageLevel();
 
-				//snowballentity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
-				plasmaShotEntity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
+			//snowballentity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
+			plasmaShotEntity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
 
-				//snowballentity.shootFromRotation(player, player.xRot, player.yRot,
-				//		0.0F, 1.5F, 1.0F);
-				plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot,
-						0.0F, 1.5F, 1.0F);
+			//snowballentity.shootFromRotation(player, player.xRot, player.yRot,
+			//		0.0F, 1.5F, 1.0F);
+			plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot,
+					0.0F, 1.5F, 1.0F);
 
-				//world.addFreshEntity(snowballentity);
-				world.addFreshEntity(plasmaShotEntity);
-			}
-
-			return ActionResult.sidedSuccess(itemStackInHand, world.isClientSide());
+			//world.addFreshEntity(snowballentity);
+			world.addFreshEntity(plasmaShotEntity);
 		}
+
+		return ActionResult.sidedSuccess(itemStackInHand, world.isClientSide());
+	}
+
 
 
 //		RayTraceResult lookingAt = Minecraft.getMinecraft().objectMouseOver;
@@ -115,52 +113,52 @@ public class Blaster extends DopeRangedWeapon implements ClassAwareInterface {
 //			// not looking at a block, or too far away from one to tell
 //		}
 //
-
-		ItemStack itemStackCurrentItem = player.getItemInHand(hand);
-
-		// MC-TODO: figure out better starting position.
-		BlockPos blockPos = player.blockPosition();
-
-		//BlockPos blockPos = itemStackCurrentItem.getFrame().getPos();
-		boolean isWorldServer = (!world.isClientSide);
-		boolean shouldShoot = ((isWorldServer) && (hand == Hand.MAIN_HAND));
-
-		if (shouldShoot) {
-
-
-			// Create the new entity.
-			//ItemStack itemStackCurrentItem = context.getItemInHand();
-			if (EntityManager.PROTOCOL_DROID.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
-				System.out.println("ERROR! Failed to spawn droid.");
-				return ActionResult.fail(itemStackCurrentItem);
-				//return ActionResultType.FAIL;
-			}
-
-			return ActionResult.success(itemStackCurrentItem);
-
-//			// Create the new entity.
-//			ItemStack itemStackCurrentItem = context.getItemInHand();
-//			if (this.entityType.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
-//				System.out.println("ERROR! Failed to spawn droid.");
-//				return ActionResultType.FAIL;
-//			}
-		}
-
-		return ActionResult.pass(itemStackCurrentItem);
-
-//		ItemStack itemstack = player.getItemInHand(p_77659_3_);
-//		boolean flag = !player.getProjectile(itemstack).isEmpty();
-
-//		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, p_77659_1_, player, p_77659_3_, flag);
-//		if (ret != null) return ret;
 //
-//		if (!player.abilities.instabuild && !flag) {
-//			return ActionResult.fail(itemstack);
-//		} else {
-//			player.startUsingItem(p_77659_3_);
-//			return ActionResult.consume(itemstack);
+//		ItemStack itemStackCurrentItem = player.getItemInHand(hand);
+//
+//		// MC-TODO: figure out better starting position.
+//		BlockPos blockPos = player.blockPosition();
+//
+//		//BlockPos blockPos = itemStackCurrentItem.getFrame().getPos();
+//		boolean isWorldServer = (!world.isClientSide);
+//		boolean shouldShoot = ((isWorldServer) && (hand == Hand.MAIN_HAND));
+//
+//		if (shouldShoot) {
+//
+//
+//			// Create the new entity.
+//			//ItemStack itemStackCurrentItem = context.getItemInHand();
+//			if (EntityManager.PROTOCOL_DROID.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
+//				System.out.println("ERROR! Failed to spawn droid.");
+//				return ActionResult.fail(itemStackCurrentItem);
+//				//return ActionResultType.FAIL;
+//			}
+//
+//			return ActionResult.success(itemStackCurrentItem);
+//
+////			// Create the new entity.
+////			ItemStack itemStackCurrentItem = context.getItemInHand();
+////			if (this.entityType.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
+////				System.out.println("ERROR! Failed to spawn droid.");
+////				return ActionResultType.FAIL;
+////			}
 //		}
-	}
+//
+//		return ActionResult.pass(itemStackCurrentItem);
+//
+////		ItemStack itemstack = player.getItemInHand(p_77659_3_);
+////		boolean flag = !player.getProjectile(itemstack).isEmpty();
+//
+////		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, p_77659_1_, player, p_77659_3_, flag);
+////		if (ret != null) return ret;
+////
+////		if (!player.abilities.instabuild && !flag) {
+////			return ActionResult.fail(itemstack);
+////		} else {
+////			player.startUsingItem(p_77659_3_);
+////			return ActionResult.consume(itemstack);
+////		}
+//	}
 
 
 	public void releaseUsing(ItemStack p_77615_1_, World p_77615_2_, LivingEntity p_77615_3_, int p_77615_4_) {
@@ -174,21 +172,6 @@ public class Blaster extends DopeRangedWeapon implements ClassAwareInterface {
 //		return;
 //	}
 
-
-	@Override
-	public List<ClassInfo> GetUnfriendlyClasses() {
-
-		// By default, we do not let force-wielding classes use blasters.
-		return SuperDopeJediMod.CLASS_MANAGER.getForceWieldingClasses();
-	}
-
-
-	@Override
-	public boolean IsUseUnfriendlyBanned() {
-
-		// By default, all blasters are banned from the unfriendly classes, namely, the force-wielding classes.
-		return true;
-	}
 
 //
 //	/**

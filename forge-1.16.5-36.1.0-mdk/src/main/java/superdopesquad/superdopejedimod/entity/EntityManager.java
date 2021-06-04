@@ -1,6 +1,9 @@
 package superdopesquad.superdopejedimod.entity;
 
 import java.awt.*;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.projectile.SnowballEntity;
@@ -298,5 +301,39 @@ public class EntityManager {
 			}
 		}
 	}
+
+
+	public void initCape() {
+
+		//super.init(e);
+
+		System.out.println("EntityManager::initCape");
+
+//		// Iterate through all our custom objects, and see if we have any models to render.
+//		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
+//			superDopeObject.registerModel();
+//		}
+
+		// Should classes come with capes?  I think so!
+		// For now, also including the more experimental ClassIndictor.
+
+		// This sets our additional layers on the "default" player model, also known as Steve.
+//		RenderPlayer renderPlayerDefault = Minecraft.getMinecraft().getRenderManager().getSkinMap().get("default");
+//		//renderPlayerDefault.addLayer(new LayerClassIndicator(renderPlayerDefault));
+//		renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
+		PlayerRenderer renderPlayerDefault = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("default");
+		renderPlayerDefault.addLayer(new LayerClassCape(renderPlayerDefault));
+
+
+		// This sets our additional layers on the "slim" player model, also known as Alex.
+		PlayerRenderer renderPlayerSlim = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("slim");
+		//renderPlayerSlim.addLayer(new LayerClassIndicator(renderPlayerSlim));
+		renderPlayerSlim.addLayer(new LayerClassCape(renderPlayerSlim));
+
+		// WeaponManager needs to be called at onInit time, to properly register some projectile entities.
+		//SuperDopeJediMod.weaponManager.onInit();
+	}
+
+
 }
 

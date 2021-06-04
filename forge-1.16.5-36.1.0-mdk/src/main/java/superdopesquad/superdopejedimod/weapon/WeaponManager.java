@@ -3,6 +3,8 @@ package superdopesquad.superdopejedimod.weapon;
 
 import net.minecraft.item.ItemTier;
 import superdopesquad.superdopejedimod.DopeItem;
+import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.faction.ClassPermissions;
 
 
 public class WeaponManager {
@@ -25,7 +27,7 @@ public class WeaponManager {
 
     // Other hand-held weapons.
     public static final DopeMeleeWeapon VIBRO_KNIFE = new DopeMeleeWeapon("vibro_knife", ItemTier.IRON);
-    public static final DopeMeleeWeapon BESKAR_SPEAR = new DopeMeleeWeapon("beskar_spear", ItemTier.DIAMOND);
+    public static final DopeMeleeWeapon BESKAR_SPEAR = new DopeMeleeWeapon("beskar_spear", ItemTier.DIAMOND, ClassPermissions.BountyHunterOnly);
     public static final DopeMeleeWeapon GAFFI_STICK = new DopeMeleeWeapon("gaffi_stick", ItemTier.IRON);
 
     // Blasters.

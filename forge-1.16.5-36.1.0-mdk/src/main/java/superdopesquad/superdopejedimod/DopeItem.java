@@ -2,14 +2,13 @@ package superdopesquad.superdopejedimod;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import superdopesquad.superdopejedimod.faction.ClassAwareInterface;
 import superdopesquad.superdopejedimod.faction.ClassInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DopeItem extends Item implements ClassAwareInterface {
+public class DopeItem extends Item  {
 
 
 	public DopeItem(String name) {
@@ -123,32 +122,5 @@ public class DopeItem extends Item implements ClassAwareInterface {
 //        		
 //		return super.getItemDropped(metadata, random, fortune); //SuperDopeJediMod.teleporterManager.teleporterFinishingKitItem;
 //	}
-	
 
-	@Override
-	public List<ClassInfo> GetFriendlyClasses() {
-
-		return new ArrayList<ClassInfo>();
-	}
-
-
-	@Override
-	public List<ClassInfo> GetUnfriendlyClasses() {
-
-		return new ArrayList<ClassInfo>();
-	}
-
-
-	@Override
-	public boolean IsUseFriendlyOnly() {
-
-		return false;
-	}
-
-
-	@Override
-	public boolean IsUseUnfriendlyBanned() {
-
-		return false;
-	}
 }

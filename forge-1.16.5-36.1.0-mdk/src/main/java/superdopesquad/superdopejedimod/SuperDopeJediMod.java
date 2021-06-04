@@ -1,22 +1,21 @@
 package superdopesquad.superdopejedimod;
 
 import net.minecraft.block.Block;
-import net.minecraft.command.Commands;
-import net.minecraft.command.arguments.ArgumentTypes;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
-import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -27,13 +26,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import superdopesquad.superdopejedimod.armor.*;
 import superdopesquad.superdopejedimod.building.BuildingManager;
-import superdopesquad.superdopejedimod.command.CommandClass;
 import superdopesquad.superdopejedimod.command.CommandManager;
 import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.faction.ClassCapability;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.material.*;
 import net.minecraft.item.Item;
+import superdopesquad.superdopejedimod.packet.PacketManager;
 import superdopesquad.superdopejedimod.weapon.WeaponManager;
 
 
@@ -41,6 +41,8 @@ import superdopesquad.superdopejedimod.weapon.WeaponManager;
 public class SuperDopeJediMod {
 
     private static final Logger LOGGER = LogManager.getLogger();
+    private int tickCounter = 0;
+    private final int TICK_CHECK_COUNT =20;
 
     // Set the metadata of the mod.
     public static final String MODID = "superdopejedimod";
@@ -50,26 +52,22 @@ public class SuperDopeJediMod {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
 
     // Establish proxy classes, so we can do the right stuff client-side only, if necessary.
-//    @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
-//    public static SuperDopeCommonProxy superDopeCommonProxy;
-//
-
-    // this is the world generator that adds our custom objects to newly spawned world chunks.
-    //public static SuperDopeWorldGenerator superDopeWorldGenerator = new SuperDopeWorldGenerator();
+    //    @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
+    //    public static SuperDopeCommonProxy superDopeCommonProxy;
 
     // Custom ToolMaterial's.  For a good tutorial on how to define a ToolMaterial, look here:
     // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
-//	public static ToolItem gaffiStickMaterial = addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
-//	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 5000, 0.0F, 9.0F, 0);
-//	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 10000, 0.0F, 12.0F, 0);
-//	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 0.0F, 8.0F, 30);
-//	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
-//	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
-//	public static ToolMaterial blasterMaterial = EnumHelper.addToolMaterial("BlasterMaterial", 3, 1000, 0.0F, 7.0F, 30);
-//	public static ToolMaterial lightSaberKnifeMaterial = EnumHelper.addToolMaterial("LightSaberKnifeMaterial", 3, 1000, 0.0F, 6.0F, 0);
-//	public static ToolMaterial drillMaterial = EnumHelper.addToolMaterial("DrillMaterial", 3, 10000, 25.0F, 0.0F, 10);
-//
+    //	public static ToolItem gaffiStickMaterial = addToolMaterial("GaffiStickMaterial", 3, 1000, 15.0F, 4.0F, 30);
+    //	public static ToolMaterial powerCrystalMaterial = EnumHelper.addToolMaterial("LightSaberMaterial", 3, 5000, 0.0F, 9.0F, 0);
+    //	public static ToolMaterial doublePowerCrystalMaterial = EnumHelper.addToolMaterial("DoubleLightSaberMaterial", 3, 10000, 0.0F, 12.0F, 0);
+    //	public static ToolMaterial brynsAwesomeSwordMaterial = EnumHelper.addToolMaterial("BrynsAwesomeSwordMaterial", 3, 2000, 0.0F, 8.0F, 30);
+    //	public static ToolMaterial mandalorianIronToolMaterial = EnumHelper.addToolMaterial("MandalorianIronToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
+    //	public static ToolMaterial quadaniumSteelToolMaterial = EnumHelper.addToolMaterial("QuadaniumSteelToolMaterial", 3, 1000, 15.0F, 4.0F, 30);
+    //	public static ToolMaterial blasterMaterial = EnumHelper.addToolMaterial("BlasterMaterial", 3, 1000, 0.0F, 7.0F, 30);
+    //	public static ToolMaterial lightSaberKnifeMaterial = EnumHelper.addToolMaterial("LightSaberKnifeMaterial", 3, 1000, 0.0F, 6.0F, 0);
+    //	public static ToolMaterial drillMaterial = EnumHelper.addToolMaterial("DrillMaterial", 3, 10000, 25.0F, 0.0F, 10);
+
     // Custom ArmorMaterial's.
     // EnumHelper.addArmorMaterial("NAME", textureName, durability, reductionAmounts, enchantability, soundOnEquip, toughness)
     //		Durability: 5 - leather; 7 - gold; 15 - chain and iron; 33 - diamond
@@ -81,35 +79,39 @@ public class SuperDopeJediMod {
 //	public static ArmorMaterial sithLordArmorMaterial = EnumHelper.addArmorMaterial("SithLordArmorMaterial", "superdopejedimod:sithlordarmormaterial", 30, new int[]{3,8,6,3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 //	public static ArmorMaterial jediArmorMaterial = EnumHelper.addArmorMaterial("JediArmorMaterial", "superdopejedimod:jediarmormaterial", 30, new int[]{3,8,6,3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
 //	public static ArmorMaterial stormTrooperArmorMaterial = EnumHelper.addArmorMaterial("StormTrooperArmor", "superdopejedimod:stormtrooperarmormaterial", 15, new int[]{2,6,5,2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, (float) 0.0);
-//
-    // instance variable.
-    //   @Instance(value = SuperDopeJediMod.MODID) //Tell Forge what instance to use.
-    //  public static SuperDopeJediMod instance;
 
     public static final MaterialManager MATERIAL_MANAGER = new MaterialManager();
+    public static final ClassManager CLASS_MANAGER = new ClassManager(); // Must be early, before objects that need classinfo.
     public static final ArmorManager ARMOR_MANAGER = new ArmorManager();
     public static final WeaponManager WEAPON_MANAGER = new WeaponManager();
-    public static final ClassManager CLASS_MANAGER = new ClassManager(); // Must be before EntityManager.
     public static final EntityManager ENTITY_MANAGER = new EntityManager();
     public static final CommandManager COMMAND_MANAGER = new CommandManager();
     public static final BuildingManager BUILDING_MANAGER = new BuildingManager();
+    public static PacketManager PACKET_MANAGER = new PacketManager();
 
 
 //    // Miscellaneous items.
 //    public static NourishmentCapsule nourishmentCapsule = new NourishmentCapsule("nourishmentCapsule");
 //    public static Credit credit = new Credit("credit");
 //
-
-//    // Our packet manager; this is where we manage custom packets to keep the client and server in-sync.
-//    public static SuperDopePacketManager packetManager = new SuperDopePacketManager();
-//
-//
 //    // Teleporters.
 //    public static TeleporterManager teleporterManager = new TeleporterManager();
 //
 //    // Managing ships and general hanger stuff.
 //    public static HangarManager hangarManager = new HangarManager();
+
 //
+//    private boolean timeToCheckThings() {
+//
+//        if (++(this.tickCounter) >= this.TICK_CHECK_COUNT) {
+//            this.tickCounter = 0;
+//            return true;
+//        }
+//
+//        return false;
+//    }
+
+
     public SuperDopeJediMod() {
 
         // Setup our registries for new blocks, items, etc.
@@ -211,6 +213,16 @@ public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 //        }
 //    }
 
+//
+//
+//    public void onArmourWear(Equip e) {
+//        if (hasSpecial(e.getPlayer(), e.getType(), e.getNewArmor())) {
+//            // add effect
+//        } else {
+//            //  remove effect
+//        }
+//    }
+
     @SubscribeEvent
     public void registerCommands(final RegisterCommandsEvent event) {
 
@@ -220,6 +232,88 @@ public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
         //ArgumentTypes.register("research", ResearchArgument.class, new ArgumentSerializer<>(ResearchArgument::research));
         //CommandClass.register(event.getDispatcher());
         COMMAND_MANAGER.registerCommands(event.getDispatcher());
+    }
+
+
+//    @SubscribeEvent
+//    public void playerTick(TickEvent.PlayerTickEvent event) {
+//
+//        if (!(this.timeToCheckThings())) {
+//            return;
+//        }
+//
+//        LOGGER.debug("processing playerTick: " + event.player.getName().getString());
+//        this.armorSetCheck(event.player);
+//    }
+
+
+//    private void armorSetCheck(PlayerEntity player) {
+//
+//        Iterable<ItemStack> armorSlots = player.getArmorSlots();
+//
+//        ItemStack chest = player.getItemBySlot(EquipmentSlotType.CHEST);
+//        //LOGGER.debug("Chest: " + (chest == null ? "null" : chest.getDisplayName().getString()));
+//
+//        this.armorItemCheck(player, chest);
+//        //ItemStack boots =armorSlots.
+//
+//    }
+//
+//
+//    private void armorItemCheck(PlayerEntity player, ItemStack armorItemStack) {
+//
+//        // If there is nothing in the slot, return.
+//        if (armorItemStack == null) return;
+//
+//        // If the armor is not a child of DopeArmor, return.
+//        Item armorItem = armorItemStack.getItem();
+//        if (!(armorItem instanceof DopeArmor)) return;
+//
+//        // If they can use it, return.
+//        //if (((DopeArmor)armorItem).canUse(player)) return;
+//
+//        //LOGGER.debug("Made it here.");
+//        //armorItemStack.getItem().canEquip()
+//
+//        //player.drop(armorItemStack, false);
+//        player.getItemBySlot(EquipmentSlotType.CHEST).onDroppedByPlayer(player);
+//    }
+
+
+    @SubscribeEvent
+    public void onPlayerLogsIn(final PlayerEvent.PlayerLoggedInEvent event) {
+
+        PlayerEntity player = event.getPlayer();
+        String playerName = player.getName().getString();
+        ClassInfo classInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerClass(player);
+
+        LOGGER.debug("PlayerEvent.PlayerLoggedInEvent: " + playerName + ", class: " +
+                (classInfo == null ? "null" : classInfo.getShortName()));
+
+        // Tell all clients that this player logged in, so we fan out the correct ClassInfo to them.
+        SuperDopeJediMod.CLASS_MANAGER.communicateToClients(player, classInfo.getId());
+
+        // We are on the server side; when the player logs in, if they are wearing illegal armor, say something.
+        ArmorManager.armorSetCheck(player);
+    }
+
+//
+//    @SubscribeEvent
+//    public void onPlayerLogsIn2(final PlayerEvent.A) {
+//
+//        String entityName = event.getEntity().getName().getString();
+//        System.out.println("Inside PlayerEvent.PlayerLoggedInEvent: " + entityName);
+//
+//    }
+
+
+
+    @SubscribeEvent
+    public void onPlayerDoesSomething(final PlayerEvent.ItemPickupEvent event) {
+
+        String entityName = event.getEntity().getName().getString();
+        System.out.println("Inside PlayerEvent.ItemPickupEvent: " + entityName);
+
     }
 
 
@@ -291,6 +385,9 @@ public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 
         ENTITY_MANAGER.registerEntityRenderer();
         //EntityRenderRegistry.register();
+
+        // Let's add capes!
+        ENTITY_MANAGER.initCape();
     }
 
 
