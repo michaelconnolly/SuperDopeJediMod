@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "x x",
+    "x x"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:beskar_ingot"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:mandalorian_leggings",
+    "count": 1
+  }
+}

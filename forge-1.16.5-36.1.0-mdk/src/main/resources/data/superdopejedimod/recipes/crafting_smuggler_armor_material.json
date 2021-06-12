@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "yyy",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "minecraft:leather"
+    },
+    "y":
+    {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:smuggler_armor_material",
+    "count": 9
+  }
+}

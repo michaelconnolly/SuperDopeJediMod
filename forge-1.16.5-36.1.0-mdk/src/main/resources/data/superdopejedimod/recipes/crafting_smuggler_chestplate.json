@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "x x",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:smuggler_armor_material"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:smuggler_chestplate",
+    "count": 1
+  }
+}

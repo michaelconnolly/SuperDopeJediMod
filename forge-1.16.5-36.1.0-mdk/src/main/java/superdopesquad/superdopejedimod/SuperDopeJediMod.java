@@ -42,7 +42,7 @@ public class SuperDopeJediMod {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private int tickCounter = 0;
-    private final int TICK_CHECK_COUNT =20;
+    private final int TICK_CHECK_COUNT = 20;
 
     // Set the metadata of the mod.
     public static final String MODID = "superdopejedimod";
@@ -119,15 +119,7 @@ public class SuperDopeJediMod {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        // Register the setup method for modloading
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-//        // Register the enqueueIMC method for modloading
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-//        // Register the processIMC method for modloading
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-//        // Register the doClientStuff method for modloading
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
+        // Adding event listeners.
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
         FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
@@ -138,99 +130,40 @@ public class SuperDopeJediMod {
         // NOTE: I have seen some mods trigger their ore generation management
         // by calling it from this.setup, instead of separate listener here.
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, MATERIAL_MANAGER::GenerateOre);
-
-        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, this::registerEntities);
-
-
-        // Register our mobs.
-        // https://github.com/MinecraftForge/MinecraftForge/issues/6911
-        //GlobalEntityTypeAttributes.put(EntityManager.WOOKIE_ENTITY, MobEntity.func_233666_p_().func_233813_a_()/*(or your own)*/);
-        //GlobalEntityTypeAttributes.put(EntityManager.WOOKIE_ENTITY, WookieEntity.func_233666_p_().create()); //*(or your own)*/);
-
-        //MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, ENTITY_MANAGER::GenerateMobs);
-    }
-//    public ExampleMod() {
-//        // Register the setup method for modloading
-
-    //FMLJavaModLoadingContext.get().getModEventBus().a
-
-//        // Register the enqueueIMC method for modloading
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-//        // Register the processIMC method for modloading
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-//        // Register the doClientStuff method for modloading
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-
-@SubscribeEvent
-public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
-
-    Entity entity = event.getObject();
-
-    if (entity == null) {
-        LOGGER.debug("inside attachCapability: event.getObject() == NULL");
-        return;
     }
 
-    ITextComponent name;
-    if (entity instanceof PlayerEntity) {
-        //name = ((PlayerEntity)entity).getName();
-        name = new StringTextComponent("(a player)");
-    } else if (entity instanceof LivingEntity) {
-        name = entity.getName();
-    } else {
-        name = entity.getName();
+
+    @SubscribeEvent
+    public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
+
+        Entity entity = event.getObject();
+        if (entity == null) {
+            LOGGER.debug("inside attachCapability: event.getObject() == NULL");
+            return;
+        }
+
+        ITextComponent name;
+        if (entity instanceof PlayerEntity) {
+            name = new StringTextComponent("(a player)");
+        } else if (entity instanceof LivingEntity) {
+            name = entity.getName();
+        } else {
+            name = entity.getName();
+        }
+
+        if (entity instanceof PlayerEntity) {
+            LOGGER.debug(("inside attachCapability: " + name.getString()));
+            final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
+            event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
+        }
     }
 
-//    if(entity instanceof LivingEntity) {
-//
-//        if ()
-//        = ((LivingEntity)event.getObject()).getDisplayName();
-
-
-    if (entity instanceof PlayerEntity) {
-        LOGGER.debug(("inside attachCapability: " + name.getString()));
-        final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
-        event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
-    } else {
-        //LOGGER.debug("inside attachCapability (NOT ATTACHING): " + name.getString());
-    }
-}
-
-//
-//    @SubscribeEvent
-//    public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-//
-//      LOGGER.debug("inside attachCapabilities: " + event.getObject().getScoreboardName());
-//
-//        if (event.getObject() == null)
-//            return;
-//
-//
-//        if (event.getObject() instanceof LivingEntity) {
-//            final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
-//            event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
-//        }
-//    }
-
-//
-//
-//    public void onArmourWear(Equip e) {
-//        if (hasSpecial(e.getPlayer(), e.getType(), e.getNewArmor())) {
-//            // add effect
-//        } else {
-//            //  remove effect
-//        }
-//    }
 
     @SubscribeEvent
     public void registerCommands(final RegisterCommandsEvent event) {
 
+        LOGGER.debug("registering commands ...");
 
-        System.out.println("inside SuperDopeJediMod:registerCommands");
-
-        //ArgumentTypes.register("research", ResearchArgument.class, new ArgumentSerializer<>(ResearchArgument::research));
-        //CommandClass.register(event.getDispatcher());
         COMMAND_MANAGER.registerCommands(event.getDispatcher());
     }
 
@@ -247,39 +180,6 @@ public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 //    }
 
 
-//    private void armorSetCheck(PlayerEntity player) {
-//
-//        Iterable<ItemStack> armorSlots = player.getArmorSlots();
-//
-//        ItemStack chest = player.getItemBySlot(EquipmentSlotType.CHEST);
-//        //LOGGER.debug("Chest: " + (chest == null ? "null" : chest.getDisplayName().getString()));
-//
-//        this.armorItemCheck(player, chest);
-//        //ItemStack boots =armorSlots.
-//
-//    }
-//
-//
-//    private void armorItemCheck(PlayerEntity player, ItemStack armorItemStack) {
-//
-//        // If there is nothing in the slot, return.
-//        if (armorItemStack == null) return;
-//
-//        // If the armor is not a child of DopeArmor, return.
-//        Item armorItem = armorItemStack.getItem();
-//        if (!(armorItem instanceof DopeArmor)) return;
-//
-//        // If they can use it, return.
-//        //if (((DopeArmor)armorItem).canUse(player)) return;
-//
-//        //LOGGER.debug("Made it here.");
-//        //armorItemStack.getItem().canEquip()
-//
-//        //player.drop(armorItemStack, false);
-//        player.getItemBySlot(EquipmentSlotType.CHEST).onDroppedByPlayer(player);
-//    }
-
-
     @SubscribeEvent
     public void onPlayerLogsIn(final PlayerEvent.PlayerLoggedInEvent event) {
 
@@ -293,98 +193,36 @@ public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
         // Tell all clients that this player logged in, so we fan out the correct ClassInfo to them.
         SuperDopeJediMod.CLASS_MANAGER.communicateToClients(player, classInfo.getId());
 
-        // We are on the server side; when the player logs in, if they are wearing illegal armor, say something.
-        ArmorManager.armorSetCheck(player);
+        // Say hi to the new user.
+        player.sendMessage(new StringTextComponent("Welcome to SuperDopeJediMod!  Your class is " + classInfo.getDescription()), null);
+
+        // We are on the server side; when the player logs in, if they are wearing illegal armor/weapons, say something.
+        ClassManager.itemPermissionCheck(player);
     }
-
-//
-//    @SubscribeEvent
-//    public void onPlayerLogsIn2(final PlayerEvent.A) {
-//
-//        String entityName = event.getEntity().getName().getString();
-//        System.out.println("Inside PlayerEvent.PlayerLoggedInEvent: " + entityName);
-//
-//    }
-
 
 
     @SubscribeEvent
     public void onPlayerDoesSomething(final PlayerEvent.ItemPickupEvent event) {
 
         String entityName = event.getEntity().getName().getString();
-        System.out.println("Inside PlayerEvent.ItemPickupEvent: " + entityName);
-
+        LOGGER.debug("PlayerEvent.ItemPickupEvent: " + entityName);
     }
-
 
 
     private void setupCommon(final FMLCommonSetupEvent event) {
 
-        System.out.println("INSIDE SuperDopeJediMod::setupCommon");
+        LOGGER.debug("SuperDopeJediMod::setupCommon ....");
 
         ENTITY_MANAGER.setupCommon();
         CLASS_MANAGER.register();
-
-//        // https://forums.minecraftforge.net/topic/87597-1161-custom-entity-attributes/
-//        // In my main class in the setup function I had a deferredWorkQueue where I dealt
-//        // with the function above like this:
-//         DeferredWorkQueue.runLater(() -> {
-//
-//            // GlobalEntityTypeAttributes.put(MyEntities.myCustomEntity, CrewmanEntity.setCustomAttributes().func_233813_a_());
-//            GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) EntityManager.WOOKIE_ENTITY, WookieEntity.setCustomAttributes().create());
-//            GlobalEntityTypeAttributes.put((EntityType<? extends LivingEntity>) EntityManager.TUSKEN_RAIDER_ENTITY, TuskenRaiderEntity.setCustomAttributes().create());
-//
-//
-//         });
-
-        // some preinit code
-        //System.out.println("Hello from SuperDopeJediMod:setup!");
-        //LOGGER.info("HELLO FROM PREINIT");
-        //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
-//
-//    @SubscribeEvent
-//    public void registerBlocks(RegistryEvent.Register<Block> event) {
-////        event.getRegistry().registerAll(new Block(...), new Block(...), ...);
-////  we don't use this for blocks/items: we use deferred registry insteadd.
-//        System.out.println("INSIDE SuperDopeJediMod::registerBlocks");
-//
-//    }
-
-//    @SubscribeEvent
-//   // public void registerEntities(final RegistryEvent.Register<EntityType<WookieEntity>> event) {
-//        public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-//
-//        System.out.println("INSIDE SuperDopeJediMod::registerEntities");
-//
-//        // MC: FIND ME :
-//        event.getRegistry().register(EntityManager.WOOKIE);
-//
-////        event.getRegistry().register(EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
-////                .build(SuperDopeJediMod.MODID + ":wookie")
-////                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
-////
-//        //event.getRegistry().registerAll(new Block(...), new Block(...), ...);
-//
-////        public static final RegistryObject<EntityType<?>> WOOKIE =
-////                SuperDopeJediMod.ENTITIES.register("wookie",
-////                        () -> EntityType.Builder.create(WookieEntity::new, EntityClassification.MONSTER)
-////                                .build(SuperDopeJediMod.MODID + ":wookie")
-////                                .setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, "wookie")));
-//
-//
-//
-//
-//    }
-
 
 
     private void setupClient(final FMLClientSetupEvent event) {
 
-        System.out.println("INSIDE SuperDopeJediMod::setupClient");
+        LOGGER.debug("SuperDopeJediMod::setupClient ...");
 
         ENTITY_MANAGER.registerEntityRenderer();
-        //EntityRenderRegistry.register();
 
         // Let's add capes!
         ENTITY_MANAGER.initCape();
@@ -411,76 +249,4 @@ public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 //
 //    	// Call the pre-init of TeleporterManager, which needs to do some registration work.
 //    	this.teleporterManager.preInit();
-   }
-//
-//
-//    @SubscribeEvent
-//    public void registerBlocks(RegistryEvent.Register<Block> event) {
-//
-//    	System.out.println("Inside SuperDopeJediMod:registerBlocks");
-//
-//    	// Iterate through all our custom blocks and items, and register them all.
-//    	for (SuperDopeObject superDopeObject : this.customObjects) {
-//
-//    		superDopeObject.registerBlocks(event);
-//    	}
-//
-//    	// MC: hack: placing this here for now.
-//        //GameRegistry.registerTileEntity(GeneratorTileEntity.class, "TileEntityGenerator");
-//    }
-//
-//
-//    @SubscribeEvent
-//    public void registerItems(RegistryEvent.Register<Item> event) {
-//
-//    	// Iterate through all our custom items, and register them all.
-//    	for (SuperDopeObject superDopeObject : this.customObjects) {
-//
-//    		superDopeObject.registerItems(event);
-//    	}
-//    }
-//
-//
-//    @EventHandler
-//    public void load(FMLInitializationEvent event) {
-//
-//    }
-//
-//
-//    @EventHandler
-//	public void serverLoad(FMLServerStartingEvent event) {
-//
-//    	commandManager.serverLoad(event);
-//	}
-//
-//
-//    @EventHandler
-//    public void init(FMLInitializationEvent event) {
-//
-//    	// Call our proxy for any side-specific work.
-//    	// Looking for where we register models?  Check in SuperDopeClientProxy.init(e).
-//    	superDopeCommonProxy.init(event);
-//
-//    	// Iterate through all our custom blocks and items,
-//    	// and see if we have any recipes to register.
-//    	for (SuperDopeObject superDopeObject : this.customObjects) {
-//    		superDopeObject.registerRecipe();
-//    	}
-//
-//    	// Register our custom world generator, so our ore gets generated.
-//    	GameRegistry.registerWorldGenerator(SuperDopeJediMod.superDopeWorldGenerator, 0);
-//
-//
-////    	// Let's register our eventhandler class.
-////    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());
-//    }
-//
-//
-//    @EventHandler
-//    public void postInit(FMLPostInitializationEvent event) {
-//
-//    	// Call our proxy for any side-specific work.
-//    	superDopeCommonProxy.postInit(event);
-//    }
-//
-//}
+}

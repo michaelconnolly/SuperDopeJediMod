@@ -62,7 +62,14 @@ public class CommandClass {
                                return CommandClass.refreshPlayerClasses(player);
                            }))
 
-                   .then(Commands.literal("clear")
+                    .then(Commands.literal("check")
+                            .executes((command) -> {
+
+                                ServerPlayerEntity player = (ServerPlayerEntity) command.getSource().getEntity();
+                                return CommandClass.checkPlayer(player);
+                            }))
+
+                .then(Commands.literal("clear")
                            .executes((command) -> {
 
                                ServerPlayerEntity player = (ServerPlayerEntity) command.getSource().getEntity();
@@ -157,4 +164,24 @@ public class CommandClass {
 //
         return 1;
     }
+
+
+    public static int checkPlayer(ServerPlayerEntity player) {
+
+        ClassManager.itemPermissionCheck(player);
+
+
+        //player.sendMessage(new StringTextComponent("NYI!"), null);
+
+        // Let's start a conversation with the client about faction/classes, since we need to make
+//			// sure all connected clients get refreshed on the current faction/class info of this user.
+//			PacketServerPokingClientAboutClass packet = new PacketServerPokingClientAboutClass();
+//			System.out.println("SENDING PacketServerPokingClientAboutClass");
+//			SuperDopeJediMod.packetManager.INSTANCE.sendTo(packet, player);
+//
+//	    	sender.sendMessage(new TextComponentString("Class refresh request initiated."));
+//
+        return 1;
+    }
+
 }

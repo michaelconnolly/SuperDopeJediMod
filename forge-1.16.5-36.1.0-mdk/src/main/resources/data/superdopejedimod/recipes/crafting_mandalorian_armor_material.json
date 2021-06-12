@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "yyy",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:beskar_ingot"
+    },
+    "y":
+    {
+      "item": "minecraft:blue_wool"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:mandalorian_armor_material",
+    "count": 9
+  }
+}

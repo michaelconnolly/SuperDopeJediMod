@@ -36,6 +36,14 @@ public class MaterialManager {
     public static final DopeBlockGeneratable KYBER_CRYSTAL_ORE = new DopeBlockGeneratable("kyber_crystal_ore", Material.HEAVY_METAL);
     public static final DopeItem KYBER_CRYSTAL = new DopeItem("kyber_crystal", ItemGroup.TAB_MATERIALS);
 
+    // Material for custom armor.
+    public static final DopeItem JEDI_ARMOR_MATERIAL = new DopeItem("jedi_armor_material", ItemGroup.TAB_MATERIALS);
+    public static final DopeItem SITH_ARMOR_MATERIAL = new DopeItem("sith_armor_material", ItemGroup.TAB_MATERIALS);
+    public static final DopeItem STORMTROOPER_ARMOR_MATERIAL = new DopeItem("stormtrooper_armor_material", ItemGroup.TAB_MATERIALS);
+    public static final DopeItem SMUGGLER_ARMOR_MATERIAL = new DopeItem("smuggler_armor_material", ItemGroup.TAB_MATERIALS);
+    public static final DopeItem REBEL_ARMOR_MATERIAL = new DopeItem("rebel_armor_material", ItemGroup.TAB_MATERIALS);
+    public static final DopeItem MANDALORIAN_ARMOR_MATERIAL = new DopeItem("mandalorian_armor_material", ItemGroup.TAB_MATERIALS);
+
     // Autoblocks!
     public static final SithTowerBlueprint SITH_MARK = new SithTowerBlueprint("sith_mark");
 

@@ -6,6 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -74,18 +76,24 @@ public class EntityManager {
 			(EntityType<TieFighterEntity>) EntityManager.createEntity(TieFighterEntity::new,
 					"tie_fighter", EntityClassification.MISC);
 
+	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
+			(EntityType<PlasmaShotEntity>) EntityManager.createEntity2(PlasmaShotEntity::new,
+					"plasma_shot", EntityClassification.MISC);
+
+
+
 //	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
 //			Registry.register(Registry.ENTITY_TYPE,
 //			"plasma_shot",
 //			EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
 //					EntityClassification.MISC).sized(0.25F, 0.25F)
-//					.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
-	public static final RegistryObject<EntityType<PlasmaShotEntity>> PLASMA_SHOT =
-			SuperDopeJediMod.ENTITIES.register(
-					"plasma_shot",
-					() -> EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
-							EntityClassification.MISC).sized(0.25F, 0.25F)
-							.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
+////					.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
+//	public static final RegistryObject<EntityType<PlasmaShotEntity>> PLASMA_SHOT =
+//			SuperDopeJediMod.ENTITIES.register(
+//					"plasma_shot",
+//					() -> EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
+//							EntityClassification.MISC).sized(0.25F, 0.25F)
+//							.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
 
 
 	// Projectile Entity Types
@@ -168,6 +176,19 @@ public class EntityManager {
 //
 //		return entity;
 //	}
+
+	private static <T extends ProjectileItemEntity> EntityType<? extends ProjectileItemEntity> createEntity2(EntityManager.IFactory<T> factory,
+																										 String name, EntityClassification classification) {
+
+		EntityType<? extends Entity> entity =
+				EntityType.Builder.of(factory, classification)
+						.sized(0.6F, 1.7F).setTrackingRange(8).build(name)
+						.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, name));
+
+		return (EntityType<? extends ProjectileItemEntity>) entity;
+	}
+
+
 
 
 	private static <T extends Entity> EntityType<? extends Entity> createEntity(EntityManager.IFactory<T> factory,

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "yyy",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:plastoid_sheet"
+    },
+    "y":
+    {
+      "item": "minecraft:light_gray_wool"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:rebel_armor_material",
+    "count": 9
+  }
+}

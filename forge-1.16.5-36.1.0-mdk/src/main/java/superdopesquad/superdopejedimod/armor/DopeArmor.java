@@ -9,12 +9,17 @@ import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
+import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.ClassPermissions;
+import superdopesquad.superdopejedimod.faction.IClassAware;
 
 
-public class DopeArmor extends ArmorItem  {
+public class DopeArmor extends ArmorItem implements IClassAware {
 
+	private static final Logger LOGGER = LogManager.getLogger();
 	private ClassPermissions classPermissions;
 
 
@@ -42,41 +47,33 @@ public class DopeArmor extends ArmorItem  {
 
 
 	@Override
-	public boolean canEquip(ItemStack stack, EquipmentSlotType armorType, Entity entity) {
-
-		if (!(entity instanceof PlayerEntity)) return true;
-
-		System.out.println("Inside onEquip: " + this.canUse((PlayerEntity) entity));
-
-		if (!(this.canUse((PlayerEntity) entity))) return false;
-
-		return super.canEquip(stack, armorType, entity);
-//		return ((MobEntity.getEquipmentSlotForItem(stack) == armorType)
-//				&& (this.canUse((PlayerEntity)entity)));
-	}
-
-
-	public boolean canUse(PlayerEntity player) {
-		return this.canUse(null, player);
-	}
-
-
-	public boolean canUse(World world, PlayerEntity player) {
-
-		//System.out.println("is classPermissions NULL? " + (this.classPermissions == null));
-
-		return ((this.classPermissions == null) || this.classPermissions.canUse(world, player));
+	public ClassPermissions getClassPermissions() {
+		return this.classPermissions;
 	}
 
 
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 
-		System.out.println("inside use: returning " + this.canUse(world, player));
+		boolean canUse = ClassManager.canUse(this, world, player);
+		LOGGER.debug("DopeArmor::use - canUse? " + canUse);
 
-		if (!this.canUse(world, player)) {
+		if (!canUse) {
 			return ActionResult.consume(player.getItemInHand(hand));
 		}
 		return ActionResult.pass(player.getItemInHand(hand));
+	}
+
+
+	@Override
+	public boolean canEquip(ItemStack stack, EquipmentSlotType slotType, Entity entity) {
+
+		boolean canEquip = ClassManager.canEquip(this, slotType, entity);
+		LOGGER.debug("DopeArmor::canEquip - canEquip? " + canEquip);
+
+		if (!canEquip)
+			return false;
+
+		return super.canEquip(stack, slotType, entity);
 	}
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "x x",
+    "xxx",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:stormtrooper_armor_material"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:stormtrooper_chestplate",
+    "count": 1
+  }
+}

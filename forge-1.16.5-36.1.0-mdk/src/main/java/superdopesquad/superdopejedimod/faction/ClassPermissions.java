@@ -11,8 +11,6 @@ import java.util.ArrayList;
 public class ClassPermissions {
 
 
-    // ClassAwareInfo sets who can use certain things.
-    //public static final ClassAwareInfo RebelsOnly = new ClassAwareInfo().addFriendlyFaction(ClassManager.REBEL_ALLIANCE);
     public static final ClassPermissions ForceWieldersOnly = new ClassPermissions()
             .addAllowClass(ClassManager.JEDI_KNIGHT)
             .addAllowClass(ClassManager.SITH_LORD);
@@ -32,7 +30,6 @@ public class ClassPermissions {
             .addAllowClass(ClassManager.SITH_LORD);
     public static final ClassPermissions JediOnly = new ClassPermissions()
             .addAllowClass(ClassManager.JEDI_KNIGHT);
-
 
     ArrayList<FactionInfo> allowFactions = new ArrayList<>();
     ArrayList<FactionInfo> denyFactions = new ArrayList<>();
@@ -97,9 +94,6 @@ public class ClassPermissions {
     }
 
 
-
-
-
     private boolean canPlayerFactionUse(PlayerEntity player) {
 
         FactionInfo factionInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerFaction(player);
@@ -111,7 +105,7 @@ public class ClassPermissions {
 
         // If any deny classes were set, if you are in there, you are OUT.  Otherwise, IN.
         if (this.denyFactions.size() > 0) {
-            return this.denyFactions.contains(factionInfo);
+            return (!(this.denyFactions.contains(factionInfo)));
         }
 
         // Otherwise, we all good here.
@@ -122,24 +116,15 @@ public class ClassPermissions {
     private boolean canPlayerClassUse(PlayerEntity player) {
 
         ClassInfo classInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerClass(player);
-       // System.out.println("classInfo:" + (classInfo == null ? "null" : classInfo.getShortName()));
 
         // If any allow classes were set, and we are in there, we are all good.
         if (this.allowClasses.size() > 0) {
-            //System.out.println("allowClasses:" + this.allowClasses.toString());
-//            for (int i=0; i<this.allowClasses.size(); i++) {
-//                System.out.println(this.allowClasses.get(i).getShortName());
-//            }
-//            System.out.println("allowClasses.contains:" + this.allowClasses.contains(classInfo));
-
             return this.allowClasses.contains(classInfo);
         }
 
         // If any deny classes were set, if you are in there, you are OUT.  Otherwise, IN.
         if (this.denyClasses.size() > 0) {
-            //System.out.println("denyClasses.contains:" + this.denyClasses.contains(classInfo));
-
-            return this.denyClasses.contains(classInfo);
+            return (!(this.denyClasses.contains(classInfo)));
         }
 
         // If you made it here, we have no allow or deny set, so return true.

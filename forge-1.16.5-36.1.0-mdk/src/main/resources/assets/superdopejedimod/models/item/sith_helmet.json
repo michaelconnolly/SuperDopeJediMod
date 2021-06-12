@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "superdopejedimod:item/sith_lord_boots"
+        "layer0": "superdopejedimod:item/sith_helmet"
     }
 }

@@ -3,28 +3,25 @@ package superdopesquad.superdopejedimod.weapon;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
+import superdopesquad.superdopejedimod.SuperDopeJediMod;
 import superdopesquad.superdopejedimod.faction.*;
 
 
 public class Blaster extends DopeRangedWeapon {
 
-
-	//protected boolean isInstantWeapon = true;
-	protected PowerLevel powerLevel; // = PowerLevel.STANDARD;
-	protected float range; // = 10.0F;
+	protected PowerLevel powerLevel = PowerLevel.STANDARD;
+	protected float range = 10.0F;
 
 
 	public Blaster(String name) {
 
-		//super(name);
 		this(name, PowerLevel.STANDARD, 10.0F);
 	}
+
 
 	public Blaster(String name, PowerLevel powerLevel, float range) {
 
@@ -34,131 +31,85 @@ public class Blaster extends DopeRangedWeapon {
 		this.range = range;
 	}
 
-//		 this.maxStackSize = 1;
-//
-	//this.setDamage();
-	//this.setMaxDamage(384);
-//         //this.setCreativeTab(CreativeTabs.COMBAT);
-//         this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
-//         {
-//             @OnlyIn(Dist.CLIENT)
-//             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-//             {
-//                 return entityIn == null ? 0.0F : (entityIn.getActiveItemStack().getItem() != Items.BOW ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 20.0F);
-//             }
-//         });
-//         this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
-//         {
-//             @OnlyIn(Dist.CLIENT)
-//             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-//             {
-//                 return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
-//             }
-//         });
-//	}
+
+	private ItemStack getPlasmaShot(PlayerEntity player) {
+
+		if (SuperDopeJediMod.CLASS_MANAGER.isPlayerInFaction(player, ClassManager.REBEL_ALLIANCE))
+			return WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
+
+		else if (SuperDopeJediMod.CLASS_MANAGER.isPlayerInFaction(player, ClassManager.THE_EMPIRE))
+			return WeaponManager.PLASMA_SHOT_ITEM_RED.getDefaultInstance();
+
+		return WeaponManager.PLASMA_SHOT_ITEM_WHITE.getDefaultInstance();
+	}
+
 
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 
-		System.out.println("inside Blaster:use");
+		ActionResult<ItemStack> superReturn = super.use(world, player, hand);
+		LOGGER.debug("superReturn: " + superReturn.getResult().toString());
 
-//		if (true) {
+		// If our base class says we need to eat this, then eat it.
+		if (superReturn.getResult() == ActionResultType.CONSUME)
+			return superReturn;
 
-		// The item object for the plasma blast we shoot out.
-		ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
 		ItemStack itemStackInHand = player.getItemInHand(hand);
 
-		// Play a sound.
-		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(),
-				SoundEvents.FIREWORK_ROCKET_SHOOT, SoundCategory.NEUTRAL,
-				0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 
-		// Create the entity of the plasma blast and set it's trajectory.
-		if (!world.isClientSide) {
 
-			// SnowballEntity snowballentity = new SnowballEntity(world, player);
-			//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+		// for debugging purposes, this is how snowballs work when ::use gets called.
+		if (true) {
+			//ItemStack itemstack = player.getItemInHand(hand);
+			//ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
+			ItemStack itemstack = this.getPlasmaShot(player);
 
-			//PlasmaShotEntity plasmaShotEntity = new EntityManager.PLASMA_SHOT.clone();
-			//SnowballEntity plasmaShotEntity = new
-			//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player, this.powerLevel.damageLevel());
-			PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+			world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+			if (!world.isClientSide) {
+				SnowballEntity snowballentity = new SnowballEntity(world, player);
+				snowballentity.setItem(itemstack);
+				snowballentity.shootFromRotation(player, player.xRot, player.yRot, 0.0F, 1.5F, 1.0F);
+				world.addFreshEntity(snowballentity);
+			}
+		}
 
-			//plasmaShotEntity.damageAmount = this.powerLevel.damageLevel();
+		else {
 
-			//snowballentity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
-			plasmaShotEntity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
+			//System.out.println("inside Blaster:use");
 
-			//snowballentity.shootFromRotation(player, player.xRot, player.yRot,
-			//		0.0F, 1.5F, 1.0F);
-			plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot,
-					0.0F, 1.5F, 1.0F);
+			// The item object for the plasma blast we shoot out.
+			//ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
 
-			//world.addFreshEntity(snowballentity);
-			world.addFreshEntity(plasmaShotEntity);
+			// Play a sound.
+			world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(),
+					SoundEvents.FIREWORK_ROCKET_SHOOT, SoundCategory.NEUTRAL,
+					0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+
+			// Create the entity of the plasma blast and set it's trajectory.
+			if (!world.isClientSide) {
+
+
+				//SnowballEntity snowballentity = new SnowballEntity(world, player);
+				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+
+				//PlasmaShotEntity plasmaShotEntity = new EntityManager.PLASMA_SHOT.clone();
+				//SnowballEntity plasmaShotEntity = new
+				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player, this.powerLevel.damageLevel());
+				PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+				plasmaShotEntity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
+
+				plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot,
+						0.0F, 1.5F, 1.0F);
+
+				boolean retVal = world.addFreshEntity(plasmaShotEntity);
+				LOGGER.debug("attempted to fire a projectile from Blaster::use: " + retVal);
+			}
+
 		}
 
 		return ActionResult.sidedSuccess(itemStackInHand, world.isClientSide());
 	}
 
-
-
-//		RayTraceResult lookingAt = Minecraft.getMinecraft().objectMouseOver;
-//		if (lookingAt != null && lookingAt.typeOfHit == RayTraceResult.Type.BLOCK) {
-//			BlockPos pos = lookingAt.getBlockPos();
-//			// now the coordinates you want are in pos. Example of use:
-//			worldIn.setBlockState(pos, Blocks.BEDROCK.getDefaultState());
-//			// this is a bit oversimplified - you have to send a packet to the server, since only the client knows the BlockPos, but only the server can change blocks
-//		} else {
-//			// not looking at a block, or too far away from one to tell
-//		}
-//
-//
-//		ItemStack itemStackCurrentItem = player.getItemInHand(hand);
-//
-//		// MC-TODO: figure out better starting position.
-//		BlockPos blockPos = player.blockPosition();
-//
-//		//BlockPos blockPos = itemStackCurrentItem.getFrame().getPos();
-//		boolean isWorldServer = (!world.isClientSide);
-//		boolean shouldShoot = ((isWorldServer) && (hand == Hand.MAIN_HAND));
-//
-//		if (shouldShoot) {
-//
-//
-//			// Create the new entity.
-//			//ItemStack itemStackCurrentItem = context.getItemInHand();
-//			if (EntityManager.PROTOCOL_DROID.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
-//				System.out.println("ERROR! Failed to spawn droid.");
-//				return ActionResult.fail(itemStackCurrentItem);
-//				//return ActionResultType.FAIL;
-//			}
-//
-//			return ActionResult.success(itemStackCurrentItem);
-//
-////			// Create the new entity.
-////			ItemStack itemStackCurrentItem = context.getItemInHand();
-////			if (this.entityType.spawn((ServerWorld) world, itemStackCurrentItem, player, blockPos, SpawnReason.SPAWN_EGG, false, false) == null) {
-////				System.out.println("ERROR! Failed to spawn droid.");
-////				return ActionResultType.FAIL;
-////			}
-//		}
-//
-//		return ActionResult.pass(itemStackCurrentItem);
-//
-////		ItemStack itemstack = player.getItemInHand(p_77659_3_);
-////		boolean flag = !player.getProjectile(itemstack).isEmpty();
-//
-////		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, p_77659_1_, player, p_77659_3_, flag);
-////		if (ret != null) return ret;
-////
-////		if (!player.abilities.instabuild && !flag) {
-////			return ActionResult.fail(itemstack);
-////		} else {
-////			player.startUsingItem(p_77659_3_);
-////			return ActionResult.consume(itemstack);
-////		}
-//	}
 
 
 	public void releaseUsing(ItemStack p_77615_1_, World p_77615_2_, LivingEntity p_77615_3_, int p_77615_4_) {
@@ -339,14 +290,6 @@ public class Blaster extends DopeRangedWeapon {
 ////	              return new ActionResult(EnumActionResult.SUCCESS, itemstack);
 ////	          }
 //		}
-
-	/**
-	 * Return the enchantability factor of the item, most of the time is based on material.
-	 */
-//	      public int getItemEnchantability()
-//	      {
-//	          return 1;
-//	      }
 
 	}
 

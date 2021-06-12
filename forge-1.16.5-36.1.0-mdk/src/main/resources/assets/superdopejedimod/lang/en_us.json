@@ -20,10 +20,10 @@
     "item.superdopejedimod.jedi_chestplate": "Jedi Knight Chestplate",
     "item.superdopejedimod.jedi_leggings": "Jedi Knight Leggings",
     "item.superdopejedimod.jedi_boots": "Jedi Knight Boots",
-    "item.superdopejedimod.sith_lord_helmet": "Sith Lord Helmet",
-    "item.superdopejedimod.sith_lord_chestplate": "Sith Lord Chestplate",
-    "item.superdopejedimod.sith_lord_leggings": "Sith Lord Leggings",
-    "item.superdopejedimod.sith_lord_boots": "Sith Lord Boots",
+    "item.superdopejedimod.sith_helmet": "Sith Lord Helmet",
+    "item.superdopejedimod.sith_chestplate": "Sith Lord Chestplate",
+    "item.superdopejedimod.sith_leggings": "Sith Lord Leggings",
+    "item.superdopejedimod.sith_boots": "Sith Lord Boots",
     "item.superdopejedimod.smuggler_helmet": "Smuggler Helmet",
     "item.superdopejedimod.smuggler_chestplate": "Smuggler Chestplate",
     "item.superdopejedimod.smuggler_leggings": "Smuggler Leggings",
@@ -63,6 +63,13 @@
     "item.superdopejedimod.astromech_droid_head": "Astromech Droid Head",
     "item.superdopejedimod.protocol_droid_head": "Protocol Droid Head",
     "item.superdopejedimod.assassin_droid_head": "Assassin Droid Head",
-    "item.superdopejedimod.probe_droid_head": "Probe Droid Head"
+    "item.superdopejedimod.probe_droid_head": "Probe Droid Head",
+
+    "item.superdopejedimod.jedi_armor_material": "Jedi Armor Material",
+    "item.superdopejedimod.sith_armor_material": "Sith Armor Material",
+    "item.superdopejedimod.smuggler_armor_material": "Smuggler Armor Material",
+    "item.superdopejedimod.stormtrooper_armor_material": "Stormtrooper Armor Material",
+    "item.superdopejedimod.rebel_armor_material": "Rebel Armor Material",
+    "item.superdopejedimod.mandalorian_armor_material": "Mandalorian Armor Material"
 }
 

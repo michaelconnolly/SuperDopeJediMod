@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "xxx",
+    "yyy",
+    "xxx"
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:plastoid_sheet"
+    },
+    "y":
+    {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:sith_armor_material",
+    "count": 9
+  }
+}

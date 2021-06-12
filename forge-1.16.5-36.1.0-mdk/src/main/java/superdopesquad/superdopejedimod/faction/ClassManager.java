@@ -4,9 +4,14 @@ package superdopesquad.superdopejedimod.faction;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -16,7 +21,6 @@ import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import superdopesquad.superdopejedimod.SuperDopeJediMod;
-import superdopesquad.superdopejedimod.armor.ArmorManager;
 import superdopesquad.superdopejedimod.packet.PlayerSetClassPacket;
 import superdopesquad.superdopejedimod.packet.PacketManager;
 
@@ -113,7 +117,7 @@ public class ClassManager {
 
 	public ClassInfo getPlayerClass(PlayerEntity player) {
 
-		LazyOptional<ClassCapabilityInterface> capability =  player.getCapability(INSTANCE, null);
+		LazyOptional<ClassCapabilityInterface> capability = player.getCapability(INSTANCE, null);
 		if (!(capability.isPresent())) {
 			LOGGER.error("failed to find className Capability.");
 			return null;
@@ -190,19 +194,11 @@ public class ClassManager {
 		classCapabilityInterface.setClassId(inputClassId);
 
 		// Send a message to all clients that a player changed their class.
+		// Also, verify that the current player is still wearing legal gear.
 		if (fanOut) {
 
 			this.communicateToClients(player, inputClassId);
-//			// Tell the client what is going on.
-//			PlayerSetClassPacket msg = new PlayerSetClassPacket(player.getUUID(), inputClassId);
-//			// Sending to all connected players
-//			PacketManager.CHANNEL.send(PacketDistributor.ALL.noArg(), msg);
-
-			// Also, since i'm currently server-side, check my armor and drop things that aren't valid.
-			//if (activePlayer == changedPlayer) {
-				ArmorManager.armorSetCheck(player);
-			//}
-
+			ClassManager.itemPermissionCheck(player);
 		}
 
 		return true;
@@ -231,5 +227,70 @@ public class ClassManager {
 
 		LOGGER.debug("failed to pattern match class name.");
 		return false;
+	}
+
+
+	public static void itemPermissionCheck(PlayerEntity player) {
+
+		// It is illegal to wear armor not meant for your class.  If so, toss it.
+		ClassManager.itemPermissionCheck(player, EquipmentSlotType.CHEST);
+		ClassManager.itemPermissionCheck(player, EquipmentSlotType.HEAD);
+		ClassManager.itemPermissionCheck(player, EquipmentSlotType.LEGS);
+		ClassManager.itemPermissionCheck(player, EquipmentSlotType.FEET);
+
+		// Current design: it's ok to hold weapons that aren't meant for you, you just can't use them.
+		//ClassManager.itemPermissionCheck(player, EquipmentSlotType.MAINHAND);
+		//ClassManager.itemPermissionCheck(player, EquipmentSlotType.OFFHAND);
+	}
+
+
+	public static void itemPermissionCheck(PlayerEntity player, EquipmentSlotType slot) {
+
+		// If there is nothing in the slot, return.
+		ItemStack itemStack = player.getItemBySlot(slot);
+		if (itemStack == null) return;
+
+		// If the item does not implement IClassAware, return.
+		Item item = itemStack.getItem();
+		if (!(item instanceof IClassAware)) return;
+
+		// If they can use it, return.
+		// If you can't, we threw an error in the chat.
+		if (ClassManager.canUse((IClassAware) item, null, player)) return;
+
+		// If you made it here, you have to get rid of this armor.
+		LOGGER.debug(item.getRegistryName().toString() + " should not be worn!");
+		ClassManager.toss(player, slot);
+	}
+
+
+	private static void toss(PlayerEntity player, EquipmentSlotType slot) {
+
+		ItemStack itemStack = player.getItemBySlot(slot);
+		ItemStack itemStackToDrop = itemStack.copy();
+
+		// reduce the amount we have by 1.  For equipment slots, this should always reduce to zero.
+		itemStack.shrink(1);
+
+		// drop the stack in that slot onto the ground.  I am not sure what the boolean parameter does.
+		player.drop(itemStackToDrop, false);
+	}
+
+
+	public static boolean canEquip(IClassAware thing, EquipmentSlotType armorType, Entity entity) {
+
+		if (!(entity instanceof PlayerEntity)) return true;
+
+		boolean canUse = ClassManager.canUse(thing, null, (PlayerEntity) entity);
+		LOGGER.debug("ClassManager::canEquip: " + canUse);
+		return canUse;
+	}
+
+
+	public static boolean canUse(IClassAware item, World world, PlayerEntity player) {
+
+		boolean canUse = ((item.getClassPermissions() == null) || item.getClassPermissions().canUse(world, player));
+		LOGGER.debug("ClassManager::canUse: " + canUse + "; was classPermissions null? " + (item.getClassPermissions() == null));
+		return (canUse);
 	}
 }

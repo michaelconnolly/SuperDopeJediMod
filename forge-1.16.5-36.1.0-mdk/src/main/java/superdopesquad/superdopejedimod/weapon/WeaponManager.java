@@ -1,15 +1,33 @@
 package superdopesquad.superdopejedimod.weapon;
 
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.SnowballEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTier;
+import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import superdopesquad.superdopejedimod.DopeItem;
+import superdopesquad.superdopejedimod.armor.ArmorManager;
+import superdopesquad.superdopejedimod.armor.DopeArmor;
 import superdopesquad.superdopejedimod.faction.ClassManager;
 import superdopesquad.superdopejedimod.faction.ClassPermissions;
+import superdopesquad.superdopejedimod.faction.IClassAware;
 
 
 public class WeaponManager {
 
-	/** Constants */
+    private static final Logger LOGGER = LogManager.getLogger();
+
+    /**
+     * Constants
+     */
     private static final float DEGREES2RADIANS = 0.017453292F;
 
     // Lightsaber stuff!
@@ -38,8 +56,11 @@ public class WeaponManager {
     public static final Blaster BLASTER_RIFLE = new Blaster("blaster_rifle", PowerLevel.STANDARD, 20.0F);
 
     // Projectile items that are rendered later by the projectile entities..
+    // public static final EntityType<PlasmaShotEntity> PLASMA_SHOT = register("snowball", EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
+
     public static PlasmaShotItem PLASMA_SHOT_ITEM_BLUE = new PlasmaShotItem("blue");
     public static PlasmaShotItem PLASMA_SHOT_ITEM_RED = new PlasmaShotItem("red");
+    public static PlasmaShotItem PLASMA_SHOT_ITEM_WHITE = new PlasmaShotItem("white");
 
     // Projectile entities should be created here, to trigger registration properly.
     //public static PlasmaShotEntity PLASMA_SHOT_ENTITY_BLUE = new PlasmaShotEntity("blue");
@@ -53,7 +74,13 @@ public class WeaponManager {
 //                    .build(new ResourceLocation(SuperDopeJediMod.MODID, "plasma_shot_what").toString())
 //    );
 
-    public WeaponManager() {}
+//    private static <T extends Entity> EntityType<T> register(String p_200712_0_, EntityType.Builder<T> p_200712_1_) {
+//        return Registry.register(Registry.ENTITY_TYPE, p_200712_0_, p_200712_1_.build(p_200712_0_));
+//    }
+
+
+    public WeaponManager() {
+    }
 
 
 //    public void onInit() {
@@ -266,16 +293,67 @@ public class WeaponManager {
 //     */
 
 
-    public static float getArrowVelocity(int charge)
-    {
-        float f = (float)charge / 20.0F;
+    public static float getArrowVelocity(int charge) {
+        float f = (float) charge / 20.0F;
         f = (f * f + f * 2.0F) / 3.0F;
 
-        if (f > 1.0F)
-        {
+        if (f > 1.0F) {
             f = 1.0F;
         }
 
         return f;
     }
+
+
+//
+//    // This is called from onPlayerLoggedIn event, to verify that they are wearing legal armor.
+//    // This could potentially be called from other places if we feel we need to double-check.
+//    // It has to be called on the server-side, since that is the only way player.drop will work.
+//    public static void armorSetCheck(PlayerEntity player) {
+//
+//        ArmorManager.armorItemCheck(player, EquipmentSlotType.CHEST);
+//        ArmorManager.armorItemCheck(player, EquipmentSlotType.HEAD);
+//        ArmorManager.armorItemCheck(player, EquipmentSlotType.LEGS);
+//        ArmorManager.armorItemCheck(player, EquipmentSlotType.FEET);
+//
+//        return;
+//    }
+//
+//    public static void itemPermissionCheck(PlayerEntity player) {
+//
+//        WeaponManager.itemPermissionCheck(player, EquipmentSlotType.MAINHAND);
+//        WeaponManager.itemPermissionCheck(player, EquipmentSlotType.OFFHAND);
+//    }
+//
+//    public static void itemPermissionCheck(PlayerEntity player, EquipmentSlotType slot) {
+//
+//        // If there is nothing in the slot, return.
+//        ItemStack itemStack = player.getItemBySlot(slot);
+//        if (itemStack == null) return;
+//
+//        // If the item does not implement IClassAware, return.
+//        Item item = itemStack.getItem();
+//        if (!(item instanceof IClassAware)) return;
+//
+//        // If they can use it, return.
+//        // If you can't, we threw an error in the chat.
+//        if (((IClassAware) item).canUse(null, player)) return;
+//
+//        // If you made it here, you have to get rid of this armor.
+//        LOGGER.debug(item.getRegistryName().toString() + " should not be worn!");
+//        WeaponManager.toss(player, slot);
+//    }
+//
+//
+//    private static void toss(PlayerEntity player, EquipmentSlotType slot) {
+//
+//        ItemStack itemStack = player.getItemBySlot(slot);
+//        ItemStack itemStackToDrop = itemStack.copy();
+//
+//        // reduce the amount we have by 1.  For equipment slots, this should always reduce to zero.
+//        itemStack.shrink(1);
+//
+//        // drop the stack in that slot onto the ground.  I am not sure what the boolean parameter does.
+//        player.drop(itemStackToDrop, false);
+//    }
 }
