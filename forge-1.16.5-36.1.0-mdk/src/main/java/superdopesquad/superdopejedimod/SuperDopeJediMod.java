@@ -51,10 +51,6 @@ public class SuperDopeJediMod {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
 
-    // Establish proxy classes, so we can do the right stuff client-side only, if necessary.
-    //    @SidedProxy(clientSide="superdopesquad.superdopejedimod.SuperDopeClientProxy", serverSide="superdopesquad.superdopejedimod.SuperDopeServerProxy")
-    //    public static SuperDopeCommonProxy superDopeCommonProxy;
-
     // Custom ToolMaterial's.  For a good tutorial on how to define a ToolMaterial, look here:
     // The order of those #'s at the end: harvestLevel, durability, miningSpeed, damageVsEntities, enchantability
     // http://bedrockminer.jimdo.com/modding-tutorials/basic-modding-1-7/custom-tools-swords/
@@ -122,9 +118,9 @@ public class SuperDopeJediMod {
         // Adding event listeners.
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
-        FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
+       // FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
         MinecraftForge.EVENT_BUS.register(superDopeEventHandler);
-        MinecraftForge.EVENT_BUS.register(this);
+       // MinecraftForge.EVENT_BUS.register(this);
 
         // Register our ore generator.
         // NOTE: I have seen some mods trigger their ore generation management
@@ -132,81 +128,6 @@ public class SuperDopeJediMod {
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, MATERIAL_MANAGER::GenerateOre);
     }
 
-
-    @SubscribeEvent
-    public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
-
-        Entity entity = event.getObject();
-        if (entity == null) {
-            LOGGER.debug("inside attachCapability: event.getObject() == NULL");
-            return;
-        }
-
-        ITextComponent name;
-        if (entity instanceof PlayerEntity) {
-            name = new StringTextComponent("(a player)");
-        } else if (entity instanceof LivingEntity) {
-            name = entity.getName();
-        } else {
-            name = entity.getName();
-        }
-
-        if (entity instanceof PlayerEntity) {
-            LOGGER.debug(("inside attachCapability: " + name.getString()));
-            final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
-            event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
-        }
-    }
-
-
-    @SubscribeEvent
-    public void registerCommands(final RegisterCommandsEvent event) {
-
-        LOGGER.debug("registering commands ...");
-
-        COMMAND_MANAGER.registerCommands(event.getDispatcher());
-    }
-
-
-//    @SubscribeEvent
-//    public void playerTick(TickEvent.PlayerTickEvent event) {
-//
-//        if (!(this.timeToCheckThings())) {
-//            return;
-//        }
-//
-//        LOGGER.debug("processing playerTick: " + event.player.getName().getString());
-//        this.armorSetCheck(event.player);
-//    }
-
-
-    @SubscribeEvent
-    public void onPlayerLogsIn(final PlayerEvent.PlayerLoggedInEvent event) {
-
-        PlayerEntity player = event.getPlayer();
-        String playerName = player.getName().getString();
-        ClassInfo classInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerClass(player);
-
-        LOGGER.debug("PlayerEvent.PlayerLoggedInEvent: " + playerName + ", class: " +
-                (classInfo == null ? "null" : classInfo.getShortName()));
-
-        // Tell all clients that this player logged in, so we fan out the correct ClassInfo to them.
-        SuperDopeJediMod.CLASS_MANAGER.communicateToClients(player, classInfo.getId());
-
-        // Say hi to the new user.
-        player.sendMessage(new StringTextComponent("Welcome to SuperDopeJediMod!  Your class is " + classInfo.getDescription()), null);
-
-        // We are on the server side; when the player logs in, if they are wearing illegal armor/weapons, say something.
-        ClassManager.itemPermissionCheck(player);
-    }
-
-
-    @SubscribeEvent
-    public void onPlayerDoesSomething(final PlayerEvent.ItemPickupEvent event) {
-
-        String entityName = event.getEntity().getName().getString();
-        LOGGER.debug("PlayerEvent.ItemPickupEvent: " + entityName);
-    }
 
 
     private void setupCommon(final FMLCommonSetupEvent event) {

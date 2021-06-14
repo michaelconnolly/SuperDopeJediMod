@@ -3,7 +3,6 @@ package superdopesquad.superdopejedimod.weapon;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -32,6 +31,49 @@ public class Blaster extends DopeRangedWeapon {
 	}
 
 
+	@Override
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+
+		ActionResult<ItemStack> superReturn = super.use(world, player, hand);
+		LOGGER.debug("superReturn: " + superReturn.getResult().toString());
+
+		// If our base class says we need to eat this, then eat it.
+		if (superReturn.getResult() == ActionResultType.CONSUME)
+			return superReturn;
+
+		// We need to return this, but don't really use it for anything ourselves.
+		ItemStack itemStackInHand = player.getItemInHand(hand);
+
+		// The plasma shot color is dynamic, based on player faction.
+		ItemStack itemstack = this.getPlasmaShot(player);
+
+		// Let's play a sound!
+		world.playSound(null, player.getX(), player.getY(), player.getZ(),
+				SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundCategory.NEUTRAL, 0.5F,
+				0.4F / (random.nextFloat() * 0.4F + 0.8F));
+
+
+		// Server side logic for creating and shooting the projectile entity in a direction.
+		if (!world.isClientSide) {
+
+			PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
+			plasmaShotEntity.setItem(itemstack);
+			plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot, 0.0F,
+					1.5F, 1.0F);
+			world.addFreshEntity(plasmaShotEntity);
+		}
+
+		return ActionResult.sidedSuccess(itemStackInHand, world.isClientSide());
+	}
+
+
+
+	public void releaseUsing(ItemStack p_77615_1_, World p_77615_2_, LivingEntity p_77615_3_, int p_77615_4_) {
+
+		LOGGER.debug("Blaster:releaseUsing ...");
+	}
+
+
 	private ItemStack getPlasmaShot(PlayerEntity player) {
 
 		if (SuperDopeJediMod.CLASS_MANAGER.isPlayerInFaction(player, ClassManager.REBEL_ALLIANCE))
@@ -43,85 +85,6 @@ public class Blaster extends DopeRangedWeapon {
 		return WeaponManager.PLASMA_SHOT_ITEM_WHITE.getDefaultInstance();
 	}
 
-
-	@Override
-	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-
-		ActionResult<ItemStack> superReturn = super.use(world, player, hand);
-		LOGGER.debug("superReturn: " + superReturn.getResult().toString());
-
-		// If our base class says we need to eat this, then eat it.
-		if (superReturn.getResult() == ActionResultType.CONSUME)
-			return superReturn;
-
-		ItemStack itemStackInHand = player.getItemInHand(hand);
-
-
-
-		// for debugging purposes, this is how snowballs work when ::use gets called.
-		if (true) {
-			//ItemStack itemstack = player.getItemInHand(hand);
-			//ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
-			ItemStack itemstack = this.getPlasmaShot(player);
-
-			world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-			if (!world.isClientSide) {
-				SnowballEntity snowballentity = new SnowballEntity(world, player);
-				snowballentity.setItem(itemstack);
-				snowballentity.shootFromRotation(player, player.xRot, player.yRot, 0.0F, 1.5F, 1.0F);
-				world.addFreshEntity(snowballentity);
-			}
-		}
-
-		else {
-
-			//System.out.println("inside Blaster:use");
-
-			// The item object for the plasma blast we shoot out.
-			//ItemStack itemstack = WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance();
-
-			// Play a sound.
-			world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(),
-					SoundEvents.FIREWORK_ROCKET_SHOOT, SoundCategory.NEUTRAL,
-					0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-
-			// Create the entity of the plasma blast and set it's trajectory.
-			if (!world.isClientSide) {
-
-
-				//SnowballEntity snowballentity = new SnowballEntity(world, player);
-				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
-
-				//PlasmaShotEntity plasmaShotEntity = new EntityManager.PLASMA_SHOT.clone();
-				//SnowballEntity plasmaShotEntity = new
-				//PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player, this.powerLevel.damageLevel());
-				PlasmaShotEntity plasmaShotEntity = new PlasmaShotEntity(world, player);
-				plasmaShotEntity.setItem(WeaponManager.PLASMA_SHOT_ITEM_BLUE.getDefaultInstance());
-
-				plasmaShotEntity.shootFromRotation(player, player.xRot, player.yRot,
-						0.0F, 1.5F, 1.0F);
-
-				boolean retVal = world.addFreshEntity(plasmaShotEntity);
-				LOGGER.debug("attempted to fire a projectile from Blaster::use: " + retVal);
-			}
-
-		}
-
-		return ActionResult.sidedSuccess(itemStackInHand, world.isClientSide());
-	}
-
-
-
-	public void releaseUsing(ItemStack p_77615_1_, World p_77615_2_, LivingEntity p_77615_3_, int p_77615_4_) {
-
-		System.out.println("inside Blaster:releaseUsing");
-	}
-
-
-//	@Override
-//	public void registerRecipe() {
-//		return;
-//	}
 
 
 //

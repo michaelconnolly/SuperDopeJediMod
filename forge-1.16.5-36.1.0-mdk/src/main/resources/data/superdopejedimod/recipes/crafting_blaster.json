@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "   ",
+    "xx ",
+    "x  "
+  ],
+  "key":
+  {
+    "x":
+    {
+      "item": "superdopejedimod:blaster_parts"
+    }
+  },
+  "result":
+  {
+    "item": "superdopejedimod:blaster",
+    "count": 1
+  }
+}

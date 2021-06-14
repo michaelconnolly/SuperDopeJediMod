@@ -82,6 +82,13 @@ public class EntityManager {
 
 
 
+//	public static final EntityType<SnowballEntity> SNOWBALL = register("snowball", EntityType.Builder.<SnowballEntity>of(SnowballEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
+
+//	private static <T extends Entity> EntityType<T> register(String p_200712_0_, EntityType.Builder<T> p_200712_1_) {
+//		return Registry.register(Registry.ENTITY_TYPE, p_200712_0_, p_200712_1_.build(p_200712_0_));
+//	}
+//
+
 //	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
 //			Registry.register(Registry.ENTITY_TYPE,
 //			"plasma_shot",
@@ -220,6 +227,7 @@ public class EntityManager {
 		event.getRegistry().register(EntityManager.ASTROMECH_DROID);
 		event.getRegistry().register(EntityManager.XWING_FIGHTER);
 		event.getRegistry().register(EntityManager.TIE_FIGHTER);
+		event.getRegistry().register(EntityManager.PLASMA_SHOT);
 
 //		//
 //		SuperDopeJediMod.BLOCKS.register(name, () -> this);
@@ -274,6 +282,7 @@ public class EntityManager {
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.ASTROMECH_DROID, new AstromechDroidEntity.RenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.XWING_FIGHTER, new XWingFighterEntity.RenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.TIE_FIGHTER, new TieFighterEntity.RenderFactory());
+		//RenderingRegistry.registerEntityRenderingHandler(EntityManager.PLASMA_SHOT, new PlasmaShotEntity.RenderFactory());
 
 	}
 
@@ -290,6 +299,7 @@ public class EntityManager {
 		GlobalEntityTypeAttributes.put(EntityManager.WOOKIE, WookieEntity.setCustomAttributes().build());
 		GlobalEntityTypeAttributes.put(EntityManager.TIE_FIGHTER, TieFighterEntity.setCustomAttributes().build());
 		GlobalEntityTypeAttributes.put(EntityManager.XWING_FIGHTER, XWingFighterEntity.setCustomAttributes().build());
+		//GlobalEntityTypeAttributes.put(EntityManager.PLASMA_SHOT, PlasmaShotEntity.setCustomAttributes().build());
 
 //		GlobalEntityTypeAttributes.getSupplier(EntityManager.JAWA);
 //		//JawaEntity.setCustomAttributes().build();

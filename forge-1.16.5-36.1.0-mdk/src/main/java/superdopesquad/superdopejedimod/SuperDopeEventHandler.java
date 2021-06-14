@@ -1,13 +1,26 @@
 package superdopesquad.superdopejedimod;
 
 
-import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import superdopesquad.superdopejedimod.command.CommandManager;
+import superdopesquad.superdopejedimod.faction.ClassCapability;
+import superdopesquad.superdopejedimod.faction.ClassInfo;
+import superdopesquad.superdopejedimod.faction.ClassManager;
+import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
 
 
 public class SuperDopeEventHandler {
@@ -16,44 +29,99 @@ public class SuperDopeEventHandler {
     public static final Logger LOGGER = LogManager.getLogger(SuperDopeJediMod.MODID + "::SuperDopeEventHandler");
 
 
-//    @SubscribeEvent
-//	public void registerBlocks(RegistryEvent.Register<Block> event) {
-//
-//        LOGGER.debug("INSIDE SuperDopeJediMod:registerBlocks");
-//
-//		// Iterate through all our custom blocks and items, and register them all.
-////		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
-////
-////			superDopeObject.registerBlocks(event);
-////		}
-//	}
+    @SubscribeEvent
+    public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
 
-
-//	@SubscribeEvent
-//	public void registerItems(RegistryEvent.Register<Item> event) {
-//
-//        LOGGER.debug("INSIDE SuperDopeJediMod:registerItems");
-//
-//
-////		// Iterate through all our custom items, and register them all.
-////		for (SuperDopeObject superDopeObject : SuperDopeJediMod.customObjects) {
-////
-////			superDopeObject.registerItems(event);
-////		}
-//	}
-
-
- @SubscribeEvent
- public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-
-        LOGGER.debug("INSIDE SuperDopeJediMod::registerEntities");
+        LOGGER.debug("SuperDopeJediMod::registerEntities ...");
 
         SuperDopeJediMod.ENTITY_MANAGER.registerEntity(event);
     }
 
 
 
+    @SubscribeEvent
+    public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 
+        Entity entity = event.getObject();
+        if (entity == null) {
+            LOGGER.warn("attachCapability: event.getObject() == NULL");
+            return;
+        }
+
+        ITextComponent name;
+        if (entity instanceof PlayerEntity) {
+            name = new StringTextComponent("(a player)");
+        } else if (entity instanceof LivingEntity) {
+            name = entity.getName();
+        } else {
+            name = entity.getName();
+        }
+
+        if (entity instanceof PlayerEntity) {
+            LOGGER.debug(("attachCapability: " + name.getString()));
+            final ClassCapability classCapability = new ClassCapability((LivingEntity) event.getObject());
+            event.addCapability(new ResourceLocation(SuperDopeJediMod.MODID), ClassManager.createProvider(classCapability));
+        }
+    }
+
+
+    @SubscribeEvent
+    public void registerCommands(final RegisterCommandsEvent event) {
+
+        CommandManager.registerCommands(event.getDispatcher());
+    }
+
+
+//    @SubscribeEvent
+//    public void playerTick(TickEvent.PlayerTickEvent event) {
+//
+//        if (!(this.timeToCheckThings())) {
+//            return;
+//        }
+//
+//        LOGGER.debug("processing playerTick: " + event.player.getName().getString());
+//        this.armorSetCheck(event.player);
+//    }
+
+
+    @SubscribeEvent
+    public void onPlayerLogsIn(final PlayerEvent.PlayerLoggedInEvent event) {
+
+        PlayerEntity player = event.getPlayer();
+        String playerName = player.getName().getString();
+        ClassInfo classInfo = SuperDopeJediMod.CLASS_MANAGER.getPlayerClass(player);
+
+        LOGGER.debug("PlayerEvent.PlayerLoggedInEvent: " + playerName + ", class: " +
+                (classInfo == null ? "null" : classInfo.getShortName()));
+
+        // Tell all clients that this player logged in, so we fan out the correct ClassInfo to them.
+        SuperDopeJediMod.CLASS_MANAGER.communicateToClients(player, classInfo.getId());
+
+        // Say hi to the new user.
+        player.sendMessage(new StringTextComponent("Welcome to SuperDopeJediMod!  Your class is " + classInfo.getDescription()), null);
+
+        // We are on the server side; when the player logs in, if they are wearing illegal armor/weapons, say something.
+        ClassManager.itemPermissionCheck(player);
+    }
+
+
+    @SubscribeEvent
+    public void onPlayerDoesSomething(final PlayerEvent.ItemPickupEvent event) {
+
+        String entityName = event.getEntity().getName().getString();
+        LOGGER.debug("PlayerEvent.ItemPickupEvent: " + entityName);
+    }
+
+
+    //******************************
+    // MC-TODO: implement something like this, which should fix problem with PlasmaShotEntity.
+    // *****************************
+    @SubscribeEvent
+    public void entityAttributeCreationEvent(EntityAttributeCreationEvent event) {
+
+        LOGGER.error("entityAttributeCreationEvent ... NYI");
+        //event.put(PlasmaShotEntity.TYPE, WeirdMobEntity.MAP);
+    }
 
 //
 //		// We are server-side, so we have accurate information on-hand on class/faction info.

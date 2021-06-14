@@ -12,13 +12,9 @@ public class CommandManager {
     private static final Logger LOGGER = LogManager.getLogger();
 
 
-    public CommandManager() {
-    }
+    public static void registerCommands(CommandDispatcher<CommandSource> dispatcher) {
 
-
-    public void registerCommands(CommandDispatcher<CommandSource> dispatcher) {
-
-        LOGGER.debug("INSIDE CommandManager::registerCommands");
+        LOGGER.debug("CommandManager::registerCommands ...");
 
         CommandClass.register(dispatcher);
     }
