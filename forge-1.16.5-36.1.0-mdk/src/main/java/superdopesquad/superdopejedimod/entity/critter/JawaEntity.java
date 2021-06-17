@@ -19,6 +19,7 @@ public class JawaEntity extends CritterEntity {
 
 
     public JawaEntity(EntityType<JawaEntity> type, World worldIn) {
+
         super(type, worldIn);
     }
 
@@ -76,21 +77,6 @@ public class JawaEntity extends CritterEntity {
 //		Class modelBaseClass = JawaModel.class;
 //		EntityRenderFactory factory = new EntityRenderFactory(renderBaseClass, modelBaseClass, this.shadowSize);
 //		RenderingRegistry.registerEntityRenderingHandler(this.getClass(), factory);
-//	}
-//
-//
-//	@Override
-//	public void registerRecipe() {
-//
-//		// Recipe for creating a Jawa Egg.
-//		ItemStack carrotStack = new ItemStack(Items.CARROT);
-//		ItemStack eggStack = new ItemStack(Items.EGG);
-//
-//		GameRegistry.addShapedRecipe(new ResourceLocation(this.getFullName()), null, new ItemStack(SuperDopeJediMod.entityManager.jawaEgg, 1),
-//						"A",
-//						"B",
-//						'A', carrotStack,
-//						'B', eggStack);
 //	}
 //
 //

@@ -29,14 +29,6 @@ public class SuperDopeEventHandler {
     public static final Logger LOGGER = LogManager.getLogger(SuperDopeJediMod.MODID + "::SuperDopeEventHandler");
 
 
-    @SubscribeEvent
-    public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-
-        LOGGER.debug("SuperDopeJediMod::registerEntities ...");
-
-        SuperDopeJediMod.ENTITY_MANAGER.registerEntity(event);
-    }
-
 
 
     @SubscribeEvent
@@ -65,11 +57,6 @@ public class SuperDopeEventHandler {
     }
 
 
-    @SubscribeEvent
-    public void registerCommands(final RegisterCommandsEvent event) {
-
-        CommandManager.registerCommands(event.getDispatcher());
-    }
 
 
 //    @SubscribeEvent
@@ -106,6 +93,13 @@ public class SuperDopeEventHandler {
 
 
     @SubscribeEvent
+    public void registerCommands(final RegisterCommandsEvent event) {
+
+        CommandManager.registerCommands(event.getDispatcher());
+    }
+
+
+    @SubscribeEvent
     public void onPlayerDoesSomething(final PlayerEvent.ItemPickupEvent event) {
 
         String entityName = event.getEntity().getName().getString();
@@ -113,15 +107,14 @@ public class SuperDopeEventHandler {
     }
 
 
-    //******************************
-    // MC-TODO: implement something like this, which should fix problem with PlasmaShotEntity.
-    // *****************************
     @SubscribeEvent
-    public void entityAttributeCreationEvent(EntityAttributeCreationEvent event) {
+    public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
 
-        LOGGER.error("entityAttributeCreationEvent ... NYI");
-        //event.put(PlasmaShotEntity.TYPE, WeirdMobEntity.MAP);
+        LOGGER.debug("registerEntities ...");
+
+        SuperDopeJediMod.ENTITY_MANAGER.registerEntity(event);
     }
+
 
 //
 //		// We are server-side, so we have accurate information on-hand on class/faction info.

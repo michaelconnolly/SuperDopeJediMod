@@ -4,9 +4,10 @@ package superdopesquad.superdopejedimod.entity.critter;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
+import superdopesquad.superdopejedimod.entity.DopeEntity;
 
 
-public abstract class CritterEntity extends MonsterEntity {
+public abstract class CritterEntity extends DopeEntity {
 
     protected static double MAX_HEALTH = 16.0D;
     protected static double MOVEMENT_SPEED = 0.3D;

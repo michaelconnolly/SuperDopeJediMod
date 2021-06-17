@@ -13,6 +13,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -115,19 +117,28 @@ public class SuperDopeJediMod {
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-        // Adding event listeners.
+        // The MOD event bus, used for a handful of specific things, like first-run setup.
+        // We'll handle these right here in this class.
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
-       // FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerEntities);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::entityAttributeCreationEvent);
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
+
+        //FMLJavaModLoadingContext.get().getModEventBus().register(superDopeEventHandler);
+       // FMLJavaModLoadingContext.get().getModEventBus().register(this);
+
+        // The main event bus, used for almost all things.
+        // We'll handle these in our eventhandler class.
         MinecraftForge.EVENT_BUS.register(superDopeEventHandler);
-       // MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.register(this);
 
         // Register our ore generator.
         // NOTE: I have seen some mods trigger their ore generation management
         // by calling it from this.setup, instead of separate listener here.
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, MATERIAL_MANAGER::GenerateOre);
-    }
 
+    }
 
 
     private void setupCommon(final FMLCommonSetupEvent event) {
@@ -150,24 +161,18 @@ public class SuperDopeJediMod {
     }
 
 
-//    @EventHandler
-//    public void preInit(FMLPreInitializationEvent event) {
-//
-//    	// Let's register our eventhandler class.
-//    	MinecraftForge.EVENT_BUS.register(new SuperDopeEventHandler());
-//
-//    	// Call our proxy for any side-specific work.
-//    	superDopeCommonProxy.preInit(event);
-//    	superDopeCommonProxy.registerTileEntities();
-//
-//    	// Iterate through all our custom blocks and items, and register them all.
-//    	for (SuperDopeObject superDopeObject : this.customObjects) {
-//    		superDopeObject.registerObject();
-//    	}
+    @SubscribeEvent
+    public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
 
-//    	// Call the pre-init of ClassManager, which needs to do some registration work.
-//    	this.classManager.preInit();
-//
-//    	// Call the pre-init of TeleporterManager, which needs to do some registration work.
-//    	this.teleporterManager.preInit();
+        LOGGER.debug("registerEntities ...");
+        SuperDopeJediMod.ENTITY_MANAGER.registerEntity(event);
+    }
+
+
+    @SubscribeEvent
+    public void entityAttributeCreationEvent(EntityAttributeCreationEvent event) {
+
+        LOGGER.debug("EntityAttributeCreationEvent ...");
+        SuperDopeJediMod.ENTITY_MANAGER.createAttributes(event);
+    }
 }

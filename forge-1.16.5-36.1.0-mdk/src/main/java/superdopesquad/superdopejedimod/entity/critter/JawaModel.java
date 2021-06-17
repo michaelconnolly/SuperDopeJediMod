@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 
 
 @OnlyIn(Dist.CLIENT)
-//public class JawaModel extends ModelBiped {
 public class JawaModel<T extends Entity> extends CritterModel<T> {
 
 	 ModelRenderer head;
@@ -16,20 +15,11 @@ public class JawaModel<T extends Entity> extends CritterModel<T> {
 	 ModelRenderer rightLeg;
 	 ModelRenderer leftLeg;
 
-//	public static int textureWidth = 64;
-//	public static int textureHeight = 64;
-
 
     public JawaModel() {
 
     	this(1.0F, 0.0F, TEXTURE_WIDTH, TEXTURE_HEIGHT);
     }
-
-//
-//    public JawaModel(float scale) {
-//
-//    	this(scale, );
-//    }
 
 
     public JawaModel(float scale, float p_i1164_2_, int width, int height) {

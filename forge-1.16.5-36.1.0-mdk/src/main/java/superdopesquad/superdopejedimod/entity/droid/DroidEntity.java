@@ -6,9 +6,11 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.world.World;
+import superdopesquad.superdopejedimod.armor.DopeArmor;
+import superdopesquad.superdopejedimod.entity.DopeEntity;
 
 
-public abstract class DroidEntity extends MonsterEntity {
+public abstract class DroidEntity extends DopeEntity {
 
     protected static double MAX_HEALTH = 16.0D;
     protected static double MOVEMENT_SPEED = 0.3D;
