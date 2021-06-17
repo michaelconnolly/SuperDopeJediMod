@@ -3,25 +3,69 @@ package superdopesquad.superdopejedimod.entity.critter;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
+import superdopesquad.superdopejedimod.entity.DopeEntity;
+import superdopesquad.superdopejedimod.entity.EntityManager;
 import superdopesquad.superdopejedimod.entity.Renderer;
 
 
 @OnlyIn(Dist.CLIENT)
 public class JawaEntity extends CritterEntity {
 
+    //protected String name = "jawa";
+    //protected static String name;
+
 
     public JawaEntity(EntityType<JawaEntity> type, World worldIn) {
 
         super(type, worldIn);
+
     }
+
+
+//    public static <T extends DopeEntity> EntityType<T> GetEntityType2(Class<T> dopeEntityClass) {
+//
+//
+//
+//        // I'm getting a warning when using our private namespace for registering these entities.
+//        // Switching to use 'minecraft', although i bet some bug crops up in this area at some point.
+//        String namespace = "minecraft"; //  MC: I feel like this should be: SuperDopeJediMod.MODID;
+//        EntityClassification classification = EntityClassification.MONSTER;
+//        String name = "jawa";
+//
+//        // Create the entity.
+//        EntityType<T> entity = (EntityType<T>) EntityType.Builder.of(JawaEntity::new, classification)
+//                .sized(0.6F, 1.7F).setTrackingRange(8).build(name)
+//                .setRegistryName(new ResourceLocation(namespace, name));
+//
+//        // Add this to our list, since we will have to do stuff to it.
+//        EntityManager.Entities.add(entity);
+//
+//        return entity;
+//
+//
+////        return (EntityType<JawaEntity>) EntityManager.createEntity(JawaEntity::new,
+////                "jawa", EntityClassification.MONSTER);
+//
+//    }
+
+
+//
+//    public static EntityType<JawaEntity> GetEntityType() {
+//        return (EntityType<JawaEntity>) EntityManager.createEntity(JawaEntity::new,
+//                "jawa", EntityClassification.MONSTER);
+//
+//    }
 
 
     public static class RenderFactory implements IRenderFactory<JawaEntity> {

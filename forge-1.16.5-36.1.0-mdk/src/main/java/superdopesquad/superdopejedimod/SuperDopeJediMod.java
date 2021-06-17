@@ -145,7 +145,7 @@ public class SuperDopeJediMod {
 
         LOGGER.debug("SuperDopeJediMod::setupCommon ....");
 
-        ENTITY_MANAGER.setupCommon();
+        //ENTITY_MANAGER.setupCommon();
         CLASS_MANAGER.register();
     }
 
@@ -154,10 +154,10 @@ public class SuperDopeJediMod {
 
         LOGGER.debug("SuperDopeJediMod::setupClient ...");
 
-        ENTITY_MANAGER.registerEntityRenderer();
+        SuperDopeJediMod.ENTITY_MANAGER.registerEntityRenderer();
 
         // Let's add capes!
-        ENTITY_MANAGER.initCape();
+        SuperDopeJediMod.ENTITY_MANAGER.initCape();
     }
 
 

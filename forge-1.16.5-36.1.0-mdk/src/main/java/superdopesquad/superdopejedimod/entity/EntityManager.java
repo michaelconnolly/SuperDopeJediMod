@@ -44,102 +44,42 @@ import superdopesquad.superdopejedimod.weapon.PlasmaShotEntity;
 public class EntityManager {
 
 	private static final Logger LOGGER = LogManager.getLogger();
-	private static ArrayList<EntityType<? extends Entity>> Entities = new ArrayList<>();
-	//private static ArrayList<Class<DopeEntity>> Entities2 = new ArrayList<>();
+	public static ArrayList<EntityType<? extends Entity>> EntityTypes = new ArrayList<>();
 
 
 	// Entities.
-	public static final EntityType<TuskenRaiderEntity> TUSKEN_RAIDER =
-			(EntityType<TuskenRaiderEntity>) EntityManager.createEntity(TuskenRaiderEntity::new,
+	public static final EntityType<TuskenRaiderEntity> TUSKEN_RAIDER = DopeEntity.createEntity(TuskenRaiderEntity::new,
 					"tusken_raider", EntityClassification.MONSTER);
 
-	public static final EntityType<WookieEntity> WOOKIE =
-			(EntityType<WookieEntity>) EntityManager.createEntity(WookieEntity::new,
+	public static final EntityType<WookieEntity> WOOKIE = DopeEntity.createEntity(WookieEntity::new,
 					"wookie", EntityClassification.MONSTER);
 
-	public static final EntityType<JawaEntity> JAWA =
-			(EntityType<JawaEntity>) EntityManager.createEntity(JawaEntity::new,
-					"jawa", EntityClassification.MONSTER);
+	public static final EntityType<JawaEntity> JAWA = DopeEntity.createEntity(JawaEntity::new, "jawa", EntityClassification.MONSTER);
 
-	public static final EntityType<StormtrooperEntity> STORMTROOPER =
-			(EntityType<StormtrooperEntity>) EntityManager.createEntity(StormtrooperEntity::new,
+	public static final EntityType<StormtrooperEntity> STORMTROOPER = DopeEntity.createEntity(StormtrooperEntity::new,
 					"stormtrooper", EntityClassification.MONSTER);
 
-	public static final EntityType<ProtocolDroidEntity> PROTOCOL_DROID =
-			(EntityType<ProtocolDroidEntity>) EntityManager.createEntity(ProtocolDroidEntity::new,
+	public static final EntityType<ProtocolDroidEntity> PROTOCOL_DROID = DopeEntity.createEntity(ProtocolDroidEntity::new,
 					"protocol_droid", EntityClassification.MONSTER);
 
-	public static final EntityType<ProbeDroidEntity> PROBE_DROID =
-			(EntityType<ProbeDroidEntity>) EntityManager.createEntity(ProbeDroidEntity::new,
+	public static final EntityType<ProbeDroidEntity> PROBE_DROID = DopeEntity.createEntity(ProbeDroidEntity::new,
 					"probe_droid", EntityClassification.MONSTER);
 
-	public static final EntityType<AssassinDroidEntity> ASSASSIN_DROID =
-			(EntityType<AssassinDroidEntity>) EntityManager.createEntity(AssassinDroidEntity::new,
+	public static final EntityType<AssassinDroidEntity> ASSASSIN_DROID = DopeEntity.createEntity(AssassinDroidEntity::new,
 					"assassin_droid", EntityClassification.MONSTER);
 
-	public static final EntityType<AstromechDroidEntity> ASTROMECH_DROID =
-			(EntityType<AstromechDroidEntity>) EntityManager.createEntity(AstromechDroidEntity::new,
+	public static final EntityType<AstromechDroidEntity> ASTROMECH_DROID = DopeEntity.createEntity(AstromechDroidEntity::new,
 					"astromech_droid", EntityClassification.MONSTER);
 
-	public static final EntityType<XWingFighterEntity> XWING_FIGHTER =
-			(EntityType<XWingFighterEntity>) EntityManager.createEntity(XWingFighterEntity::new,
+	public static final EntityType<XWingFighterEntity> XWING_FIGHTER = DopeEntity.createEntity(XWingFighterEntity::new,
 					"xwing_fighter", EntityClassification.MISC);
 
-	public static final EntityType<TieFighterEntity> TIE_FIGHTER =
-			(EntityType<TieFighterEntity>) EntityManager.createEntity(TieFighterEntity::new,
+	public static final EntityType<TieFighterEntity> TIE_FIGHTER = DopeEntity.createEntity(TieFighterEntity::new,
 					"tie_fighter", EntityClassification.MISC);
 
-	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
-			(EntityType<PlasmaShotEntity>) EntityManager.createEntity2(PlasmaShotEntity::new,
-					"plasma_shot", EntityClassification.MISC);
-
-
-
-//	public static final EntityType<SnowballEntity> SNOWBALL = register("snowball", EntityType.Builder.<SnowballEntity>of(SnowballEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
-
-//	private static <T extends Entity> EntityType<T> register(String p_200712_0_, EntityType.Builder<T> p_200712_1_) {
-//		return Registry.register(Registry.ENTITY_TYPE, p_200712_0_, p_200712_1_.build(p_200712_0_));
-//	}
-//
-
 //	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
-//			Registry.register(Registry.ENTITY_TYPE,
-//			"plasma_shot",
-//			EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
-//					EntityClassification.MISC).sized(0.25F, 0.25F)
-////					.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
-//	public static final RegistryObject<EntityType<PlasmaShotEntity>> PLASMA_SHOT =
-//			SuperDopeJediMod.ENTITIES.register(
-//					"plasma_shot",
-//					() -> EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new,
-//							EntityClassification.MISC).sized(0.25F, 0.25F)
-//							.clientTrackingRange(4).updateInterval(10).build("plasma_shot"));
-
-
-	// Projectile Entity Types
-//	public static final RegistryObject<EntityType<PlasmaShotEntity>> PLASMA_SHOT = SuperDopeJediMod.ENTITIES.register("plasma_shot",
-//			() -> EntityType.Builder.of(PlasmaShotEntity::new, EntityClassification.MISC)
-//					.size(1.0f,0.5f)
-//					.build(new ResourceLocation(SuperDopeJediMod.MODID, "plasma_shot").toString())
-//	);
-//	public static final RegistryObject<EntityType<PlasmaShotEntity>> CRAWLER_VENOM =
-//	SuperDopeJediMod.ENTITIES.register("crawler_venom",
-//			() -> EntityType.Builder.<PlasmaShotEntity> <----- create(CrawlerVenomEntity::new, EntityClassification.MISC)
-//					.size(1.0f,0.5f)
-//					.build(new ResourceLocation(MajCraft.MOD_ID, "crawler_venom").toString())
-//	);
-
-
-//	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT =
-//			(EntityType<PlasmaShotEntity>) EntityManager.createEntity(PlasmaShotEntity::new,
+//			(EntityType<PlasmaShotEntity>) EntityManager.createEntity2(PlasmaShotEntity::new,
 //					"plasma_shot", EntityClassification.MISC);
-
-	//public static final EntityType<SnowballEntity> SNOWBALL = register("snowball", EntityType.Builder.<SnowballEntity>of(SnowballEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
-//	public static final EntityType<PlasmaShotEntity> PLASMA_SHOT = register("plasma_shot", EntityType.Builder.<PlasmaShotEntity>of(PlasmaShotEntity::new, EntityClassification.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10));
-//
-//	private static <T extends Entity> EntityType<T> register(String p_200712_0_, EntityType.Builder<T> p_200712_1_) {
-//		return Registry.register(Registry.ENTITY_TYPE, p_200712_0_, p_200712_1_.build(p_200712_0_));
-//	}
 
 
 		// Droid Kit objects.
@@ -195,17 +135,25 @@ public class EntityManager {
 //
 //		return entity;
 //	}
+//
+//	private static <T extends ProjectileItemEntity> EntityType<? extends ProjectileItemEntity> createEntity2(EntityManager.IFactory<T> factory,
+//																										 String name, EntityClassification classification) {
+//		EntityType<? extends Entity> entity =
+//				EntityType.Builder.of(factory, classification)
+//						.sized(0.6F, 1.7F).setTrackingRange(8).build(name)
+//						.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, name));
+//
+//		return (EntityType<? extends ProjectileItemEntity>) entity;
+//	}
 
-	private static <T extends ProjectileItemEntity> EntityType<? extends ProjectileItemEntity> createEntity2(EntityManager.IFactory<T> factory,
-																										 String name, EntityClassification classification) {
-		EntityType<? extends Entity> entity =
-				EntityType.Builder.of(factory, classification)
-						.sized(0.6F, 1.7F).setTrackingRange(8).build(name)
-						.setRegistryName(new ResourceLocation(SuperDopeJediMod.MODID, name));
-
-		return (EntityType<? extends ProjectileItemEntity>) entity;
-	}
-
+//
+//	public <T extends DopeEntity> void catalogEntity(Class<T> dopeEntity) {
+//
+//		dopeEntity.setCustomAttributes();
+//
+//		Alert alert = clazzAlert.newInstance();
+//		//use the alert object as you want/need...
+//	}
 
 //
 //	private static Class<DopeEntity> addEntity3(Class<DopeEntity> entityClass) {
@@ -231,45 +179,33 @@ public class EntityManager {
 
 
 
-
-	private static <T extends Entity> EntityType<? extends Entity> createEntity(EntityManager.IFactory<T> factory,
-				String name, EntityClassification classification) {
-
-		// I'm getting a warning when using our private namespace for registering these entities.
-		// Switching to use 'minecraft', although i bet some bug crops up in this area at some point.
-		String namespace = "minecraft"; //  MC: I feel like this should be: SuperDopeJediMod.MODID;
-
-		// Create the entity.
-		EntityType<? extends Entity> entity = EntityType.Builder.of(factory, classification)
-						.sized(0.6F, 1.7F).setTrackingRange(8).build(name)
-						.setRegistryName(new ResourceLocation(namespace, name));
-
-		// Add this to our list, since we will have to do stuff to it.
-		EntityManager.Entities.add(entity);
-
-		return entity;
-	}
+//
+//	public static <T extends Entity> EntityType<? extends Entity> createEntity(EntityManager.IFactory<T> factory,
+//				String name, EntityClassification classification) {
+//
+//		// I'm getting a warning when using our private namespace for registering these entities.
+//		// Switching to use 'minecraft', although i bet some bug crops up in this area at some point.
+//		String namespace = "minecraft"; //  MC: I feel like this should be: SuperDopeJediMod.MODID;
+//
+//		// Create the entity.
+//		EntityType<? extends Entity> entity = EntityType.Builder.of(factory, classification)
+//						.sized(0.6F, 1.7F).setTrackingRange(8).build(name)
+//						.setRegistryName(new ResourceLocation(namespace, name));
+//
+//		// Add this to our list, since we will have to do stuff to it.
+//		EntityManager.Entities.add(entity);
+//
+//		return entity;
+//	}
 
 
 	public void registerEntity(RegistryEvent.Register<EntityType<?>> event) {
 
 		LOGGER.debug("EntityManager::registerEntity ...");
 
-		for (int i=0; i<EntityManager.Entities.size(); i++) {
-			event.getRegistry().register(EntityManager.Entities.get(i));
+		for (int i=0; i<EntityManager.EntityTypes.size(); i++) {
+			event.getRegistry().register(EntityManager.EntityTypes.get(i));
 		}
-
-//		event.getRegistry().register(EntityManager.WOOKIE);
-//		event.getRegistry().register(EntityManager.TUSKEN_RAIDER);
-//		event.getRegistry().register(EntityManager.JAWA);
-//		event.getRegistry().register(EntityManager.STORMTROOPER);
-//		event.getRegistry().register(EntityManager.PROTOCOL_DROID);
-//		event.getRegistry().register(EntityManager.PROBE_DROID);
-//		event.getRegistry().register(EntityManager.ASSASSIN_DROID);
-//		event.getRegistry().register(EntityManager.ASTROMECH_DROID);
-//		event.getRegistry().register(EntityManager.XWING_FIGHTER);
-//		event.getRegistry().register(EntityManager.TIE_FIGHTER);
-//		event.getRegistry().register(EntityManager.PLASMA_SHOT);
 	}
 
 
@@ -277,6 +213,8 @@ public class EntityManager {
 	public void registerEntityRenderer() {
 
 		LOGGER.debug("EntityManager::registerEntityRenderer");
+
+//		Class<? extends DopeEntity> entityClass = EntityManager.WOOKIE.
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.WOOKIE, new WookieEntity.RenderFactory());
 		RenderingRegistry.registerEntityRenderingHandler(EntityManager.TUSKEN_RAIDER, new TuskenRaiderEntity.RenderFactory());
@@ -295,43 +233,42 @@ public class EntityManager {
 
 	public void createAttributes(EntityAttributeCreationEvent event) {
 
-//		for (int i=0; i<EntityManager.Entities.size(); i++) {
-//			//event.getRegistry().register(EntityManager.Entities.get(i));
-//			EntityType<? extends LivingEntity> entityType = EntityManager.Entities.get(i);
-//			AttributeModifierMap.MutableAttribute customAttributes = ((DopeEntity)(entityType.getClass())).
-//			event.put(entityType, JawaEntity.setCustomAttributes().build());
-//
-//		}
-
-
+		event.put(EntityManager.PROTOCOL_DROID, ProtocolDroidEntity.setCustomAttributes().build());
+		event.put(EntityManager.PROBE_DROID, ProbeDroidEntity.setCustomAttributes().build());
+		event.put(EntityManager.ASSASSIN_DROID, AssassinDroidEntity.setCustomAttributes().build());
+		event.put(EntityManager.ASTROMECH_DROID, AstromechDroidEntity.setCustomAttributes().build());
 		event.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().build());
-		//GlobalEntityTypeAttributes.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().build());
-
+		event.put(EntityManager.STORMTROOPER, StormtrooperEntity.setCustomAttributes().build());
+		event.put(EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().build());
+		event.put(EntityManager.WOOKIE, WookieEntity.setCustomAttributes().build());
+		event.put(EntityManager.TIE_FIGHTER, TieFighterEntity.setCustomAttributes().build());
+		event.put(EntityManager.XWING_FIGHTER, XWingFighterEntity.setCustomAttributes().build());
+		//event.put(EntityManager.PLASMA_SHOT, PlasmaShotEntity.setCustomAttributes().build());
 	}
 
 
-	public void setupCommon() {
-
-		LOGGER.debug("EntityManager::setupCommon ...");
-
-		GlobalEntityTypeAttributes.put(EntityManager.PROTOCOL_DROID, ProtocolDroidEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.PROBE_DROID, ProbeDroidEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.ASSASSIN_DROID, AssassinDroidEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.ASTROMECH_DROID, AstromechDroidEntity.setCustomAttributes().build());
-		//GlobalEntityTypeAttributes.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.STORMTROOPER, StormtrooperEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.WOOKIE, WookieEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.TIE_FIGHTER, TieFighterEntity.setCustomAttributes().build());
-		GlobalEntityTypeAttributes.put(EntityManager.XWING_FIGHTER, XWingFighterEntity.setCustomAttributes().build());
-		//GlobalEntityTypeAttributes.put(EntityManager.PLASMA_SHOT, PlasmaShotEntity.setCustomAttributes().build());
-
-//		GlobalEntityTypeAttributes.getSupplier(EntityManager.JAWA);
-//		//JawaEntity.setCustomAttributes().build();
-//		StormtrooperEntity.setCustomAttributes().build();
-//		TuskenRaiderEntity.setCustomAttributes().build();
-//		WookieEntity.setCustomAttributes().build();
-	}
+//	public void setupCommon() {
+//
+//		LOGGER.debug("EntityManager::setupCommon ...");
+//
+//		GlobalEntityTypeAttributes.put(EntityManager.PROTOCOL_DROID, ProtocolDroidEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.PROBE_DROID, ProbeDroidEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.ASSASSIN_DROID, AssassinDroidEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.ASTROMECH_DROID, AstromechDroidEntity.setCustomAttributes().build());
+//		//GlobalEntityTypeAttributes.put(EntityManager.JAWA, JawaEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.STORMTROOPER, StormtrooperEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.TUSKEN_RAIDER, TuskenRaiderEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.WOOKIE, WookieEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.TIE_FIGHTER, TieFighterEntity.setCustomAttributes().build());
+//		GlobalEntityTypeAttributes.put(EntityManager.XWING_FIGHTER, XWingFighterEntity.setCustomAttributes().build());
+//		//GlobalEntityTypeAttributes.put(EntityManager.PLASMA_SHOT, PlasmaShotEntity.setCustomAttributes().build());
+//
+////		GlobalEntityTypeAttributes.getSupplier(EntityManager.JAWA);
+////		//JawaEntity.setCustomAttributes().build();
+////		StormtrooperEntity.setCustomAttributes().build();
+////		TuskenRaiderEntity.setCustomAttributes().build();
+////		WookieEntity.setCustomAttributes().build();
+//	}
 
 
 	public static void registerEntityWorldSpawns() {
